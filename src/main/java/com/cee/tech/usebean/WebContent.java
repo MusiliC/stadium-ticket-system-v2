@@ -1,0 +1,16 @@
+package com.cee.tech.usebean;
+
+import java.io.Serializable;
+
+public class WebContent implements Serializable {
+
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+}
