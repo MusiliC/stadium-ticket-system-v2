@@ -1,4 +1,4 @@
-Accounting application:
+Ticket System application:
 
 Server details:
 Wildfly 26
