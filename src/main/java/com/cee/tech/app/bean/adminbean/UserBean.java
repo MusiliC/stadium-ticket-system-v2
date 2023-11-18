@@ -3,6 +3,7 @@ package com.cee.tech.app.bean.adminbean;
 import com.cee.tech.app.bean.UserBeanI;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
+import com.cee.tech.view.html.HtmlComponents;
 
 import java.util.List;
 
@@ -24,18 +25,6 @@ public class UserBean implements UserBeanI {
     public String allRegisteredUsers() {
         List<User> users = Database.getDbInstance().getUsers();
 
-        StringBuilder tbBuilder = new StringBuilder();
-        tbBuilder.append("<table>");
-        tbBuilder.append("<tr>");
-        tbBuilder.append("  <th>Username</th>\n" +
-                "          <th>VIP tickets</th>\n" +
-                "          <th>Normal tickets</th>\n" +
-                "          <th>Action</th>");
-        tbBuilder.append("</tr>");
-        for (User user: users){
-            tbBuilder.append(user.UserDataTable());
-        }
-        tbBuilder.append("</table>");
-        return tbBuilder.toString();
+        return HtmlComponents.table(users);
     }
 }

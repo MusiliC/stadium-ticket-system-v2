@@ -1,4 +1,4 @@
-package com.cee.tech.app.action.userActions;
+package com.cee.tech.app.action.useractions;
 
 import com.cee.tech.app.action.BaseActionClass;
 

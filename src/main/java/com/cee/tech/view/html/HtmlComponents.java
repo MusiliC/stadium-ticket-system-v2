@@ -1,7 +1,5 @@
 package com.cee.tech.view.html;
 
-import com.cee.tech.app.model.entity.TicketPricing;
-import com.cee.tech.database.Database;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -9,30 +7,44 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class HtmlComponents implements Serializable {
-//    public static String table(List<Object> models) {
-//
-//        if(models == null || models.isEmpty()){
-//            return StringUtils.EMPTY;
-//        }
-//        Field[] fields = models.get(0).getClass().getFields();
-//
-//        StringBuilder tbBuilder = new StringBuilder();
-//
-//        tbBuilder.append("<table>");
-//        tbBuilder.append("<tr>");
-//        for(Field field: fields){
-//        tbBuilder.append(" <th>" + field.getName() + "</th");
-//        }
-//
-//
-//        for (Object model: models){
-//            tbBuilder.append("<tr>");
-//            for(Field field: fields)
-//                tb
-//        }
-//        tbBuilder.append("</table>");
-//        return tbBuilder.toString();
-//    }
+    public static String table(List<?> models) {
+
+        if (models == null || models.isEmpty()) {
+            return StringUtils.EMPTY;
+        }
+        Field[] fields = models.get(0).getClass().getDeclaredFields();
+
+        StringBuilder tbBuilder = new StringBuilder();
+
+        tbBuilder.append("<table>");
+        tbBuilder.append("<tr>");
+
+        for (Field field : fields) {
+            if(!field.isAnnotationPresent(EticketTableColHeader.class))
+                continue;
+            tbBuilder.append(" <th>" + field.getAnnotation(EticketTableColHeader.class).headerLabel() + "</th>");
+        }
+
+        tbBuilder.append("</tr>");
+
+
+        for (Object model : models) {
+            tbBuilder.append("<tr>");
+            for (Field field : fields) {
+                if(!field.isAnnotationPresent(EticketTableColHeader.class))
+                    continue;
+                field.setAccessible(true);
+                try {
+                    tbBuilder.append("<td>").append(field.get(model)).append("</td>");
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            tbBuilder.append("</tr>");
+        }
+        tbBuilder.append("</table>");
+        return tbBuilder.toString();
+    }
 
     public static String form(Class<?> model) {
 

@@ -9,7 +9,7 @@ import java.io.Serializable;
 @EticketHtmlForm(label = "Fixture", url = "./adminfixtures", httpMethod = "POST")
 public class Fixture implements Serializable {
 
-    @EticketFormField(label = "Fixture Id")
+
     private String fixtureId;
     @EticketFormField(label = "Fixture Type")
     private String fixtureType;
