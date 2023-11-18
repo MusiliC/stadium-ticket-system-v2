@@ -1,7 +1,6 @@
-package com.cee.tech.app.action.userActions;
+package com.cee.tech.app.action.useractions;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.cee.tech.app.action.sharedActions;
+package com.cee.tech.app.action.sharedactions;
 
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.adminbean.UserBean;

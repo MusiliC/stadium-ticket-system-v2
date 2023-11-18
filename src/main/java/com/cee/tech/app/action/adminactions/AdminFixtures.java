@@ -1,4 +1,4 @@
-package com.cee.tech.app.action.adminActions;
+package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.FixtureBeanI;

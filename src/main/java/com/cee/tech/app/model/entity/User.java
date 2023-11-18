@@ -1,16 +1,22 @@
 package com.cee.tech.app.model.entity;
 
-import org.apache.commons.lang3.StringUtils;
+
+
+import com.cee.tech.view.html.EticketTableColHeader;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
+
     private  String id;
+    @EticketTableColHeader(headerLabel = "Username")
     private String username;
     private String password;
     private  String confirmPassword;
 
+    @EticketTableColHeader(headerLabel  = "Normal Ticket")
     private int normalTickets = 0;
+    @EticketTableColHeader(headerLabel  = "VIP Ticket")
     private int vipTickets = 0;
 
 
@@ -79,19 +85,5 @@ public class User implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
-    public String UserDataTable(){
-        StringBuilder tbBuilder = new StringBuilder();
 
-        tbBuilder.append("<tr>");
-        tbBuilder.append("<td>").append(StringUtils.trimToEmpty(getUsername())).append("</td>");
-        tbBuilder.append("<td>").append(getVipTickets()).append("</td>");
-        tbBuilder.append("<td>").append(getNormalTickets()).append("</td>");
-        tbBuilder.append("<td>");
-        tbBuilder.append(" <div class=\"userOutlineButton\">Details</div>");
-        tbBuilder.append("</td>");
-        tbBuilder.append("</tr>");
-
-        return  tbBuilder.toString();
-
-    };
 }

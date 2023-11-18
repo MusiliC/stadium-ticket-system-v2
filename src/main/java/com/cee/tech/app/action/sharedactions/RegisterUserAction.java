@@ -1,4 +1,4 @@
-package com.cee.tech.app.action.sharedActions;
+package com.cee.tech.app.action.sharedactions;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
