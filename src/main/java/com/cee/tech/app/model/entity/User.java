@@ -3,6 +3,7 @@ package com.cee.tech.app.model.entity;
 
 
 import com.cee.tech.view.html.EticketTableColHeader;
+import com.cee.tech.view.html.TableActions;
 
 import java.io.Serializable;
 
@@ -18,6 +19,10 @@ public class User implements Serializable {
     private int normalTickets = 0;
     @EticketTableColHeader(headerLabel  = "VIP Ticket")
     private int vipTickets = 0;
+
+    @EticketTableColHeader(headerLabel  = "Actions")
+    @TableActions(actions={"Delete", "Edit"})
+    private String actions[];
 
 
     public int getNormalTickets() {

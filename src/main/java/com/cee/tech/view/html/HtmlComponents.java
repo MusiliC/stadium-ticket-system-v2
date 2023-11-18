@@ -36,10 +36,12 @@ public class HtmlComponents implements Serializable {
                 field.setAccessible(true);
                 try {
                     tbBuilder.append("<td>").append(field.get(model)).append("</td>");
+
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
             }
+
             tbBuilder.append("</tr>");
         }
         tbBuilder.append("</table>");
@@ -100,7 +102,7 @@ public class HtmlComponents implements Serializable {
         }
         String htmlForm = "<form action=\"" + eticketHtmlForm.url() + "\" method=\"" + eticketHtmlForm.httpMethod() + "\">\n";
         htmlForm += " <p class=\"fixtureTitle\">Book a ticket</p>\n";
-        htmlForm += "          <div class=\"formTicketContainer\">\n";
+        htmlForm += "<div class=\"formTicketContainer\">\n";
 
         Field[] fields = model.getDeclaredFields();
 
