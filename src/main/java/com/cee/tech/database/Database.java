@@ -10,12 +10,15 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Database implements Serializable {
 
     private  static  Database dbInstance;
 
     private  Database(){};
+    private List<Object> data = new ArrayList<>();
+
 
     private  String databaseCreatedAt;
 
@@ -31,6 +34,16 @@ public class Database implements Serializable {
         return databaseCreatedAt;
     }
 
+    public List<Object> getData(Class <?> clazz) {
+        return data
+                .stream()
+                .filter(clazz::isInstance)
+                .collect(Collectors.toList());
+    }
+
+    public void setData(List<Object> data) {
+        this.data = data;
+    }
 
     private List<User> users = new ArrayList<>();
     private  List<Fixture> fixtures = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.cee.tech.app.bean;
+package com.cee.tech.app.bean.sharedbean;
 
 import com.cee.tech.app.model.entity.Fixture;
 

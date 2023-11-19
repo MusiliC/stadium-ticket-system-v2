@@ -2,6 +2,7 @@ package com.cee.tech.app.model.entity;
 
 import com.cee.tech.view.html.EticketFormField;
 import com.cee.tech.view.html.EticketHtmlForm;
+import com.cee.tech.view.html.EticketTableColHeader;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -12,16 +13,22 @@ public class Fixture implements Serializable {
 
     private String fixtureId;
     @EticketFormField(label = "Fixture Type")
+    @EticketTableColHeader(headerLabel = "Fixture Type")
     private String fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
+    @EticketTableColHeader(headerLabel = "Fixture Time")
     private String fixtureTime;
     @EticketFormField(label = "Fixture Location")
+    @EticketTableColHeader(headerLabel = "Fixture Location")
     private String fixtureLocation;
     @EticketFormField(label = "Home Team")
+    @EticketTableColHeader(headerLabel = "Home Team")
     private String homeTeam;
     @EticketFormField(label = "Away Team")
+    @EticketTableColHeader(headerLabel = "Away Team")
     private String awayTeam;
     @EticketFormField(label = "Fixture Date", fieldType = "date")
+    @EticketTableColHeader(headerLabel = "Fixture Date")
     private String fixtureDate;
 
 

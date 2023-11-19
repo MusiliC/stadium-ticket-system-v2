@@ -1,13 +1,14 @@
-package com.cee.tech.app.bean.adminbean;
+package com.cee.tech.app.bean.sharedbean;
 
-import com.cee.tech.app.bean.UserBeanI;
+import com.cee.tech.app.bean.GenericBeanImpl;
+import com.cee.tech.app.bean.userbean.UserBeanI;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
 import com.cee.tech.view.html.HtmlComponents;
 
 import java.util.List;
 
-public class UserBean implements UserBeanI {
+public class UserBean extends GenericBeanImpl<User> implements UserBeanI {
     Database database = Database.getDbInstance();
     @Override
     public boolean registerUser(User user) {
@@ -27,4 +28,6 @@ public class UserBean implements UserBeanI {
 
         return HtmlComponents.table(users);
     }
+
+
 }

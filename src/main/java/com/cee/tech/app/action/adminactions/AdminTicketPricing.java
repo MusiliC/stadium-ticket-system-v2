@@ -1,7 +1,7 @@
 package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
-import com.cee.tech.app.bean.TicketPricingBeanI;
+import com.cee.tech.app.bean.adminbean.TicketPricingBeanI;
 import com.cee.tech.app.bean.adminbean.TicketPricingBean;
 import com.cee.tech.app.model.entity.TicketPricing;
 import com.cee.tech.database.Database;

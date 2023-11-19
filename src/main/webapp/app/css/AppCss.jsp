@@ -196,6 +196,7 @@
 
               .fixtureContainer {
                   width: 83%;
+                  min-height: 50vh;
                   margin: auto;
                   padding-top: 10px;
                   padding-bottom: 10px;

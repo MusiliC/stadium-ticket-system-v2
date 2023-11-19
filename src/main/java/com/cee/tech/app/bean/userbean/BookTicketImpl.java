@@ -1,4 +1,4 @@
-package com.cee.tech.app.bean;
+package com.cee.tech.app.bean.userbean;
 
 import com.cee.tech.app.bean.userbean.BookTicketI;
 import com.cee.tech.app.model.entity.Ticket;

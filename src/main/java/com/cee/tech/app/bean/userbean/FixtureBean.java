@@ -1,6 +1,6 @@
 package com.cee.tech.app.bean.userbean;
 
-import com.cee.tech.app.bean.FixtureBeanI;
+import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
 import com.cee.tech.app.model.entity.Fixture;
 import com.cee.tech.database.Database;
 
