@@ -1,7 +1,7 @@
 package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
-import com.cee.tech.app.bean.FixtureBeanI;
+import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
 import com.cee.tech.app.bean.adminbean.FixtureAdminBean;
 import com.cee.tech.app.model.entity.Fixture;
 import com.cee.tech.database.Database;

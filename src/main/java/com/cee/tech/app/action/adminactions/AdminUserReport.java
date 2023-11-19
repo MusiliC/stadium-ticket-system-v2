@@ -1,8 +1,8 @@
 package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
-import com.cee.tech.app.bean.adminbean.UserBean;
-import com.cee.tech.app.bean.UserBeanI;
+import com.cee.tech.app.bean.sharedbean.UserBean;
+import com.cee.tech.app.bean.userbean.UserBeanI;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +18,12 @@ public class AdminUserReport extends BaseActionClass {
         renderAdminPage(req, res, "   <div class=\"adminTableContainer\">\n" +
                 "      <p class=\"fixtureTitleTable\">Users Report</p>\n" +
                 "\n" +
-                userBean.allRegisteredUsers() +
+                userBean.list(UserBean.class) +
                 "      <div class=\"ticketReportButton\">\n" +
                 "        <a href=\"#\" class=\"ticketReportOneButton\">Download</a>\n" +
                 "      </div>\n" +
                 "    </div>");
+
+
     }
 }

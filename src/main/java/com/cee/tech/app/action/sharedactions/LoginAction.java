@@ -1,8 +1,8 @@
 package com.cee.tech.app.action.sharedactions;
 
 import com.cee.tech.app.action.BaseActionClass;
-import com.cee.tech.app.bean.AuthBean;
-import com.cee.tech.app.bean.AuthBeanI;
+import com.cee.tech.app.bean.sharedbean.AuthBean;
+import com.cee.tech.app.bean.sharedbean.AuthBeanI;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.utils.CustomLogger;
 import org.apache.commons.lang3.StringUtils;

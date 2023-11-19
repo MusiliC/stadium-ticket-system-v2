@@ -1,10 +1,10 @@
-package com.cee.tech.app.bean;
+package com.cee.tech.app.bean.sharedbean;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
 
 import java.io.Serializable;
 
-public class AuthBean implements Serializable,AuthBeanI {
+public class AuthBean implements Serializable, AuthBeanI {
     Database database = Database.getDbInstance();
     User userDetails = null;
     public User authenticateUser(User loginUser){

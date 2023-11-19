@@ -1,8 +1,8 @@
 package com.cee.tech.app.action.sharedactions;
 
 import com.cee.tech.app.action.BaseActionClass;
-import com.cee.tech.app.bean.adminbean.UserBean;
-import com.cee.tech.app.bean.UserBeanI;
+import com.cee.tech.app.bean.sharedbean.UserBean;
+import com.cee.tech.app.bean.userbean.UserBeanI;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
 import javax.servlet.ServletException;
