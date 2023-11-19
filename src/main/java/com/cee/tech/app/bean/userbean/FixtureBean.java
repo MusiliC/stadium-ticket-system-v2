@@ -1,5 +1,6 @@
 package com.cee.tech.app.bean.userbean;
 
+import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
 import com.cee.tech.app.model.entity.Fixture;
 import com.cee.tech.database.Database;
@@ -7,7 +8,7 @@ import com.cee.tech.database.Database;
 import java.io.Serializable;
 import java.util.List;
 
-public class FixtureBean implements FixtureBeanI, Serializable {
+public class FixtureBean extends GenericBeanImpl<Fixture> implements FixtureBeanI, Serializable {
     public  String upcomingFixtures(){
         List<Fixture> fixtures = Database.getDbInstance().getFixtures();
 
@@ -19,6 +20,8 @@ public class FixtureBean implements FixtureBeanI, Serializable {
 
         return tbBuilder.toString();
     };
+
+
     public Fixture addUpdateFixture(Fixture fixture)throws  Exception{
       return  fixture;
     };

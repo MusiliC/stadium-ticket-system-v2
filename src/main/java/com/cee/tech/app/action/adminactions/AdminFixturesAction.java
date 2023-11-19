@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/adminfixtures")
-public class AdminFixtures extends BaseActionClass {
+public class AdminFixturesAction extends BaseActionClass {
     FixtureBeanI adminFixtureBean = new FixtureAdminBean();
 
     @Override
@@ -34,8 +34,7 @@ public class AdminFixtures extends BaseActionClass {
                 "      <!-- bottom part  -->\n" +
                 "      <div class=\"fixtureAdminContainer\">\n" +
                 "        <!-- each fixture div -->\n" +
-                adminFixtureBean.upcomingFixtures() +
-
+                adminFixtureBean.list(Fixture.class) +
                 "      </div>\n" +
                 "    </div>");
 

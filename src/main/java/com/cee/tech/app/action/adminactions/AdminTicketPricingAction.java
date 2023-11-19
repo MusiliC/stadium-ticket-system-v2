@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/adminticketpricing")
-public class AdminTicketPricing extends BaseActionClass {
+public class AdminTicketPricingAction extends BaseActionClass {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         Database database = Database.getDbInstance();
