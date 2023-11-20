@@ -1,15 +1,13 @@
 package com.cee.tech.app.bean.sharedbean;
 import com.cee.tech.app.model.entity.User;
-import com.cee.tech.database.Database;
 import com.cee.tech.database.MySqlDatabase;
 
 import java.io.Serializable;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthBean implements Serializable, AuthBeanI {
+public class AuthBeanImpl implements Serializable, AuthBeanI {
 
     User userDetails = null;
     public User authenticateUser(User loginUser) throws SQLException {

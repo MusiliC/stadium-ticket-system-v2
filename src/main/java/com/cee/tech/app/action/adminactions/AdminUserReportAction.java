@@ -1,7 +1,7 @@
 package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
-import com.cee.tech.app.bean.sharedbean.UserBean;
+import com.cee.tech.app.bean.sharedbean.UserBeanImpl;
 import com.cee.tech.app.bean.userbean.UserBeanI;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.view.html.HtmlComponents;
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AdminUserReportAction extends BaseActionClass {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-        UserBeanI userBean = new UserBean();
+        UserBeanI userBean = new UserBeanImpl();
 
         renderAdminPage(req, res, "   <div class=\"adminTableContainer\">\n" +
                 "      <p class=\"fixtureTitleTable\">Users Report</p>\n" +

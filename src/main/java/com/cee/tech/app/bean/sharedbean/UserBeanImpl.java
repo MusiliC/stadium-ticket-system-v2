@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserBean extends GenericBeanImpl<User> implements UserBeanI {
+public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
     @Override
     public boolean registerUser(User user) throws SQLException {
