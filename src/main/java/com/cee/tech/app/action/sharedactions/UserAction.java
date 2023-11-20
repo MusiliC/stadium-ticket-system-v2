@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/user")
 public class UserAction extends BaseActionClass {
@@ -19,12 +20,17 @@ public class UserAction extends BaseActionClass {
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        Database database = Database.getDbInstance();
 
-        User registerUser = new User();
-        serializeForm(registerUser, req.getParameterMap());
+            User registerUser = new User();
+            serializeForm(registerUser, req.getParameterMap());
+            try {
+                userBean.registerUser(registerUser);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
-        userBean.registerUser(registerUser);
+
+
         res.sendRedirect("./");
 
     }

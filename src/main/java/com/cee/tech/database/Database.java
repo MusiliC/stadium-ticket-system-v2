@@ -6,6 +6,7 @@ import com.cee.tech.app.model.entity.TicketPricing;
 import com.cee.tech.app.model.entity.User;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,9 +17,18 @@ public class Database implements Serializable {
 
     private  static  Database dbInstance;
 
+    private Connection connection;
+
     private  Database(){};
     private List<Object> data = new ArrayList<>();
 
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 
     private  String databaseCreatedAt;
 
@@ -33,6 +43,8 @@ public class Database implements Serializable {
     public String getDatabaseCreatedAt() {
         return databaseCreatedAt;
     }
+
+
 
     public List<Object> getData(Class <?> clazz) {
         return data

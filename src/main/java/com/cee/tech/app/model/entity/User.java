@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private  String id;
+    private  int id;
     @EticketTableColHeader(headerLabel = "Username")
     private String username;
     private String password;
@@ -44,13 +44,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String username, String password) {
+    public User(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public User(String id, String username, String password, int normalTickets, int vipTickets) {
+    public User(int id, String username, String password, int normalTickets, int vipTickets) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -58,11 +58,11 @@ public class User implements Serializable {
         this.vipTickets = vipTickets;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

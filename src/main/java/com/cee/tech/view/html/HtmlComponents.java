@@ -92,6 +92,17 @@ public class HtmlComponents implements Serializable {
         return htmlForm;
     }
 
+    public  static  String fixtureCard(List<?> model){
+        if (model == null || model.isEmpty()) {
+            return StringUtils.EMPTY;
+        }
+
+        Field[] fields = model.get(0).getClass().getDeclaredFields();
+
+
+        return "hey";
+    }
+
     public static String ticketForm(Class<?> model) {
         EticketHtmlForm eticketHtmlForm = null;
         if (model.isAnnotationPresent(EticketHtmlForm.class)) {

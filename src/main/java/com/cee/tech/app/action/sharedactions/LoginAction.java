@@ -40,10 +40,12 @@ public class LoginAction extends BaseActionClass {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        User userDetails = authBean.authenticateUser(loginUser);
+        try {
+
+            User userDetails = authBean.authenticateUser(loginUser);
 
 
-            if (userDetails !=null) {
+            if (userDetails != null) {
                 HttpSession httpSession = req.getSession(true);
                 httpSession.setAttribute("LoginId", new Date().getTime() + "");
                 // implementing cookies
@@ -57,11 +59,14 @@ public class LoginAction extends BaseActionClass {
                     res.sendRedirect("./home");
                 }
 
+            }
+
+            PrintWriter print = res.getWriter();
+
+            print.write("<html><body>Invalid credentials! <a href=\".\"> Login again </a></body></html>");
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        PrintWriter print = res.getWriter();
-
-        print.write("<html><body>Invalid credentials! <a href=\".\"> Login again </a></body></html>");
     }
 
 }
