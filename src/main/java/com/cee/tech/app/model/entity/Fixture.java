@@ -1,5 +1,6 @@
 package com.cee.tech.app.model.entity;
 
+import com.cee.tech.view.html.EticketFixtureCard;
 import com.cee.tech.view.html.EticketFormField;
 import com.cee.tech.view.html.EticketHtmlForm;
 import com.cee.tech.view.html.EticketTableColHeader;
@@ -12,24 +13,33 @@ public class Fixture implements Serializable {
 
 
     private String fixtureId;
+
     @EticketFormField(label = "Fixture Type")
     @EticketTableColHeader(headerLabel = "Fixture Type")
+    @EticketFixtureCard(name = "Fixture Type", className = "fixture")
     private String fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
-    @EticketTableColHeader(headerLabel = "Fixture Time")
+    @EticketTableColHeader(headerLabel = "Time")
+    @EticketFixtureCard(name = "Fixture Time")
     private String fixtureTime;
     @EticketFormField(label = "Fixture Location")
-    @EticketTableColHeader(headerLabel = "Fixture Location")
+    @EticketTableColHeader(headerLabel = "Location")
+    @EticketFixtureCard(name = "Fixture Location")
     private String fixtureLocation;
     @EticketFormField(label = "Home Team")
     @EticketTableColHeader(headerLabel = "Home Team")
+    @EticketFixtureCard(name = "Home Team")
     private String homeTeam;
     @EticketFormField(label = "Away Team")
     @EticketTableColHeader(headerLabel = "Away Team")
+    @EticketFixtureCard(name = "Away Team")
     private String awayTeam;
     @EticketFormField(label = "Fixture Date", fieldType = "date")
-    @EticketTableColHeader(headerLabel = "Fixture Date")
+    @EticketTableColHeader(headerLabel = "Date")
+    @EticketFixtureCard(name = "Fixture Date", className = "date")
     private String fixtureDate;
+    @EticketTableColHeader(headerLabel = "Edit")
+    private String edit;
 
 
     public String getFixtureType() {
@@ -116,7 +126,7 @@ public class Fixture implements Serializable {
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<div class=\"oneFixture\">");
         tbBuilder.append("<div class=\"fixture\">");
-        tbBuilder.append("<td>").append(StringUtils.trimToEmpty(getFixtureType())).append("</td>");
+        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
         tbBuilder.append(" </div>");
         tbBuilder.append("  <div class=\"timeLocation\">");
         tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");
@@ -141,7 +151,7 @@ public class Fixture implements Serializable {
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<div class=\"oneFixture\">");
         tbBuilder.append("<div class=\"fixture\">");
-        tbBuilder.append("<td>").append(StringUtils.trimToEmpty(getFixtureType())).append("</td>");
+        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
         tbBuilder.append(" </div>");
         tbBuilder.append("  <div class=\"timeLocation\">");
         tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");

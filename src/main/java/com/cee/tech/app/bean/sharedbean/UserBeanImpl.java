@@ -24,13 +24,14 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
             MySqlDatabase database = MySqlDatabase.getInstance();
             Connection conn = database.getConnection();
 
-            String sqlQuery = "insert into user (username, password, normalTickets,vipTickets )values(?,?,?,?);";
+            String sqlQuery = "insert into users (id,username, password, normalTickets,vipTickets )values(?,?,?,?,?);";
             PreparedStatement sqlStmt = conn.prepareStatement(sqlQuery);
 
-            sqlStmt.setString(1,user.getUsername());
-            sqlStmt.setString(2,user.getPassword());
-            sqlStmt.setInt(3,user.getNormalTickets());
-            sqlStmt.setInt(4,user.getVipTickets());
+            sqlStmt.setInt(1, (int) (Math.random()*10000));
+            sqlStmt.setString(2,user.getUsername());
+            sqlStmt.setString(3,user.getPassword());
+            sqlStmt.setInt(4,user.getNormalTickets());
+            sqlStmt.setInt(5,user.getVipTickets());
 
             sqlStmt.executeUpdate();
 

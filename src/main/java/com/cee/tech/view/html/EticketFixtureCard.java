@@ -10,4 +10,10 @@ import java.lang.annotation.Target;
 public @interface EticketFixtureCard {
     String name() default "";
     String className() default "";
+
+    String divTag() default "div";
+
+    String pTag() default "p";
+
+
 }
