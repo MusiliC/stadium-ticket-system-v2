@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/adminticketreport")
-public class AdminTicketReport extends BaseActionClass {
+public class AdminTicketReportAction extends BaseActionClass {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         renderAdminPage(req, res, "    <div class=\"adminTableContainer\">\n" +

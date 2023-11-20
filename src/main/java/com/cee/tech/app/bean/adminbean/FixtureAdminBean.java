@@ -1,12 +1,13 @@
 package com.cee.tech.app.bean.adminbean;
 
+import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
 import com.cee.tech.app.model.entity.Fixture;
 import com.cee.tech.database.Database;
 
 import java.util.List;
 
-public class FixtureAdminBean implements FixtureBeanI {
+public class FixtureAdminBean extends GenericBeanImpl<Fixture> implements FixtureBeanI {
     @Override
     public String upcomingFixtures() {
         List<Fixture> fixtures = Database.getDbInstance().getFixtures();

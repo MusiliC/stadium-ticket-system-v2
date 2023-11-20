@@ -1,7 +1,7 @@
 package com.cee.tech.app.action.sharedactions;
 
 import com.cee.tech.app.action.BaseActionClass;
-import com.cee.tech.app.bean.sharedbean.AuthBean;
+import com.cee.tech.app.bean.sharedbean.AuthBeanImpl;
 import com.cee.tech.app.bean.sharedbean.AuthBeanI;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.utils.CustomLogger;
@@ -21,7 +21,7 @@ import javax.servlet.http.*;
 })
 public class LoginAction extends BaseActionClass {
 
-    AuthBeanI authBean = new AuthBean();
+    AuthBeanI authBean = new AuthBeanImpl();
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
         if (StringUtils.isNotBlank((String) httpSession.getAttribute("LoginId")))
@@ -40,10 +40,12 @@ public class LoginAction extends BaseActionClass {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        User userDetails = authBean.authenticateUser(loginUser);
+        try {
+
+            User userDetails = authBean.authenticateUser(loginUser);
 
 
-            if (userDetails !=null) {
+            if (userDetails != null && StringUtils.isNotBlank(userDetails.getUsername())) {
                 HttpSession httpSession = req.getSession(true);
                 httpSession.setAttribute("LoginId", new Date().getTime() + "");
                 // implementing cookies
@@ -57,11 +59,14 @@ public class LoginAction extends BaseActionClass {
                     res.sendRedirect("./home");
                 }
 
+            }
+
+            PrintWriter print = res.getWriter();
+
+            print.write("<html><body>Invalid credentials! <a href=\".\"> Login again </a></body></html>");
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        PrintWriter print = res.getWriter();
-
-        print.write("<html><body>Invalid credentials! <a href=\".\"> Login again </a></body></html>");
     }
 
 }

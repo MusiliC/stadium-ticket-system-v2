@@ -2,21 +2,28 @@ package com.cee.tech.app.model.entity;
 
 
 
+import com.cee.tech.database.helper.DbTable;
+import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketTableColHeader;
 import com.cee.tech.view.html.TableActions;
 
 import java.io.Serializable;
 
+@DbTable(name = "users")
 public class User implements Serializable {
 
-    private  String id;
+    @DbTableColumn(name = "id", definition = "int", primaryKey = "primary key", notNull = "not null")
+    private  int id;
+    @DbTableColumn(name = "username", notNull = "not null")
     @EticketTableColHeader(headerLabel = "Username")
     private String username;
+    @DbTableColumn(name = "password", notNull = "not null")
     private String password;
     private  String confirmPassword;
-
+    @DbTableColumn(name = "normalTickets", definition = "int")
     @EticketTableColHeader(headerLabel  = "Normal Ticket")
     private int normalTickets = 0;
+    @DbTableColumn(name = "vipTickets", definition = "int")
     @EticketTableColHeader(headerLabel  = "VIP Ticket")
     private int vipTickets = 0;
 
@@ -44,13 +51,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String username, String password) {
+    public User(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public User(String id, String username, String password, int normalTickets, int vipTickets) {
+    public User(int id, String username, String password, int normalTickets, int vipTickets) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -58,11 +65,11 @@ public class User implements Serializable {
         this.vipTickets = vipTickets;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
