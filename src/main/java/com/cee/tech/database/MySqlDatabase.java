@@ -1,5 +1,7 @@
 package com.cee.tech.database;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +16,13 @@ public class MySqlDatabase implements Serializable {
     private Connection connection;
 
     private MySqlDatabase() throws SQLException {
-        connection = DriverManager.getConnection(URL,USER,PASSWORD);
+
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setURL(URL);
+        dataSource.setUser(USER);
+        dataSource.setPassword(PASSWORD);
+        connection = dataSource.getConnection();
+
     }
 
     public static MySqlDatabase getInstance() throws SQLException {

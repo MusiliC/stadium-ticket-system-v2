@@ -4,7 +4,9 @@ import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
 import com.cee.tech.app.bean.adminbean.FixtureAdminBean;
 import com.cee.tech.app.model.entity.Fixture;
+import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
+import com.cee.tech.view.html.HtmlComponents;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +36,7 @@ public class AdminFixturesAction extends BaseActionClass {
                 "      <!-- bottom part  -->\n" +
                 "      <div class=\"fixtureAdminContainer\">\n" +
                 "        <!-- each fixture div -->\n" +
-                adminFixtureBean.list(Fixture.class) +
+                HtmlComponents.table(adminFixtureBean.list(Fixture.class) ) +
                 "      </div>\n" +
                 "    </div>");
 
