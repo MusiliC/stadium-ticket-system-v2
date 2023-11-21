@@ -11,7 +11,6 @@ import java.io.Serializable;
 @EticketHtmlForm(label = "Fixture", url = "./adminfixtures", httpMethod = "POST")
 public class Fixture implements Serializable {
 
-
     private String fixtureId;
 
     @EticketFormField(label = "Fixture Type")
@@ -38,16 +37,17 @@ public class Fixture implements Serializable {
     @EticketTableColHeader(headerLabel = "Date")
     @EticketFixtureCard(name = "Fixture Date", className = "date")
     private String fixtureDate;
-    @EticketTableColHeader(headerLabel = "Edit")
-    private String edit;
+    @EticketTableColHeader(headerLabel = "Action")
+    private String action = "Edit";
+
 
 
     public String getFixtureType() {
         return fixtureType;
     }
 
-
-    public Fixture(String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam, String awayTeam, String fixtureDate) {
+    public Fixture(String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam, String awayTeam,
+            String fixtureDate) {
         this.fixtureType = fixtureType;
         this.fixtureTime = fixtureTime;
         this.fixtureLocation = fixtureLocation;
@@ -56,7 +56,8 @@ public class Fixture implements Serializable {
         this.fixtureDate = fixtureDate;
     }
 
-    public Fixture(String fixtureId, String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam, String awayTeam, String fixtureDate) {
+    public Fixture(String fixtureId, String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
+            String awayTeam, String fixtureDate) {
         this.fixtureId = fixtureId;
         this.fixtureType = fixtureType;
         this.fixtureTime = fixtureTime;
@@ -65,6 +66,8 @@ public class Fixture implements Serializable {
         this.awayTeam = awayTeam;
         this.fixtureDate = fixtureDate;
     }
+
+    
 
     public String getFixtureId() {
         return fixtureId;
@@ -121,7 +124,6 @@ public class Fixture implements Serializable {
     public Fixture() {
     }
 
-
     public String tableRow() {
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<div class=\"oneFixture\">");
@@ -169,6 +171,14 @@ public class Fixture implements Serializable {
         tbBuilder.append("</div>");
         return tbBuilder.toString();
 
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 
 }

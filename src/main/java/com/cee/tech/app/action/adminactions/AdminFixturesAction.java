@@ -36,7 +36,7 @@ public class AdminFixturesAction extends BaseActionClass {
                 "      <!-- bottom part  -->\n" +
                 "      <div class=\"fixtureAdminContainer\">\n" +
                 "        <!-- each fixture div -->\n" +
-                HtmlComponents.table(adminFixtureBean.list(Fixture.class) ) +
+                HtmlComponents.table(Fixture.class,adminFixtureBean.list(Fixture.class) ) +
                 "      </div>\n" +
                 "    </div>");
 

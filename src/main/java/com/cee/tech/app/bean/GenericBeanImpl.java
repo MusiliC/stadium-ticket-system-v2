@@ -1,6 +1,7 @@
 package com.cee.tech.app.bean;
 
 import com.cee.tech.app.model.entity.Fixture;
+import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
 import com.cee.tech.view.html.HtmlComponents;
@@ -21,6 +22,9 @@ public class GenericBeanImpl<T> implements  GenericBeanI<T>{
 
         if (entity.equals(Fixture.class))
             return (List<T>) database.getFixtures();
+
+        if (entity.equals(TicketManagement.class))
+            return (List<T>) database.getTicketManagement();
 
 
         return new ArrayList<>();

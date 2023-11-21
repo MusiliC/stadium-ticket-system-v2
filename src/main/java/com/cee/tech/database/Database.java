@@ -2,7 +2,7 @@ package com.cee.tech.database;
 
 import com.cee.tech.app.model.entity.Fixture;
 import com.cee.tech.app.model.entity.Ticket;
-import com.cee.tech.app.model.entity.TicketPricing;
+import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
 
 import java.io.Serializable;
@@ -60,7 +60,7 @@ public class Database implements Serializable {
     private List<User> users = new ArrayList<>();
     private  List<Fixture> fixtures = new ArrayList<>();
 
-    private List<TicketPricing> ticketPricing = new ArrayList<>();
+    private List<TicketManagement> ticketManagement = new ArrayList<>();
 
     private List<Ticket> bookTicket = new ArrayList<>();
 
@@ -72,12 +72,12 @@ public class Database implements Serializable {
         this.bookTicket = bookTicket;
     }
 
-    public List<TicketPricing> getTicketPricing() {
-        return ticketPricing;
+    public List<TicketManagement> getTicketManagement() {
+        return ticketManagement;
     }
 
-    public void setTicketPricing(List<TicketPricing> ticketPricing) {
-        this.ticketPricing = ticketPricing;
+    public void setTicketManagement(List<TicketManagement> ticketManagement) {
+        this.ticketManagement = ticketManagement;
     }
 
     public List<Fixture> getFixtures() {

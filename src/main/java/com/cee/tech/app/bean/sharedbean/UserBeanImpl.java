@@ -49,7 +49,7 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
     public String allRegisteredUsers() {
         List<User> users = Database.getDbInstance().getUsers();
 
-        return HtmlComponents.table(users);
+        return HtmlComponents.table(User.class,users);
     }
 
 
