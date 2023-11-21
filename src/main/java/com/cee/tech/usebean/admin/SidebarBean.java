@@ -44,18 +44,7 @@ public class SidebarBean implements Serializable {
                 "              <a href=\"./adminfixtures\">Upcoming Fixtures</a>\n" +
                 "            </div>\n" +
                 "          </div>"+
-                "     <div class=\"adminLinkTag\">\n" +
-                "            <img\n" +
-                "              width=\"22\"\n" +
-                "              height=\"22\"\n" +
-                "              src=\"https://img.icons8.com/ios/50/us-dollar-circled--v1.png\"\n" +
-                "              alt=\"us-dollar-circled--v1\"\n" +
-                "              style=\"filter: invert(100%)\"\n" +
-                "            />\n" +
-                "            <div>\n" +
-                "              <a href=\"./adminticketpricing\">Ticket Pricing</a>\n" +
-                "            </div>\n" +
-                "          </div>" +
+
                 "  <div class=\"adminLinkTag\">\n" +
                 "            <img\n" +
                 "              width=\"22\"\n" +
@@ -68,6 +57,18 @@ public class SidebarBean implements Serializable {
                 "              <a href=\"./adminticket\">Ticket Management</a>\n" +
                 "            </div>\n" +
                 "          </div>"+
+                "     <div class=\"adminLinkTag\">\n" +
+                "            <img\n" +
+                "              width=\"22\"\n" +
+                "              height=\"22\"\n" +
+                "              src=\"https://img.icons8.com/ios/50/us-dollar-circled--v1.png\"\n" +
+                "              alt=\"us-dollar-circled--v1\"\n" +
+                "              style=\"filter: invert(100%)\"\n" +
+                "            />\n" +
+                "            <div>\n" +
+                "              <a href=\"./adminticketpricing\">Ticket Manage List</a>\n" +
+                "            </div>\n" +
+                "          </div>" +
                 "                <div class=\"adminLinkTag\">\n" +
                 "                    <img width=\"22\" height=\"22\" src=\"https://img.icons8.com/ios/50/graph-report.png\" alt=\"graph-report\" style=\"filter: invert(100%);\"/>\n" +
                 "                    <div>\n" +

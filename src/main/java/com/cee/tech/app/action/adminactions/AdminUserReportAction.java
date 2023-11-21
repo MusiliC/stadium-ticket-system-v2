@@ -20,7 +20,7 @@ public class AdminUserReportAction extends BaseActionClass {
         renderAdminPage(req, res, "   <div class=\"adminTableContainer\">\n" +
                 "      <p class=\"fixtureTitleTable\">Users Report</p>\n" +
                 "\n" +
-                HtmlComponents.table(userBean.list(User.class) ) +
+                HtmlComponents.table(User.class,userBean.list(User.class) ) +
                 "      <div class=\"ticketReportButton\">\n" +
                 "        <a href=\"#\" class=\"ticketReportOneButton\">Download</a>\n" +
                 "      </div>\n" +

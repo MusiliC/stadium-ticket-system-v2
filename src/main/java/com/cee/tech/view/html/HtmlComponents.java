@@ -7,12 +7,10 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class HtmlComponents implements Serializable {
-    public static String table(List<?> models) {
+    public static String table(Class<?> clazz,List<?> models) {
 
-        if (models == null || models.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
-        Field[] fields = models.get(0).getClass().getDeclaredFields();
+
+        Field[] fields = clazz.getDeclaredFields();
 
         StringBuilder tbBuilder = new StringBuilder();
 
@@ -27,7 +25,9 @@ public class HtmlComponents implements Serializable {
 
         tbBuilder.append("</tr>");
 
-
+        if (models == null || models.isEmpty()) {
+            return StringUtils.EMPTY;
+        }
         for (Object model : models) {
             tbBuilder.append("<tr>");
             for (Field field : fields) {

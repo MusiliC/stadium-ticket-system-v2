@@ -1,15 +1,15 @@
 package com.cee.tech.app.bean.adminbean;
 
-import com.cee.tech.app.model.entity.TicketPricing;
+import com.cee.tech.app.bean.GenericBeanImpl;
+import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.database.Database;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class TicketPricingBean implements TicketPricingBeanI, Serializable {
-    @Override
+public class AdminTicketManagementBean extends GenericBeanImpl<TicketManagement> implements AdminTicketManagementI, Serializable {
     public String ticketPricesData() {
-        List<TicketPricing> ticketPricings = Database.getDbInstance().getTicketPricing();
+        List<TicketManagement> ticketPricings = Database.getDbInstance().getTicketManagement();
 
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<table>");
@@ -20,20 +20,18 @@ public class TicketPricingBean implements TicketPricingBeanI, Serializable {
                 "            <th>Action</th>");
         tbBuilder.append("</tr>");
 
-        for (TicketPricing ticketPricing: ticketPricings){
+        for (TicketManagement ticketPricing: ticketPricings){
             tbBuilder.append(ticketPricing.ticketPricingTableRow());
         }
         tbBuilder.append("</table>");
         return tbBuilder.toString();
     }
 
-    @Override
-    public TicketPricing addUpdateTicketPrice(TicketPricing ticketPricing) throws Exception {
+    public TicketManagement addUpdateTicketPrice(TicketManagement ticketPricing) throws Exception {
         return null;
     }
 
-    @Override
-    public void deleteFixture(TicketPricing ticketPricing) {
+    public void deleteFixture(TicketManagement ticketPricing) {
         System.out.println("Delete fixture");
     }
 }
