@@ -11,7 +11,7 @@ public @interface DbTableColumn {
     String name();
     String definition() default "varchar(255)" ;
     String primaryKey() default "";
-
+    String foreignKeyColumn() default "";
     String notNull() default "";
 
 
