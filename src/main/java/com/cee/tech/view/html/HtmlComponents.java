@@ -26,7 +26,7 @@ public class HtmlComponents implements Serializable {
         tbBuilder.append("</tr>");
 
         if (models == null || models.isEmpty()) {
-            return StringUtils.EMPTY;
+            return tbBuilder.toString();
         }
         for (Object model : models) {
             tbBuilder.append("<tr>");
@@ -92,34 +92,7 @@ public class HtmlComponents implements Serializable {
         return htmlForm;
     }
 
-//    public  static  String fixtureCard(List<?> model){
-//        if (model == null || model.isEmpty()) {
-//            return StringUtils.EMPTY;
-//        }
-//
-//        Field[] fields = model.get(0).getClass().getDeclaredFields();
-//
-//        StringBuilder htmlCard = new StringBuilder();
-//
-//        for (Field field: fields){
-//            if (!field.isAnnotationPresent(EticketFixtureCard.class))
-//                continue;
-//
-//            EticketFixtureCard eticketFixtureCard = field.getDeclaredAnnotation(EticketFixtureCard.class);
-//
-//            String fieldName = field.getName();
-//
-//            htmlCard.append("<div class=\"oneFixture\">");
-//            htmlCard.append("<div class=\"fixture\">");
-//            htmlCard.append("<p>").append(StringUtils.isEmpty(eticketFixtureCard.name())).append("</p>");
-//            htmlCard.append("/div");
-//            htmlCard.append("/div");
-//
-//        }
-//
-//
-//        return htmlCard.toString();
-//    }
+
 
     public static String ticketForm(Class<?> model) {
         EticketHtmlForm eticketHtmlForm = null;

@@ -12,13 +12,60 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebListener
 public class AppInit implements ServletContextListener {
+
+    public static<T> List<T> select(Class<T> filter) {
+        try {
+            Class<?> clazz = filter;
+            System.out.println();
+            System.out.println("Clazz>>>>>>>>>>" + clazz.getName());
+
+            if (!clazz.isAnnotationPresent(DbTable.class))
+                return new ArrayList<>();
+
+            DbTable dbTable = clazz.getAnnotation(DbTable.class);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.append("SELECT * FROM ")
+                    .append(dbTable.name()).append(";");
+            Connection conn = MySqlDatabase.getInstance().getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(stringBuilder.toString());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<T> result = new ArrayList<>();
+
+            while (resultSet.next()) {
+                T object = (T) clazz.getDeclaredConstructor().newInstance();
+
+                for (Field field : clazz.getDeclaredFields()) {
+                    DbTableColumn dbColumn = field.getAnnotation(DbTableColumn.class);
+                    if (dbColumn != null) {
+                        String columnName = dbColumn.name();
+
+                        Object value = resultSet.getObject(columnName);
+                        field.setAccessible(true);
+                        field.set(object, value);
+                    }
+                }
+
+                result.add(object);
+            }
+            return result;
+        } catch (SQLException | InvocationTargetException | IllegalArgumentException | InstantiationException | IllegalAccessException |
+                 NoSuchMethodException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
