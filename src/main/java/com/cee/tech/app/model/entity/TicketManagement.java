@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class TicketManagement implements Serializable {
     @EticketTableColHeader(headerLabel = "Fixture Type")
-    private String ticketType;
+    private TicketType ticketType;
     @EticketTableColHeader(headerLabel = "Total Tickets")
     private int totalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "VIP tickets")
@@ -25,8 +25,8 @@ public class TicketManagement implements Serializable {
     public TicketManagement() {
     }
 
-    public TicketManagement(String ticketType, int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
-        this.ticketType = ticketType;
+    public TicketManagement(int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
+
         this.totalTicketsAllocated = totalTicketsAllocated;
         this.totalVipTicketsLocated = totalVipTicketsLocated;
         this.ticketAmountVIP = ticketAmountVIP;
@@ -34,11 +34,11 @@ public class TicketManagement implements Serializable {
         this.ticketAmountNormal = ticketAmountNormal;
     }
 
-    public String getTicketType() {
+    public TicketType getTicketType() {
         return ticketType;
     }
 
-    public void setTicketType(String ticketType) {
+    public void setTicketType(TicketType ticketType) {
         this.ticketType = ticketType;
     }
 
@@ -88,7 +88,7 @@ public class TicketManagement implements Serializable {
 
 
         tbBuilder.append("<tr>");
-        tbBuilder.append("<td>").append(StringUtils.trimToEmpty(getTicketType())).append("</td>");
+        //tbBuilder.append("<td>").append(StringUtils.trimToEmpty(getTicketType())).append("</td>");
         tbBuilder.append("<td>").append(getTicketAmountVIP()).append("</td>");
         tbBuilder.append("<td>").append(getTicketAmountNormal()).append("</td>");
         tbBuilder.append("<td>");

@@ -16,7 +16,7 @@ public class Fixture implements Serializable {
     @EticketFormField(label = "Fixture Type")
     @EticketTableColHeader(headerLabel = "Fixture Type")
     @EticketFixtureCard(name = "Fixture Type", className = "fixture")
-    private String fixtureType;
+    private FixtureType fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")
     @EticketFixtureCard(name = "Fixture Time")
@@ -42,13 +42,12 @@ public class Fixture implements Serializable {
 
 
 
-    public String getFixtureType() {
+    public FixtureType getFixtureType() {
         return fixtureType;
     }
 
-    public Fixture(String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam, String awayTeam,
+    public Fixture(String fixtureType, String fixtureLocation, String homeTeam, String awayTeam,
             String fixtureDate) {
-        this.fixtureType = fixtureType;
         this.fixtureTime = fixtureTime;
         this.fixtureLocation = fixtureLocation;
         this.homeTeam = homeTeam;
@@ -56,10 +55,9 @@ public class Fixture implements Serializable {
         this.fixtureDate = fixtureDate;
     }
 
-    public Fixture(String fixtureId, String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
+    public Fixture(String fixtureId, String fixtureTime, String fixtureLocation, String homeTeam,
             String awayTeam, String fixtureDate) {
         this.fixtureId = fixtureId;
-        this.fixtureType = fixtureType;
         this.fixtureTime = fixtureTime;
         this.fixtureLocation = fixtureLocation;
         this.homeTeam = homeTeam;
@@ -117,7 +115,7 @@ public class Fixture implements Serializable {
         this.fixtureLocation = fixtureLocation;
     }
 
-    public void setFixtureType(String fixtureType) {
+    public void setFixtureType(FixtureType fixtureType) {
         this.fixtureType = fixtureType;
     }
 
@@ -128,7 +126,7 @@ public class Fixture implements Serializable {
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<div class=\"oneFixture\">");
         tbBuilder.append("<div class=\"fixture\">");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
+       // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
         tbBuilder.append(" </div>");
         tbBuilder.append("  <div class=\"timeLocation\">");
         tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");
@@ -153,7 +151,7 @@ public class Fixture implements Serializable {
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<div class=\"oneFixture\">");
         tbBuilder.append("<div class=\"fixture\">");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
+       // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
         tbBuilder.append(" </div>");
         tbBuilder.append("  <div class=\"timeLocation\">");
         tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");

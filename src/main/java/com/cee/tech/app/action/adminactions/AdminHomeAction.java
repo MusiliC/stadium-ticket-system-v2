@@ -2,6 +2,7 @@ package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.model.entity.Fixture;
+import com.cee.tech.view.html.HtmlAdminPages;
 import com.cee.tech.view.html.HtmlComponents;
 
 import java.io.IOException;
@@ -16,14 +17,8 @@ public class AdminHomeAction extends BaseActionClass {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        renderAdminPage(req, res, " <div class=\"formMainContainer\">\n" +
-                "      <div class=\"createFixtureContainer\">\n" +
-                "        <p class=\"fixtureTitle\">Create Fixture</p>\n" +
-                "\n" +
-                HtmlComponents.form(Fixture.class) +
-                "      </div>\n" +
-                "    </div>");
-
+        renderAdminPage(req, res, HtmlAdminPages.adminHomePage(HtmlComponents.form(Fixture.class) )
+               );
     }
 
 }
