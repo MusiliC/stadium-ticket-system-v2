@@ -30,20 +30,7 @@ public class GenericBeanImpl<T> implements  GenericBeanI<T>{
         return new ArrayList<>();
     }
 
-//    @Override
-//    public List<T> list(Class<?> entity) {
-//
-//        List<User> users = Database.getDbInstance().getUsers();
-//        //return HtmlComponents.table(users);
-//        return (List<T>) users;
-//    }
 
-//    @SuppressWarnings({"unchecked","rawtypes"})
-//    @Override
-//    public List<T> list(Class<?> entity) {
-//        return (List<T>) Database.getDbInstance().getData(entity);
-//
-//    }
 
     @Override
     public T addOrUpdate(T entity) {
