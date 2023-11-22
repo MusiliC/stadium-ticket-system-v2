@@ -108,7 +108,7 @@ public class AppInit implements ServletContextListener {
        database.getFixtures().add(new Fixture("Kenya Premier League","17:00 EAT", "Nyayo","Gor Mahia", "Shabana","27/10/2023"));
        database.getFixtures().add(new Fixture("Mozzart Cup","14:00 EAT", "MISC Kasarani","Kariobangi Sharks","Kakamega Homeboyz",  "1/11/2023"));
 
-       database.getTicketManagement().add(new TicketManagement("CAF Champions league",300, 100, 800, 100,200));
+       //database.getTicketManagement().add(new TicketManagement("CAF Champions league",300, 100, 800, 100,200));
     }
 
     @Override

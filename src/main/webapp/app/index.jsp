@@ -45,7 +45,7 @@
               <%--  <jsp:getProperty name="contentHtmlRender" property="content" /> --%>
               ${contentHtmlRender.content}
              <%--  <jsp:getProperty name="footerMenuContent" property="footerMenu" /> --%>
-             ${footerMenuContent.footerMenu}
+           <%--    ${footerMenuContent.footerMenu} --%>
             <%--   <%= new Footer().footerMenu() %> --%>
 
 

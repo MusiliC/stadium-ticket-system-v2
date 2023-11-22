@@ -6,6 +6,7 @@ import com.cee.tech.app.bean.adminbean.FixtureAdminBean;
 import com.cee.tech.app.model.entity.Fixture;
 
 import com.cee.tech.database.Database;
+import com.cee.tech.view.html.HtmlAdminPages;
 import com.cee.tech.view.html.HtmlComponents;
 
 import javax.servlet.ServletException;
@@ -31,14 +32,8 @@ public class AdminFixturesAction extends BaseActionClass {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        renderAdminPage(req, res, "    <div class=\"mainFixtureContainer\">\n" +
-                "      <!-- top part -->\n" +
-                "      <!-- bottom part  -->\n" +
-                "      <div class=\"fixtureAdminContainer\">\n" +
-                "        <!-- each fixture div -->\n" +
-                HtmlComponents.table(Fixture.class,adminFixtureBean.list(Fixture.class) ) +
-                "      </div>\n" +
-                "    </div>");
+        renderAdminPage(req, res, HtmlAdminPages.adminFixturesPage( HtmlComponents.table(Fixture.class,adminFixtureBean.list(Fixture.class) ))
+                );
 
     }
 }

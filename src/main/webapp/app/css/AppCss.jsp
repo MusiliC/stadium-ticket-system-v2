@@ -359,11 +359,18 @@
                   margin: 20px 0px;
                   color: rgb(10, 79, 182);
                 }
+                .bookTicketTitle{
+                 font-size: 1.5rem;
+                                  text-align: start;
+                                  margin: 20px 0px;
+                                  color: rgb(10, 79, 182);
+                }
               .ticketButtons{
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: start;
                     gap: 20px;
                     align-items: center;
+                    width:100%;
                 }
             <%--oneTicket styling --%>
 
