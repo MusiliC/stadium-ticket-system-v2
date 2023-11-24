@@ -3,6 +3,9 @@ package com.cee.tech.app.bean.userbean;
 import com.cee.tech.app.bean.userbean.BookTicketI;
 import com.cee.tech.app.model.entity.Ticket;
 
+import javax.ejb.Stateless;
+
+
 public class BookTicketImpl implements BookTicketI {
     @Override
     public String allTickets() {

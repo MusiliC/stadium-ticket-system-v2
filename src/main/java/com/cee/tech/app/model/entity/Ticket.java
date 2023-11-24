@@ -5,7 +5,7 @@ import com.cee.tech.view.html.EticketHtmlForm;
 
 import java.io.Serializable;
 @EticketHtmlForm(label = "Ticket", url = "./#")
-public class Ticket implements Serializable {
+public class Ticket extends BaseEntity {
     @EticketFormField
     private String name;
     @EticketFormField

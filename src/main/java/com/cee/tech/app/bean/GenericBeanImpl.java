@@ -1,40 +1,24 @@
 package com.cee.tech.app.bean;
 
-import com.cee.tech.app.model.entity.Fixture;
-import com.cee.tech.app.model.entity.TicketManagement;
-import com.cee.tech.app.model.entity.User;
-import com.cee.tech.database.Database;
-import com.cee.tech.view.html.HtmlComponents;
+import com.cee.tech.dao.GenericDaoI;
+import com.cee.tech.dao.GenericDaoImpl;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.List;
 
-public class GenericBeanImpl<T> implements  GenericBeanI<T>{
-    Database database = Database.getDbInstance();
+public class GenericBeanImpl<T> implements GenericBeanI<T> {
+
+    GenericDaoI<T> genericDaoI = new GenericDaoImpl<>();
 
     @Override
-    @SuppressWarnings({"unchecked", "rawtypes"})
+
     public List<T> list(Class<?> entity) {
-
-        if (entity.equals(User.class))
-            return (List<T>) database.getUsers();
-
-        if (entity.equals(Fixture.class))
-            return (List<T>) database.getFixtures();
-
-        if (entity.equals(TicketManagement.class))
-            return (List<T>) database.getTicketManagement();
-
-
-        return new ArrayList<>();
+        return genericDaoI.list(entity);
     }
-
 
 
     @Override
     public T addOrUpdate(T entity) {
-        return null;
+        return genericDaoI.addOrUpdate(entity);
     }
 
     @Override

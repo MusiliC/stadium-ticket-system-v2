@@ -7,6 +7,7 @@ import com.cee.tech.database.Database;
 import com.cee.tech.database.MySqlDatabase;
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -23,7 +24,7 @@ import java.util.List;
 @WebListener
 public class AppInit implements ServletContextListener {
 
-    public static<T> List<T> select(Class<T> filter) {
+    public static <T> List<T> select(Class<T> filter) {
         try {
             Class<?> clazz = filter;
             System.out.println();
@@ -61,7 +62,8 @@ public class AppInit implements ServletContextListener {
                 result.add(object);
             }
             return result;
-        } catch (SQLException | InvocationTargetException | IllegalArgumentException | InstantiationException | IllegalAccessException |
+        } catch (SQLException | InvocationTargetException | IllegalArgumentException | InstantiationException |
+                 IllegalAccessException |
                  NoSuchMethodException ex) {
             throw new RuntimeException(ex);
         }
@@ -88,13 +90,19 @@ public class AppInit implements ServletContextListener {
 
                 StringBuilder sqlBuilder = new StringBuilder();
                 sqlBuilder.append("create table if not exists ").append(dbTable.name()).append("(");
-                for (Field field : clazz.getDeclaredFields()) {
+
+                Field[] fields = (Field[]) ArrayUtils.add(clazz.getSuperclass().getDeclaredFields(), clazz.getDeclaredFields());
+
+                for (Field field : fields) {
                     if (!field.isAnnotationPresent(DbTableColumn.class))
                         continue;
                     DbTableColumn dbTableColumn = field.getAnnotation(DbTableColumn.class);
 
                     sqlBuilder.append(dbTableColumn.name()).append(" ").append(dbTableColumn.definition()).append(" ").append(dbTableColumn.primaryKey()).append(" ").append(dbTableColumn.notNull()).append(",");
                 }
+
+
+
                 sqlBuilder.append(")");
 
                 conn.prepareStatement(sqlBuilder.toString().replace(",)", ")")).executeUpdate();
@@ -105,10 +113,10 @@ public class AppInit implements ServletContextListener {
 
         }
 
-       database.getFixtures().add(new Fixture("Kenya Premier League","17:00 EAT", "Nyayo","Gor Mahia", "Shabana","27/10/2023"));
-       database.getFixtures().add(new Fixture("Mozzart Cup","14:00 EAT", "MISC Kasarani","Kariobangi Sharks","Kakamega Homeboyz",  "1/11/2023"));
+        database.getFixtures().add(new Fixture("Kenya Premier League", "17:00 EAT", "Nyayo", "Gor Mahia", "Shabana", "27/10/2023"));
+        database.getFixtures().add(new Fixture("Mozzart Cup", "14:00 EAT", "MISC Kasarani", "Kariobangi Sharks", "Kakamega Homeboyz", "1/11/2023"));
 
-       //database.getTicketManagement().add(new TicketManagement("CAF Champions league",300, 100, 800, 100,200));
+        //database.getTicketManagement().add(new TicketManagement("CAF Champions league",300, 100, 800, 100,200));
     }
 
     @Override

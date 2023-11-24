@@ -19,6 +19,5 @@ public class BookTicketAction extends BaseActionClass {
         renderPage(req,res, HtmlUserPages.bookTicketPage(HtmlComponents.ticketForm(Ticket.class) )
                );
 
-
     }
 }

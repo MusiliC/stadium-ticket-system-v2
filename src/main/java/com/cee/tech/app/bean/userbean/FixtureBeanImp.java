@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import java.io.Serializable;
 import java.util.List;
 @Stateless
-public class FixtureBean extends GenericBeanImpl<Fixture> implements FixtureBeanI, Serializable {
+public class FixtureBeanImp extends GenericBeanImpl<Fixture> implements FixtureBeanI, Serializable {
     public  String upcomingFixtures(){
         List<Fixture> fixtures = Database.getDbInstance().getFixtures();
 

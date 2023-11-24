@@ -1,7 +1,6 @@
 package com.cee.tech.app.model.entity;
 
 
-
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketTableColHeader;
@@ -10,26 +9,24 @@ import com.cee.tech.view.html.TableActions;
 import java.io.Serializable;
 
 @DbTable(name = "users")
-public class User implements Serializable {
+public class User extends BaseEntity {
 
-    @DbTableColumn(name = "id", definition = "int", primaryKey = "primary key", notNull = "not null")
-    private  int id;
     @DbTableColumn(name = "username", notNull = "not null")
     @EticketTableColHeader(headerLabel = "Username")
     private String username;
     @DbTableColumn(name = "password", notNull = "not null")
     private String password;
-    private  String confirmPassword;
+    private String confirmPassword;
     @DbTableColumn(name = "normalTickets", definition = "int")
-    @EticketTableColHeader(headerLabel  = "Normal Ticket")
+    @EticketTableColHeader(headerLabel = "Normal Ticket")
     private int normalTickets = 0;
     @DbTableColumn(name = "vipTickets", definition = "int")
-    @EticketTableColHeader(headerLabel  = "VIP Ticket")
+    @EticketTableColHeader(headerLabel = "VIP Ticket")
     private int vipTickets = 0;
 
-    @EticketTableColHeader(headerLabel  = "Actions")
-    @TableActions(actions={"Delete", "Edit"})
-    private String actions[];
+    @EticketTableColHeader(headerLabel = "Actions")
+    @TableActions(actions = "Edit")
+    private String actions;
 
 
     public int getNormalTickets() {
@@ -52,27 +49,20 @@ public class User implements Serializable {
     }
 
     public User(int id, String username, String password) {
-        this.id = id;
+        setId(id);
         this.username = username;
         this.password = password;
     }
 
     public User(int id, String username, String password, int normalTickets, int vipTickets) {
-        this.id = id;
+        setId(id);
         this.username = username;
         this.password = password;
         this.normalTickets = normalTickets;
         this.vipTickets = vipTickets;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+  
     public String getUsername() {
         return username;
     }

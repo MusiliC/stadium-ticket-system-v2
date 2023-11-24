@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 
 @EticketHtmlForm(label = "Fixture", url = "./adminfixtures", httpMethod = "POST")
-public class Fixture implements Serializable {
+public class Fixture extends BaseEntity {
 
     private String fixtureId;
 

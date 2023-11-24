@@ -12,7 +12,7 @@ RUN mvn dependency:go-offline
 
 # Copy the source code to the container
 #coping fro woring dirctory to app
-COPY . . 
+COPY . .
 
 # Build the application
 RUN mvn package -DskipTests
@@ -41,8 +41,5 @@ EXPOSE 8080 9990
 
 # Start WildFly in standalone mode
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
-
-
-
 
 

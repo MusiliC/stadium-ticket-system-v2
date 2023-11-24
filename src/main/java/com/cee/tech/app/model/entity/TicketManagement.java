@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
-public class TicketManagement implements Serializable {
+public class TicketManagement extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
     private TicketType ticketType;
     @EticketTableColHeader(headerLabel = "Total Tickets")

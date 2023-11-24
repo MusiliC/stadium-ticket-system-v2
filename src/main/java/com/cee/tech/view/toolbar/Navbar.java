@@ -3,6 +3,8 @@ package com.cee.tech.view.toolbar;
 import java.io.Serializable;
 
 public class Navbar implements Menu, Serializable {
+
+
     @Override
     public String menu(String firstLetter) {
        String navbar;
