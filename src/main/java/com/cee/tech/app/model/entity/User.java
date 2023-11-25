@@ -62,7 +62,7 @@ public class User extends BaseEntity {
         this.vipTickets = vipTickets;
     }
 
-  
+
     public String getUsername() {
         return username;
     }
