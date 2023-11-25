@@ -1,22 +1,31 @@
 package com.cee.tech.app.model.entity;
 
+import com.cee.tech.database.helper.DbTable;
+import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketTableColHeader;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
-public class TicketManagement implements Serializable {
+@DbTable(name = "ticketManagement")
+public class TicketManagement extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
+    @DbTableColumn(name = "ticketType", notNull = "not null")
     private TicketType ticketType;
     @EticketTableColHeader(headerLabel = "Total Tickets")
+    @DbTableColumn(name = "totalTickets", notNull = "not null")
     private int totalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "VIP tickets")
+    @DbTableColumn(name = "totalVip", notNull = "not null")
     private int totalVipTicketsLocated;
     @EticketTableColHeader(headerLabel = "VIP Ticket Amount")
+    @DbTableColumn(name = "vipAmount", notNull = "not null")
     private int ticketAmountVIP;
     @EticketTableColHeader(headerLabel = "Normal Tickets")
+    @DbTableColumn(name = "totalNormal", notNull = "not null")
     private int totalNormalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "Normal Ticket Amount")
+    @DbTableColumn(name = "normalAmount", notNull = "not null")
     private int ticketAmountNormal;
 
     @EticketTableColHeader(headerLabel = "Action")
@@ -25,8 +34,8 @@ public class TicketManagement implements Serializable {
     public TicketManagement() {
     }
 
-    public TicketManagement(int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
-
+    public TicketManagement(int id,int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
+        setId(id);
         this.totalTicketsAllocated = totalTicketsAllocated;
         this.totalVipTicketsLocated = totalVipTicketsLocated;
         this.ticketAmountVIP = ticketAmountVIP;

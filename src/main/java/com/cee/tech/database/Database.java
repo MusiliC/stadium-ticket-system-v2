@@ -1,7 +1,7 @@
 package com.cee.tech.database;
 
 import com.cee.tech.app.model.entity.Fixture;
-import com.cee.tech.app.model.entity.Ticket;
+import com.cee.tech.app.model.entity.BookTicket;
 import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
 
@@ -62,13 +62,13 @@ public class Database implements Serializable {
 
     private List<TicketManagement> ticketManagement = new ArrayList<>();
 
-    private List<Ticket> bookTicket = new ArrayList<>();
+    private List<BookTicket> bookTicket = new ArrayList<>();
 
-    public List<Ticket> getBookTicket() {
+    public List<BookTicket> getBookTicket() {
         return bookTicket;
     }
 
-    public void setBookTicket(List<Ticket> bookTicket) {
+    public void setBookTicket(List<BookTicket> bookTicket) {
         this.bookTicket = bookTicket;
     }
 

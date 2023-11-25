@@ -1,10 +1,8 @@
 package com.cee.tech.database.helper;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+@Inherited
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DbTableColumn {
@@ -13,6 +11,8 @@ public @interface DbTableColumn {
     String primaryKey() default "";
     String foreignKeyColumn() default "";
     String notNull() default "";
+    String references() default "";
+    String referenceTo() default "";
 
 
 }

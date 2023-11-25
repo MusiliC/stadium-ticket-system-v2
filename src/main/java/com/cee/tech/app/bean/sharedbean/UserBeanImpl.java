@@ -17,8 +17,6 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
     @Override
     public boolean registerUser(User user) throws SQLException {
 
-
-
         if (user.getPassword().equals(user.getConfirmPassword())) {
 
             MySqlDatabase database = MySqlDatabase.getInstance();

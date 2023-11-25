@@ -2,8 +2,7 @@ package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.adminbean.AdminTicketManagementI;
-import com.cee.tech.app.bean.adminbean.AdminTicketManagementImpl;
-import com.cee.tech.app.bean.adminbean.AdminTicketManagementBean;
+import com.cee.tech.app.bean.adminbean.AdminTicketManagementBeanImpl;
 import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.database.Database;
 import com.cee.tech.view.html.HtmlAdminPages;
@@ -18,7 +17,7 @@ import java.io.IOException;
 @WebServlet("/adminticketpricing")
 public class AdminTicketManageAction extends BaseActionClass {
 
-    AdminTicketManagementI adminTicketManagement = new AdminTicketManagementBean();
+    AdminTicketManagementI adminTicketManagement = new AdminTicketManagementBeanImpl();
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
