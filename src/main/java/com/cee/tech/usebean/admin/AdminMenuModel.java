@@ -1,14 +1,17 @@
-package com.cee.tech.view.toolbar;
+package com.cee.tech.usebean.admin;
 
 import java.io.Serializable;
 
-public class MenuLink implements Serializable {
+public class AdminMenuModel implements Serializable {
+
     private String label;
     private String url;
+    private String icon;
 
-    public MenuLink(String label, String url) {
+    public AdminMenuModel(String label, String url, String icon) {
         this.label = label;
         this.url = url;
+        this.icon = icon;
     }
 
     public String getLabel() {
@@ -25,5 +28,13 @@ public class MenuLink implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

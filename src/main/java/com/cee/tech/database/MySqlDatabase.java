@@ -23,7 +23,7 @@ public class MySqlDatabase implements Serializable {
     public static final String USER = "root";
     public static final String PASSWORD = "makutano";
 
-    private static  MySqlDatabase database;
+    private static MySqlDatabase database;
     private Connection connection;
 
     private MySqlDatabase() throws SQLException {
@@ -37,13 +37,13 @@ public class MySqlDatabase implements Serializable {
     }
 
     public static MySqlDatabase getInstance() throws SQLException {
-        if(database == null)
+        if (database == null)
             database = new MySqlDatabase();
 
         return database;
     }
 
-    public static void updateSchema(){
+    public static void updateSchema() {
         System.out.println(" ***************** Updating schema Database **********************");
 
 
@@ -98,9 +98,9 @@ public class MySqlDatabase implements Serializable {
         }
     }
 
-    public void insert(Object entity){
-        try{
+    public void saveOrUpdate(Object entity) {
 
+        try {
             Class<?> clazz = entity.getClass();
             if (!clazz.isAnnotationPresent(DbTable.class))
                 return;
@@ -147,8 +147,8 @@ public class MySqlDatabase implements Serializable {
 
             int paramIdx = 1;
             for (Object param : parameters) {
-                if (param.getClass().isAssignableFrom(BigDecimal.class))
-                    sqlStmt.setBigDecimal(paramIdx++, (BigDecimal) param);
+                if (param.getClass().isAssignableFrom(int.class))
+                    sqlStmt.setInt(paramIdx++, (Integer) param);
                 else if (param.getClass().isAssignableFrom(Long.class))
                     sqlStmt.setLong(paramIdx++, (long) param);
                 else if (param.getClass().isAssignableFrom(Date.class))
@@ -158,7 +158,7 @@ public class MySqlDatabase implements Serializable {
             }
 
             sqlStmt.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

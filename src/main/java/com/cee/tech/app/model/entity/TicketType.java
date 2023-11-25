@@ -7,7 +7,6 @@ public enum TicketType implements Serializable {
     NORMAL("Normal");
 
     private String name;
-
     TicketType(String name) {
         this.name = name;
     }

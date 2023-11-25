@@ -12,6 +12,8 @@ import java.util.List;
 public class GenericDaoImpl<T> implements GenericDaoI<T> {
     Database database = Database.getDbInstance();
 
+
+
     @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
     public List<T> list(Class<?> entity) {

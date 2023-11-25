@@ -1,5 +1,7 @@
 package com.cee.tech.app.model.entity;
 
+import com.cee.tech.database.helper.DbTable;
+import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketFixtureCard;
 import com.cee.tech.view.html.EticketFormField;
 import com.cee.tech.view.html.EticketHtmlForm;
@@ -9,70 +11,51 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 
 @EticketHtmlForm(label = "Fixture", url = "./adminfixtures", httpMethod = "POST")
+@DbTable(name = "fixtures")
 public class Fixture extends BaseEntity {
 
-    private String fixtureId;
 
     @EticketFormField(label = "Fixture Type")
     @EticketTableColHeader(headerLabel = "Fixture Type")
-    @EticketFixtureCard(name = "Fixture Type", className = "fixture")
+    @DbTableColumn(name = "fixtureType", notNull = "not null")
     private FixtureType fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")
-    @EticketFixtureCard(name = "Fixture Time")
+    @DbTableColumn(name = "fixtureTime", notNull = "not null")
     private String fixtureTime;
     @EticketFormField(label = "Fixture Location")
     @EticketTableColHeader(headerLabel = "Location")
-    @EticketFixtureCard(name = "Fixture Location")
+    @DbTableColumn(name = "fixtureLocation", notNull = "not null")
     private String fixtureLocation;
     @EticketFormField(label = "Home Team")
     @EticketTableColHeader(headerLabel = "Home Team")
-    @EticketFixtureCard(name = "Home Team")
+    @DbTableColumn(name = "homeTeam", notNull = "not null")
     private String homeTeam;
     @EticketFormField(label = "Away Team")
     @EticketTableColHeader(headerLabel = "Away Team")
-    @EticketFixtureCard(name = "Away Team")
+    @DbTableColumn(name = "awayTeam", notNull = "not null")
     private String awayTeam;
     @EticketFormField(label = "Fixture Date", fieldType = "date")
     @EticketTableColHeader(headerLabel = "Date")
-    @EticketFixtureCard(name = "Fixture Date", className = "date")
+    @DbTableColumn(name = "fixtureDate", notNull = "not null")
     private String fixtureDate;
     @EticketTableColHeader(headerLabel = "Action")
     private String action = "Edit";
-
 
 
     public FixtureType getFixtureType() {
         return fixtureType;
     }
 
-    public Fixture(String fixtureType, String fixtureLocation, String homeTeam, String awayTeam,
-            String fixtureDate) {
+
+    public Fixture(int id, String fixtureTime, String fixtureLocation, String homeTeam,
+                   String awayTeam, String fixtureDate) {
+        setId(id);
         this.fixtureTime = fixtureTime;
         this.fixtureLocation = fixtureLocation;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.fixtureDate = fixtureDate;
-    }
-
-    public Fixture(String fixtureId, String fixtureTime, String fixtureLocation, String homeTeam,
-            String awayTeam, String fixtureDate) {
-        this.fixtureId = fixtureId;
-        this.fixtureTime = fixtureTime;
-        this.fixtureLocation = fixtureLocation;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.fixtureDate = fixtureDate;
-    }
-
-    
-
-    public String getFixtureId() {
-        return fixtureId;
-    }
-
-    public void setFixtureId(String fixtureId) {
-        this.fixtureId = fixtureId;
     }
 
     public String getFixtureTime() {
@@ -126,7 +109,7 @@ public class Fixture extends BaseEntity {
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<div class=\"oneFixture\">");
         tbBuilder.append("<div class=\"fixture\">");
-       // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
+        // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
         tbBuilder.append(" </div>");
         tbBuilder.append("  <div class=\"timeLocation\">");
         tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");
@@ -151,7 +134,7 @@ public class Fixture extends BaseEntity {
         StringBuilder tbBuilder = new StringBuilder();
         tbBuilder.append("<div class=\"oneFixture\">");
         tbBuilder.append("<div class=\"fixture\">");
-       // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
+        // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
         tbBuilder.append(" </div>");
         tbBuilder.append("  <div class=\"timeLocation\">");
         tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");

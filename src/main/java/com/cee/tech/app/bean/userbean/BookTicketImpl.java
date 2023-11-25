@@ -1,9 +1,6 @@
 package com.cee.tech.app.bean.userbean;
 
-import com.cee.tech.app.bean.userbean.BookTicketI;
-import com.cee.tech.app.model.entity.Ticket;
-
-import javax.ejb.Stateless;
+import com.cee.tech.app.model.entity.BookTicket;
 
 
 public class BookTicketImpl implements BookTicketI {
@@ -13,12 +10,12 @@ public class BookTicketImpl implements BookTicketI {
     }
 
     @Override
-    public Ticket bookTicket(Ticket ticket) throws Exception {
+    public BookTicket bookTicket(BookTicket ticket) throws Exception {
         return null;
     }
 
     @Override
-    public void deleteTicket(Ticket ticket) {
+    public void deleteTicket(BookTicket ticket) {
         System.out.println("deleted");
     }
 }

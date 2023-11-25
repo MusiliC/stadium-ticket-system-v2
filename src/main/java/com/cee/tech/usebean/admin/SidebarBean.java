@@ -1,9 +1,11 @@
 package com.cee.tech.usebean.admin;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SidebarBean implements Serializable {
-    private String  sidebarMenu;
+    private String sidebarMenu;
 
     public String getSidebarMenu() {
         return sidebarMenu;
@@ -13,7 +15,19 @@ public class SidebarBean implements Serializable {
         this.sidebarMenu = sidebarMenu;
     }
 
-    public void generateSidebar(){
+//    private final List<AdminMenuModel> adminMenuLinks = new ArrayList<>();
+//
+//    {
+//        adminMenuLinks.add(new AdminMenuModel("Create Fixture", "./admin", "https://img.icons8.com/ios/50/000000/edit--v1.png"));
+//        adminMenuLinks.add(new AdminMenuModel("Upcoming Fixtures", "./adminfixtures", "https://img.icons8.com/ios/50/football.png"));
+//        adminMenuLinks.add(new AdminMenuModel("Ticket Management", "./adminticket", "https://img.icons8.com/dotty/80/ticket.png"));
+//        adminMenuLinks.add(new AdminMenuModel("Ticket Management List", "./adminticketpricing", "https://img.icons8.com/ios/50/us-dollar-circled--v1.png"));
+//        adminMenuLinks.add(new AdminMenuModel("Ticket Report", "./adminticketreport", "https://img.icons8.com/ios/50/graph-report.png"));
+//        adminMenuLinks.add(new AdminMenuModel("User Report", "./adminusers", "https://img.icons8.com/ios-glyphs/30/group.png"));
+//
+//    }
+
+    public void generateSidebar() {
         sidebarMenu = "    <div class=\"sidebar\">\n" +
                 "            <div class=\"adminAppName\">\n" +
                 "                <div>\n" +
@@ -43,7 +57,7 @@ public class SidebarBean implements Serializable {
                 "            <div>\n" +
                 "              <a href=\"./adminfixtures\">Upcoming Fixtures</a>\n" +
                 "            </div>\n" +
-                "          </div>"+
+                "          </div>" +
 
                 "  <div class=\"adminLinkTag\">\n" +
                 "            <img\n" +
@@ -56,7 +70,7 @@ public class SidebarBean implements Serializable {
                 "            <div>\n" +
                 "              <a href=\"./adminticket\">Ticket Management</a>\n" +
                 "            </div>\n" +
-                "          </div>"+
+                "          </div>" +
                 "     <div class=\"adminLinkTag\">\n" +
                 "            <img\n" +
                 "              width=\"22\"\n" +

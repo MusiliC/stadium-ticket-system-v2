@@ -11,6 +11,8 @@ public @interface DbTableColumn {
     String primaryKey() default "";
     String foreignKeyColumn() default "";
     String notNull() default "";
+    String references() default "";
+    String referenceTo() default "";
 
 
 }
