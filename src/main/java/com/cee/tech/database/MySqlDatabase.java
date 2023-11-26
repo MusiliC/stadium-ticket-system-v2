@@ -1,5 +1,8 @@
 package com.cee.tech.database;
 
+import com.cee.tech.app.model.entity.BookTicket;
+import com.cee.tech.app.model.entity.Fixture;
+import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.helper.DBTableId;
 import com.cee.tech.database.helper.DbTable;
@@ -52,6 +55,9 @@ public class MySqlDatabase implements Serializable {
 
             List<Class<?>> entities = new ArrayList<>();
             entities.add(User.class);
+            entities.add(Fixture.class);
+            entities.add(TicketManagement.class);
+            entities.add(BookTicket.class);
 
             for (Class<?> clazz : entities) {
 

@@ -14,6 +14,8 @@ import java.util.List;
 
 public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
+    //MySqlDatabase mySqlDatabase = new MySqlDatabase().;
+
     @Override
     public boolean registerUser(User user) throws SQLException {
 

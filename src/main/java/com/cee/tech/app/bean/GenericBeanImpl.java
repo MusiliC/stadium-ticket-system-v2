@@ -18,7 +18,7 @@ public class GenericBeanImpl<T> implements GenericBeanI<T> {
 
     @Override
     public T addOrUpdate(T entity) {
-        return genericDaoI.addOrUpdate(entity);
+        return null;
     }
 
     @Override
