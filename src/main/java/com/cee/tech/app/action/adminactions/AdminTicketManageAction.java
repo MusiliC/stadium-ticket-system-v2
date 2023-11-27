@@ -8,6 +8,7 @@ import com.cee.tech.database.Database;
 import com.cee.tech.view.html.HtmlAdminPages;
 import com.cee.tech.view.html.HtmlComponents;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,8 @@ import java.io.IOException;
 @WebServlet("/adminticketpricing")
 public class AdminTicketManageAction extends BaseActionClass {
 
-    AdminTicketManagementI adminTicketManagementBean = new AdminTicketManagementBeanImpl();
+    @EJB
+    AdminTicketManagementI adminTicketManagementBean;
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

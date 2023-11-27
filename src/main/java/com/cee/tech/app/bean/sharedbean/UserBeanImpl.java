@@ -18,8 +18,6 @@ import java.util.List;
 @Stateless
 public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
-
-
     @Override
     public boolean registerUser(User user) throws SQLException {
 
