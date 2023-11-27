@@ -5,6 +5,7 @@ import com.cee.tech.app.model.entity.Fixture;
 import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
+import com.cee.tech.database.MySqlDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class GenericDaoImpl<T> implements GenericDaoI<T> {
     Database database = Database.getDbInstance();
 
-
+    GenericDaoI<T> genericDaoI = new GenericDaoImpl<>();
 
     @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -31,15 +32,23 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
         return new ArrayList<>();
     }
 
-
-
     @Override
-    public T addOrUpdate(T entity) {
-        return null;
+    public void addOrUpdate(T entity) {
+       MySqlDatabase.saveOrUpdate(entity);
     }
 
     @Override
     public void delete(T entity) {
+
+    }
+
+    @Override
+    public MySqlDatabase getDatabase() {
+        return null;
+    }
+
+    @Override
+    public void setDatabase(MySqlDatabase database) {
 
     }
 }

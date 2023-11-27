@@ -10,22 +10,22 @@ import java.io.Serializable;
 @DbTable(name = "ticketManagement")
 public class TicketManagement extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
-    @DbTableColumn(name = "ticketType", notNull = "not null")
-    private TicketType ticketType;
+    @DbTableColumn(name = "fixtureType", notNull = "not null")
+    private String fixtureType;
     @EticketTableColHeader(headerLabel = "Total Tickets")
-    @DbTableColumn(name = "totalTickets", notNull = "not null")
+    @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
     private int totalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "VIP tickets")
-    @DbTableColumn(name = "totalVip", notNull = "not null")
+    @DbTableColumn(name = "totalVip", notNull = "not null", definition = "int")
     private int totalVipTicketsLocated;
     @EticketTableColHeader(headerLabel = "VIP Ticket Amount")
-    @DbTableColumn(name = "vipAmount", notNull = "not null")
+    @DbTableColumn(name = "vipAmount", notNull = "not null", definition = "int")
     private int ticketAmountVIP;
     @EticketTableColHeader(headerLabel = "Normal Tickets")
-    @DbTableColumn(name = "totalNormal", notNull = "not null")
+    @DbTableColumn(name = "totalNormal", notNull = "not null", definition="int")
     private int totalNormalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "Normal Ticket Amount")
-    @DbTableColumn(name = "normalAmount", notNull = "not null")
+    @DbTableColumn(name = "normalAmount", notNull = "not null", definition = "int")
     private int ticketAmountNormal;
 
     @EticketTableColHeader(headerLabel = "Action")
@@ -34,8 +34,9 @@ public class TicketManagement extends BaseEntity {
     public TicketManagement() {
     }
 
-    public TicketManagement(int id,int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
+    public TicketManagement(int id,String fixtureType, int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
         setId(id);
+        this.fixtureType = fixtureType;
         this.totalTicketsAllocated = totalTicketsAllocated;
         this.totalVipTicketsLocated = totalVipTicketsLocated;
         this.ticketAmountVIP = ticketAmountVIP;
@@ -43,12 +44,12 @@ public class TicketManagement extends BaseEntity {
         this.ticketAmountNormal = ticketAmountNormal;
     }
 
-    public TicketType getTicketType() {
-        return ticketType;
+    public String getFixtureType() {
+        return fixtureType;
     }
 
-    public void setTicketType(TicketType ticketType) {
-        this.ticketType = ticketType;
+    public void setFixtureType(String fixtureType) {
+        this.fixtureType = fixtureType;
     }
 
     public int getTotalTicketsAllocated() {

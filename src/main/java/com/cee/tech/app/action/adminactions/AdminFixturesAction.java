@@ -27,7 +27,7 @@ public class AdminFixturesAction extends BaseActionClass {
 
         Fixture getAdminFixture = new Fixture();
 
-        database.getFixtures().add(new Fixture(req.getParameter("fixtureType"),req.getParameter("fixtureTime"),req.getParameter("fixtureLocation"),req.getParameter("homeTeam"),req.getParameter("awayTeam"),req.getParameter("fixtureDate")));
+        //database.getFixtures().add(new Fixture(req.getParameter("fixtureType"),req.getParameter("fixtureTime"),req.getParameter("fixtureLocation"),req.getParameter("homeTeam"),req.getParameter("awayTeam"),req.getParameter("fixtureDate")));
 
         res.sendRedirect("./adminfixtures");
     }

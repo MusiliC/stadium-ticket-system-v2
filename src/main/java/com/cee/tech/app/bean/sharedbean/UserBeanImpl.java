@@ -14,6 +14,8 @@ import java.util.List;
 
 public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
+    //MySqlDatabase mySqlDatabase = new MySqlDatabase().;
+
     @Override
     public boolean registerUser(User user) throws SQLException {
 
@@ -36,6 +38,12 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
             return true;
         }
         return false;
+//
+//        if (user.getPassword().equals(user.getConfirmPassword())) {
+//            getDao().addOrUpdate(user);
+//            return true;
+//        }
+//        return false;
     };
 
     @Override
@@ -49,6 +57,7 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
         return HtmlComponents.table(User.class,users);
     }
+
 
 
 }

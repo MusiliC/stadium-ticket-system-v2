@@ -7,7 +7,7 @@ public interface GenericBeanI<T> extends Serializable {
 
     List<T> list(Class<?> entity);
 
-     T addOrUpdate(T entity);
+     void addOrUpdate(T entity);
 
     void delete(T entity);
 }

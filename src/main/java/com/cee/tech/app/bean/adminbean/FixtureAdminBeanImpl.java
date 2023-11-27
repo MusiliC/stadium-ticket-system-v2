@@ -10,11 +10,11 @@ import java.util.List;
 
 public class FixtureAdminBeanImpl extends GenericBeanImpl<Fixture> implements FixtureBeanI {
 
-//    @Override
-//    public void addOrUpdate(Fixture fixture) {
-//
-//         getDao().addOrUpdate(fixture);
-//    }
+    @Override
+    public void addOrUpdate(Fixture fixture) {
+         getDao().addOrUpdate(fixture);
+    }
+
     @Override
     public String upcomingFixtures() {
         List<Fixture> fixtures = Database.getDbInstance().getFixtures();

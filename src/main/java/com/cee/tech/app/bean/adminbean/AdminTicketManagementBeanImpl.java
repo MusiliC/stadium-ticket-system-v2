@@ -5,5 +5,8 @@ import com.cee.tech.app.model.entity.TicketManagement;
 
 
 public class AdminTicketManagementBeanImpl extends GenericBeanImpl<TicketManagement> implements AdminTicketManagementI {
-
+    @Override
+    public void addOrUpdate(TicketManagement ticketManagement){
+        getDao().addOrUpdate(ticketManagement);
+    }
 }

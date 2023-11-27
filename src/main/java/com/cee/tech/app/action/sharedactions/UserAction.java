@@ -29,8 +29,6 @@ public class UserAction extends BaseActionClass {
                 throw new RuntimeException(e);
             }
 
-
-
         res.sendRedirect("./");
 
     }

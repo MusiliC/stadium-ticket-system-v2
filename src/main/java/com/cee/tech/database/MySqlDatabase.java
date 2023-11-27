@@ -1,5 +1,8 @@
 package com.cee.tech.database;
 
+import com.cee.tech.app.model.entity.BookTicket;
+import com.cee.tech.app.model.entity.Fixture;
+import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.helper.DBTableId;
 import com.cee.tech.database.helper.DbTable;
@@ -24,7 +27,7 @@ public class MySqlDatabase implements Serializable {
     public static final String PASSWORD = "makutano";
 
     private static MySqlDatabase database;
-    private Connection connection;
+    private static Connection connection;
 
     private MySqlDatabase() throws SQLException {
 
@@ -52,6 +55,9 @@ public class MySqlDatabase implements Serializable {
 
             List<Class<?>> entities = new ArrayList<>();
             entities.add(User.class);
+            entities.add(Fixture.class);
+            entities.add(TicketManagement.class);
+            entities.add(BookTicket.class);
 
             for (Class<?> clazz : entities) {
 
@@ -98,7 +104,7 @@ public class MySqlDatabase implements Serializable {
         }
     }
 
-    public void saveOrUpdate(Object entity) {
+    public static void saveOrUpdate(Object entity) {
 
         try {
             Class<?> clazz = entity.getClass();
@@ -162,6 +168,15 @@ public class MySqlDatabase implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public static  <T> List<T> select(T filter){
+        return new ArrayList<>();
+    }
+
+    public static  <T> T selectSingle(T filter){
+        return filter;
+    }
+
 
     public Connection getConnection() {
         return connection;

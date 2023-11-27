@@ -19,41 +19,24 @@ public class BookTicket extends BaseEntity {
     private String phoneNumber;
     @EticketFormField(label="Ticket Type")
     @DbTableColumn(name = "ticketType", notNull = "not null")
-    private TicketType ticketType;
+    private String ticketType;
     @EticketFormField(label= "Number of Tickets", fieldType = "number")
-    @DbTableColumn(name = "totalTickets", notNull = "not null")
+    @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
     private int numberOfTickets;
-
-//    @DbTableColumn(name = "userId", notNull = "not null", foreignKeyColumn = "FOREIGN KEY", references = "REFERENCES", referenceTo = "users(id)")
-//    private int userId;
 
     public BookTicket() {
     }
 
-//    public BookTicket(String name, String email, String phoneNumber, TicketType ticketType, int numberOfTickets, int userId) {
-//        this.name = name;
-//        this.email = email;
-//        this.phoneNumber = phoneNumber;
-//        this.ticketType = ticketType;
-//        this.numberOfTickets = numberOfTickets;
-//        this.userId = userId;
-//    }
 
-    public BookTicket(int id,String name, String email, String phoneNumber, int numberOfTickets) {
+    public BookTicket(int id,String name, String email, String phoneNumber, String ticketType, int numberOfTickets) {
         setId(id);
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.ticketType = ticketType;
         this.numberOfTickets = numberOfTickets;
     }
 
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
 
     public String getName() {
         return name;
@@ -79,11 +62,11 @@ public class BookTicket extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public TicketType getTicketType() {
+    public String getTicketType() {
         return ticketType;
     }
 
-    public void setTicketType(TicketType ticketType) {
+    public void setTicketType(String ticketType) {
         this.ticketType = ticketType;
     }
 
