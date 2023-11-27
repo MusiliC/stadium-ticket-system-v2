@@ -88,4 +88,15 @@ public class User extends BaseEntity {
     }
 
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", normalTickets=" + normalTickets +
+                ", vipTickets=" + vipTickets +
+                ", actions='" + actions + '\'' +
+                '}';
+    }
 }

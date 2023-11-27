@@ -9,6 +9,5 @@ import javax.ejb.Remote;
 @Remote
 public interface FixtureBeanI extends GenericBeanI<Fixture>  {
     public  String upcomingFixtures();
-    public Fixture addUpdateFixture(Fixture fixture) throws  Exception;
-    public  void deleteFixture(Fixture fixture);
+
 }

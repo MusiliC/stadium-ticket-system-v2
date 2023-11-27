@@ -7,43 +7,33 @@ import com.cee.tech.database.Database;
 import com.cee.tech.database.MySqlDatabase;
 import com.cee.tech.view.html.HtmlComponents;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+@Remote
+@Stateless
 public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
-    //MySqlDatabase mySqlDatabase = new MySqlDatabase().;
+
 
     @Override
     public boolean registerUser(User user) throws SQLException {
 
-        if (user.getPassword().equals(user.getConfirmPassword())) {
+        if (!user.getPassword().equals(user.getConfirmPassword()))
+            throw new RuntimeException("Password & confirm password do not match");
 
-            MySqlDatabase database = MySqlDatabase.getInstance();
-            Connection conn = database.getConnection();
+        //1. check if username already exist
+        //2. hash password
+        //3. initiate event to send email ...Observer design pattern
 
-            String sqlQuery = "insert into users (id,username, password, normalTickets,vipTickets )values(?,?,?,?,?);";
-            PreparedStatement sqlStmt = conn.prepareStatement(sqlQuery);
+        getDao().addOrUpdate(user);
 
-            sqlStmt.setInt(1, (int) (Math.random()*10000));
-            sqlStmt.setString(2,user.getUsername());
-            sqlStmt.setString(3,user.getPassword());
-            sqlStmt.setInt(4,user.getNormalTickets());
-            sqlStmt.setInt(5,user.getVipTickets());
-
-            sqlStmt.executeUpdate();
-
-            return true;
-        }
         return false;
-//
-//        if (user.getPassword().equals(user.getConfirmPassword())) {
-//            getDao().addOrUpdate(user);
-//            return true;
-//        }
-//        return false;
+
     };
 
     @Override
