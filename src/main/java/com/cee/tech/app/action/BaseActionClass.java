@@ -10,12 +10,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class BaseActionClass extends HttpServlet {
-    public  void serializeForm(Object bean, Map<String, ? extends Object> requestMap){
+    public  void serializeForm(Object bean, Map<String, ?> requestMap){
         try {
             BeanUtils.populate(bean, requestMap);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
 

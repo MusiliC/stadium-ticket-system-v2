@@ -38,6 +38,12 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
             return true;
         }
         return false;
+//
+//        if (user.getPassword().equals(user.getConfirmPassword())) {
+//            getDao().addOrUpdate(user);
+//            return true;
+//        }
+//        return false;
     };
 
     @Override
@@ -51,6 +57,7 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
         return HtmlComponents.table(User.class,users);
     }
+
 
 
 }

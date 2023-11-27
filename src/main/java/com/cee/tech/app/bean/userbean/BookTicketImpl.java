@@ -1,9 +1,10 @@
 package com.cee.tech.app.bean.userbean;
 
+import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.model.entity.BookTicket;
 
 
-public class BookTicketImpl implements BookTicketI {
+public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookTicketI {
     @Override
     public String allTickets() {
         return null;

@@ -27,7 +27,7 @@ public class MySqlDatabase implements Serializable {
     public static final String PASSWORD = "makutano";
 
     private static MySqlDatabase database;
-    private Connection connection;
+    private static Connection connection;
 
     private MySqlDatabase() throws SQLException {
 
@@ -104,7 +104,7 @@ public class MySqlDatabase implements Serializable {
         }
     }
 
-    public void saveOrUpdate(Object entity) {
+    public static void saveOrUpdate(Object entity) {
 
         try {
             Class<?> clazz = entity.getClass();
@@ -168,6 +168,15 @@ public class MySqlDatabase implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public static  <T> List<T> select(T filter){
+        return new ArrayList<>();
+    }
+
+    public static  <T> T selectSingle(T filter){
+        return filter;
+    }
+
 
     public Connection getConnection() {
         return connection;

@@ -32,11 +32,9 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
         return new ArrayList<>();
     }
 
-
-
     @Override
     public void addOrUpdate(T entity) {
-        genericDaoI.addOrUpdate(entity);
+       MySqlDatabase.saveOrUpdate(entity);
     }
 
     @Override

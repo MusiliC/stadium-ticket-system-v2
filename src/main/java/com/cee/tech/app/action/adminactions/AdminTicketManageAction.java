@@ -17,7 +17,7 @@ import java.io.IOException;
 @WebServlet("/adminticketpricing")
 public class AdminTicketManageAction extends BaseActionClass {
 
-    AdminTicketManagementI adminTicketManagement = new AdminTicketManagementBeanImpl();
+    AdminTicketManagementI adminTicketManagementBean = new AdminTicketManagementBeanImpl();
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class AdminTicketManageAction extends BaseActionClass {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        renderAdminPage(req, res, HtmlAdminPages.adminTicketManageListPage(HtmlComponents.table(TicketManagement.class, adminTicketManagement.list(TicketManagement.class)))
+        renderAdminPage(req, res, HtmlAdminPages.adminTicketManageListPage(HtmlComponents.table(TicketManagement.class, adminTicketManagementBean.list(TicketManagement.class)))
         );
 
     }
