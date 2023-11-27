@@ -4,12 +4,12 @@ import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.sharedbean.AuthBeanImpl;
 import com.cee.tech.app.bean.sharedbean.AuthBeanI;
 import com.cee.tech.app.model.entity.User;
-import com.cee.tech.utils.CustomLogger;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +21,9 @@ import javax.servlet.http.*;
 })
 public class LoginAction extends BaseActionClass {
 
-    AuthBeanI authBean = new AuthBeanImpl();
+    @EJB
+    AuthBeanI authBean;
+
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
         if (StringUtils.isNotBlank((String) httpSession.getAttribute("LoginId")))
@@ -31,8 +33,6 @@ public class LoginAction extends BaseActionClass {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-        CustomLogger logger = CustomLogger.getLoggerInstance();
 
         User loginUser = new User();
         serializeForm(loginUser, req.getParameterMap());
@@ -64,7 +64,7 @@ public class LoginAction extends BaseActionClass {
             PrintWriter print = res.getWriter();
 
             print.write("<html><body>Invalid credentials! <a href=\".\"> Login again </a></body></html>");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

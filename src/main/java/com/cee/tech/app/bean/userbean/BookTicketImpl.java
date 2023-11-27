@@ -2,21 +2,19 @@ package com.cee.tech.app.bean.userbean;
 
 import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.model.entity.BookTicket;
+import com.cee.tech.utils.TicketNumberGenerator;
+
+import javax.inject.Inject;
 
 
 public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookTicketI {
-    @Override
-    public String allTickets() {
-        return null;
-    }
+    @Inject
+    private TicketNumberGenerator ticketNumberGenerator;
 
     @Override
-    public BookTicket bookTicket(BookTicket ticket) throws Exception {
-        return null;
+    public void addOrUpdate(BookTicket bookTicket) {
+        bookTicket.setTicketNumber(ticketNumberGenerator.generate());
+        getDao().addOrUpdate(bookTicket);
     }
 
-    @Override
-    public void deleteTicket(BookTicket ticket) {
-        System.out.println("deleted");
-    }
 }

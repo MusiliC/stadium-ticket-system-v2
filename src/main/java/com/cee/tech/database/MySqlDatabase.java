@@ -9,6 +9,14 @@ import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.mysql.cj.jdbc.MysqlDataSource;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -21,37 +29,28 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+@Singleton
+@Startup()
 public class MySqlDatabase implements Serializable {
-    public static final String URL = "jdbc:mysql://localhost:3306/eticket";
-    public static final String USER = "root";
-    public static final String PASSWORD = "makutano";
+    private Connection connection;
 
-    private static MySqlDatabase database;
-    private static Connection connection;
-
-    private MySqlDatabase() throws SQLException {
-
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL(URL);
-        dataSource.setUser(USER);
-        dataSource.setPassword(PASSWORD);
+    @PostConstruct
+    private void init() throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        DataSource dataSource = (DataSource) ctx.lookup("java:jboss/datasources/eticket");
         connection = dataSource.getConnection();
 
+        System.out.println("Executed. on start up!!");
+
+        this.updateSchema();
     }
 
-    public static MySqlDatabase getInstance() throws SQLException {
-        if (database == null)
-            database = new MySqlDatabase();
 
-        return database;
-    }
-
-    public static void updateSchema() {
+    private void updateSchema() {
         System.out.println(" ***************** Updating schema Database **********************");
 
 
         try {
-            Connection conn = MySqlDatabase.getInstance().getConnection();
 
             List<Class<?>> entities = new ArrayList<>();
             entities.add(User.class);
@@ -95,7 +94,7 @@ public class MySqlDatabase implements Serializable {
 
                 System.out.println("Created table: " + tableSql);
 
-                conn.prepareStatement(sqlBuilder.toString().replace(",)", ")")).executeUpdate();
+                connection.prepareStatement(sqlBuilder.toString().replace(",)", ")")).executeUpdate();
 
             }
         } catch (SQLException e) {
@@ -103,10 +102,10 @@ public class MySqlDatabase implements Serializable {
 
         }
     }
-
-    public static void saveOrUpdate(Object entity) {
+    public void saveOrUpdate(Object entity) {
 
         try {
+
             Class<?> clazz = entity.getClass();
             if (!clazz.isAnnotationPresent(DbTable.class))
                 return;
@@ -115,7 +114,6 @@ public class MySqlDatabase implements Serializable {
 
             List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
             fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
-
 
             StringBuilder columnBuilder = new StringBuilder();
             StringBuilder paramPlaceHolderBuilder = new StringBuilder();
@@ -153,10 +151,12 @@ public class MySqlDatabase implements Serializable {
 
             int paramIdx = 1;
             for (Object param : parameters) {
-                if (param.getClass().isAssignableFrom(int.class))
-                    sqlStmt.setInt(paramIdx++, (Integer) param);
+                if (param.getClass().isAssignableFrom(BigDecimal.class))
+                    sqlStmt.setBigDecimal(paramIdx++, (BigDecimal) param);
                 else if (param.getClass().isAssignableFrom(Long.class))
                     sqlStmt.setLong(paramIdx++, (long) param);
+                else if (param.getClass().isAssignableFrom(Integer.class))
+                    sqlStmt.setInt(paramIdx++, (int) param);
                 else if (param.getClass().isAssignableFrom(Date.class))
                     sqlStmt.setDate(paramIdx++, new java.sql.Date(((Date) param).getTime()));
                 else
@@ -164,16 +164,82 @@ public class MySqlDatabase implements Serializable {
             }
 
             sqlStmt.executeUpdate();
-        } catch (Exception e) {
+
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public static  <T> List<T> select(T filter){
+//    public void saveOrUpdate(Object entity) {
+//
+//        try {
+//            Class<?> clazz = entity.getClass();
+//            if (!clazz.isAnnotationPresent(DbTable.class))
+//                return;
+//
+//            DbTable dbTable = clazz.getAnnotation(DbTable.class);
+//
+//            List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
+//            fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
+//
+//
+//            StringBuilder columnBuilder = new StringBuilder();
+//            StringBuilder paramPlaceHolderBuilder = new StringBuilder();
+//            List<Object> parameters = new ArrayList<>();
+//
+//            for (Field field : fields) {
+//                if (!field.isAnnotationPresent(DbTableColumn.class) || field.isAnnotationPresent(DBTableId.class))
+//                    continue;
+//
+//                field.setAccessible(true);
+//                if (field.get(entity) == null)
+//                    continue;
+//
+//                DbTableColumn dbTableColumn = field.getAnnotation(DbTableColumn.class);
+//
+//                columnBuilder.append(dbTableColumn.name()).append(",");
+//                paramPlaceHolderBuilder.append("?").append(",");
+//                parameters.add(field.get(entity));
+//
+//            }
+//
+//            String queryBuilder = "insert into " +
+//                    dbTable.name() +
+//                    "(" +
+//                    columnBuilder +
+//                    ")" +
+//                    " values(" +
+//                    paramPlaceHolderBuilder +
+//                    ")";
+//
+//            String query = queryBuilder.replace(",)", ")");
+//            System.out.println("Query: " + query);
+//
+//            PreparedStatement sqlStmt = connection.prepareStatement(query);
+//
+//            int paramIdx = 1;
+//            for (Object param : parameters) {
+//                if (param.getClass().isAssignableFrom(int.class))
+//                    sqlStmt.setInt(paramIdx++, (Integer) param);
+//                else if (param.getClass().isAssignableFrom(Long.class))
+//                    sqlStmt.setLong(paramIdx++, (long) param);
+//                else if (param.getClass().isAssignableFrom(Date.class))
+//                    sqlStmt.setDate(paramIdx++, new java.sql.Date(((Date) param).getTime()));
+//                else
+//                    sqlStmt.setString(paramIdx++, (String) param);
+//            }
+//
+//            sqlStmt.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public static  <T> List<T> fetch(T filter){
         return new ArrayList<>();
     }
 
-    public static  <T> T selectSingle(T filter){
+    public static  <T> T fetchSingle(T filter){
         return filter;
     }
 
@@ -182,7 +248,15 @@ public class MySqlDatabase implements Serializable {
         return connection;
     }
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+    @PreDestroy
+    public void closeConnection(){
+        try {
+            if (connection != null)
+                connection.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
     }
 }

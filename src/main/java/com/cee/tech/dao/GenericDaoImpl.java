@@ -11,44 +11,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenericDaoImpl<T> implements GenericDaoI<T> {
-    Database database = Database.getDbInstance();
-
-    GenericDaoI<T> genericDaoI = new GenericDaoImpl<>();
+    private MySqlDatabase database;
 
     @Override
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<T> list(Class<?> entity) {
-
-        if (entity.equals(User.class))
-            return (List<T>) database.getUsers();
-
-        if (entity.equals(Fixture.class))
-            return (List<T>) database.getFixtures();
-
-        if (entity.equals(TicketManagement.class))
-            return (List<T>) database.getTicketManagement();
-
-
-        return new ArrayList<>();
+        return null;
     }
 
     @Override
     public void addOrUpdate(T entity) {
-       MySqlDatabase.saveOrUpdate(entity);
+        database.saveOrUpdate(entity);
     }
-
     @Override
     public void delete(T entity) {
 
     }
 
-    @Override
     public MySqlDatabase getDatabase() {
-        return null;
+        return database;
     }
 
-    @Override
     public void setDatabase(MySqlDatabase database) {
-
+        this.database = database;
     }
 }

@@ -23,11 +23,5 @@ public class FixtureBeanImp extends GenericBeanImpl<Fixture> implements FixtureB
     };
 
 
-    public Fixture addUpdateFixture(Fixture fixture)throws  Exception{
-      return  fixture;
-    };
 
-    public  void deleteFixture(Fixture fixture){
-        System.out.println("Yaay");
-    }
 }

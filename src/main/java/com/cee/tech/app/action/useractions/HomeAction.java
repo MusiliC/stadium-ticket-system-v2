@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.utils.CookieUtils;
-import com.cee.tech.utils.CustomLogger;
 import com.cee.tech.view.html.HtmlUserPages;
 
 
@@ -17,9 +16,6 @@ import com.cee.tech.view.html.HtmlUserPages;
 public class HomeAction extends BaseActionClass {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-
-        CustomLogger logger = CustomLogger.getLoggerInstance();
 
         Cookie userCookie = CookieUtils.getCookieByName(req, "username");
         String accessCookie = null;
@@ -30,9 +26,7 @@ public class HomeAction extends BaseActionClass {
             System.out.println("Cookie not found");
         }
 
-        logger.log(Level.INFO, "********** " + accessCookie + "***************");
-
-        renderPage(req,res, HtmlUserPages.homePage());
+       renderPage(req,res, HtmlUserPages.homePage());
 
 
     }

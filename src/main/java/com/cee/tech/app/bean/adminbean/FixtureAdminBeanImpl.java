@@ -28,13 +28,5 @@ public class FixtureAdminBeanImpl extends GenericBeanImpl<Fixture> implements Fi
         return tbBuilder.toString();
     }
 
-    @Override
-    public Fixture addUpdateFixture(Fixture fixture) throws Exception {
-        return null;
-    }
 
-    @Override
-    public void deleteFixture(Fixture fixture) {
-
-    }
 }

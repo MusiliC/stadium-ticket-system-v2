@@ -5,7 +5,5 @@ import com.cee.tech.app.model.entity.BookTicket;
 
 
 public interface BookTicketI extends GenericBeanI<BookTicket> {
-    public  String allTickets();
-    public BookTicket bookTicket(BookTicket ticket) throws  Exception;
-    public  void deleteTicket(BookTicket ticket);
+
 }

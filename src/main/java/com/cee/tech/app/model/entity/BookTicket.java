@@ -11,6 +11,9 @@ public class BookTicket extends BaseEntity {
     @EticketFormField
     @DbTableColumn(name = "name", notNull = "not null")
     private String name;
+
+    @DbTableColumn(name = "ticketNumber", notNull = "not null")
+    private String ticketNumber;
     @EticketFormField
     @DbTableColumn(name = "email")
     private String email;
@@ -28,8 +31,11 @@ public class BookTicket extends BaseEntity {
     }
 
 
-    public BookTicket(int id,String name, String email, String phoneNumber, String ticketType, int numberOfTickets) {
+
+
+    public BookTicket(int id,String ticketNumber, String name, String email, String phoneNumber, String ticketType, int numberOfTickets) {
         setId(id);
+        this.ticketNumber = ticketNumber;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -78,5 +84,11 @@ public class BookTicket extends BaseEntity {
         this.numberOfTickets = numberOfTickets;
     }
 
+    public String getTicketNumber() {
+        return ticketNumber;
+    }
 
+    public void setTicketNumber(String ticketNumber) {
+        this.ticketNumber = ticketNumber;
+    }
 }

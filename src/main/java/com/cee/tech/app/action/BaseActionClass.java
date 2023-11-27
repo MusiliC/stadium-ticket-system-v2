@@ -19,6 +19,7 @@ public class BaseActionClass extends HttpServlet {
 
     }
 
+
     public void renderPage(HttpServletRequest req, HttpServletResponse res, String content) throws ServletException, IOException {
         req.setAttribute("content", content);
 
