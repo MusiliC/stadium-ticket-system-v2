@@ -19,7 +19,7 @@ import java.io.IOException;
 @WebServlet("/adminfixtures")
 public class AdminFixturesAction extends BaseActionClass {
 
-    FixtureBeanI adminFixtureBean = new FixtureAdminBeanImpl();
+        FixtureBeanI adminFixtureBean = new FixtureAdminBeanImpl();
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
