@@ -23,12 +23,12 @@ public class AdminFixturesAction extends BaseActionClass {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        Database database = Database.getDbInstance();
 
-        Fixture getAdminFixture = new Fixture();
+        Fixture newAdminFixture = new Fixture();
+        serializeForm(newAdminFixture, req.getParameterMap());
 
-        //database.getFixtures().add(new Fixture(req.getParameter("fixtureType"),req.getParameter("fixtureTime"),req.getParameter("fixtureLocation"),req.getParameter("homeTeam"),req.getParameter("awayTeam"),req.getParameter("fixtureDate")));
 
+        adminFixtureBean.addOrUpdate(newAdminFixture);
         res.sendRedirect("./adminfixtures");
     }
 

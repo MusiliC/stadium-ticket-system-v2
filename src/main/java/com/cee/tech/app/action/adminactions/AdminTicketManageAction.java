@@ -23,9 +23,14 @@ public class AdminTicketManageAction extends BaseActionClass {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        Database database = Database.getDbInstance();
 
-        //database.getTicketPricing().add(new TicketManagement(req.getParameter("fixtureType"),Integer.parseInt( req.getParameter("vipTicketPrice")),Integer.parseInt( req.getParameter("normalTicketPrice"))));
+        TicketManagement newTicket = new TicketManagement();
+
+
+        serializeForm(newTicket, req.getParameterMap());
+
+        adminTicketManagementBean.addOrUpdate(newTicket);
+
 
         res.sendRedirect("./adminticketpricing");
     }

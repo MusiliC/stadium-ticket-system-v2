@@ -16,7 +16,7 @@ public class AdminCreateTicketAction extends BaseActionClass {
                 "      <div class=\"createFixtureContainer\">\n" +
                 "        <p class=\"fixtureTitle\">Manage ticket for upcoming fixture</p>\n" +
                 "\n" +
-                "        <form action=\"./fixtures\" method=\"post\">\n" +
+                "        <form action=\"./adminticketpricing\" method=\"post\">\n" +
                 "          <div class=\"formContainer\">\n" +
                 "            <div class=\"formInput\">\n" +
                 "                <label for=\"fixtureType\">Fixture Type:</label>\n" +
@@ -29,25 +29,25 @@ public class AdminCreateTicketAction extends BaseActionClass {
                 "                </select>\n" +
                 "              </div>\n" +
                 "            <div class=\"formInput\">\n" +
-                "              <label for=\"totalTickets\">Total Tickets Allocated:</label>\n" +
-                "              <input type=\"number\" name=\"totalTickets\" id=\"totalTickets\" />\n" +
+                "              <label for=\"totalTicketsAllocated\">Total Tickets Allocated:</label>\n" +
+                "              <input type=\"number\" name=\"totalTicketsAllocated\" id=\"totalTicketsAllocated\" />\n" +
                 "            </div>\n" +
                 "            \n" +
                 "            <div class=\"formInput\">\n" +
-                "              <label for=\"vipTickets\">Total VIP tickets:</label>\n" +
-                "              <input type=\"number\" name=\"vipTickets\" id=\"vipTickets\" />\n" +
+                "              <label for=\"totalVipTicketsLocated\">Total VIP tickets:</label>\n" +
+                "              <input type=\"number\" name=\"totalVipTicketsLocated\" id=\"totalVipTicketsLocated\" />\n" +
                 "            </div>\n" +
                 "            <div class=\"formInput\">\n" +
-                "              <label for=\"vipAmount\">VIP ticket amount:</label>\n" +
-                "              <input type=\"number\" name=\"vipAmount\" id=\"vipAmount\" />\n" +
+                "              <label for=\"ticketAmountVIP\">VIP ticket amount:</label>\n" +
+                "              <input type=\"number\" name=\"ticketAmountVIP\" id=\"ticketAmountVIP\" />\n" +
                 "            </div>\n" +
                 "            <div class=\"formInput\">\n" +
-                "              <label for=\"normalTickets\">Total Normal tickets:</label>\n" +
-                "              <input type=\"number\" name=\"normalTickets\" id=\"normalTickets\" />\n" +
+                "              <label for=\"totalNormalTicketsAllocated\">Total Normal tickets:</label>\n" +
+                "              <input type=\"number\" name=\"totalNormalTicketsAllocated\" id=\"totalNormalTicketsAllocated\" />\n" +
                 "            </div>\n" +
                 "            <div class=\"formInput\">\n" +
-                "              <label for=\"normalAmount\">Normal ticket amount:</label>\n" +
-                "              <input type=\"number\" name=\"normalAmount\" id=\"normalAmount\" />\n" +
+                "              <label for=\"ticketAmountNormal\">Normal ticket amount:</label>\n" +
+                "              <input type=\"number\" name=\"ticketAmountNormal\" id=\"ticketAmountNormal\" />\n" +
                 "            </div>\n" +
                 "          \n" +
                 "          </div>\n" +
