@@ -30,7 +30,6 @@ public class BookTicketAction extends BaseActionClass {
 
     }
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-
         renderPage(req,res, HtmlUserPages.bookTicketPage(HtmlComponents.ticketForm(BookTicket.class) )
                );
 

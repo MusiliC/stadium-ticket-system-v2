@@ -15,19 +15,23 @@ import com.cee.tech.view.html.HtmlUserPages;
 @WebServlet("/home")
 public class HomeAction extends BaseActionClass {
 
-    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-        Cookie userCookie = CookieUtils.getCookieByName(req, "username");
-        String accessCookie = null;
-
-        if (userCookie != null) {
-            accessCookie = userCookie.getValue();
-        } else {
-            System.out.println("Cookie not found");
-        }
-
-       renderPage(req,res, HtmlUserPages.homePage());
-
+    public void doGet(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
+        res.sendRedirect("./home.jsp");
 
     }
+
+//    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+//
+//        Cookie userCookie = CookieUtils.getCookieByName(req, "username");
+//        String accessCookie = null;
+//
+//        if (userCookie != null) {
+//            accessCookie = userCookie.getValue();
+//        } else {
+//            System.out.println("Cookie not found");
+//        }
+//
+//       renderPage(req,res, HtmlUserPages.homePage());
+//
+//    }
 }
