@@ -6,7 +6,7 @@ import com.cee.tech.view.html.EticketFormField;
 import com.cee.tech.view.html.EticketHtmlForm;
 
 @DbTable(name = "bookTicket")
-@EticketHtmlForm(label = "Ticket", url = "./tickets")
+@EticketHtmlForm(label = "Ticket", url = "./book")
 public class BookTicket extends BaseEntity {
     @EticketFormField(name = "name")
     @DbTableColumn(name = "name", notNull = "not null")
@@ -17,13 +17,13 @@ public class BookTicket extends BaseEntity {
     @EticketFormField(name = "email")
     @DbTableColumn(name = "email")
     private String email;
-    @EticketFormField(label = "Phone Number", name = "number")
-    @DbTableColumn(name = "number", notNull = "not null")
+    @EticketFormField(label = "Phone Number", name = "phoneNumber")
+    @DbTableColumn(name = "phoneNumber", notNull = "not null")
     private String phoneNumber;
     @EticketFormField(label="Ticket Type", name = "ticketType")
     @DbTableColumn(name = "ticketType", notNull = "not null")
     private String ticketType;
-    @EticketFormField(label= "Number of Tickets", fieldType = "number", name = "totalTickets")
+    @EticketFormField(label= "Number of Tickets", fieldType = "number", name = "numberOfTickets")
     @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
     private int numberOfTickets;
 

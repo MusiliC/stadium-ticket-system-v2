@@ -16,10 +16,9 @@ import java.io.IOException;
 @WebServlet("/fixtures")
 public class FixtureAction extends BaseActionClass {
 
-    @EJB
+    @EJB(beanName = "userFixtureBean")
     FixtureBeanI fixtureBean;
 
-    private Fixture fixture = new Fixture();
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
@@ -33,16 +32,5 @@ public class FixtureAction extends BaseActionClass {
 
     }
 
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
-        Database database = Database.getDbInstance();
 
-
-        serializeForm(fixture, req.getParameterMap());
-        database.getFixtures().add(fixture);
-
-        res.sendRedirect("./fixtures");
-
-
-    }
 }

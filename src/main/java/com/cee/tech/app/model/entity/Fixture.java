@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
-@EticketHtmlForm(label = "Fixture", url = "./adminfixtures", httpMethod = "POST")
+@EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
 @DbTable(name = "fixtures")
 public class Fixture extends BaseEntity {
 
