@@ -39,7 +39,6 @@
  <%  navbarBean.generateMenu(firstLetter); %>
  <% footerMenuContent.generateFooterMenu(); %>
 
- 
               <%-- <jsp:getProperty name="navbarBean" property="menu" /> --%>
                ${navbarBean.menu}
               <%--  <jsp:getProperty name="contentHtmlRender" property="content" /> --%>
