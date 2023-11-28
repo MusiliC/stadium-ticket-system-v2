@@ -113,5 +113,16 @@ public class TicketManagement extends BaseEntity {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "TicketManagement{" +
+                "fixtureType='" + fixtureType + '\'' +
+                ", totalTicketsAllocated=" + totalTicketsAllocated +
+                ", totalVipTicketsLocated=" + totalVipTicketsLocated +
+                ", ticketAmountVIP=" + ticketAmountVIP +
+                ", totalNormalTicketsAllocated=" + totalNormalTicketsAllocated +
+                ", ticketAmountNormal=" + ticketAmountNormal +
+                ", action='" + action + '\'' +
+                '}';
+    }
 }

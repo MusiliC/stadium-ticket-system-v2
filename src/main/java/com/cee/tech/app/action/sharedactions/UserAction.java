@@ -28,7 +28,6 @@ public class UserAction extends BaseActionClass {
 
             System.out.println();
             System.out.println();
-
             System.out.println();
             System.out.println();
 

@@ -9,7 +9,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import java.io.Serializable;
 import java.util.List;
-@Stateless
+@Stateless(name = "userFixtureBean")
 @Remote
 public class FixtureBeanImp extends GenericBeanImpl<Fixture> implements FixtureBeanI, Serializable {
     public  String upcomingFixtures(){

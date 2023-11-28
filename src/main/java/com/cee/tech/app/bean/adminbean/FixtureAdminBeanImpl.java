@@ -9,7 +9,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import java.util.List;
 
-
+@Stateless(name = "adminFixtureBean")
+@Remote
 public class FixtureAdminBeanImpl extends GenericBeanImpl<Fixture> implements FixtureBeanI {
 
     @Override

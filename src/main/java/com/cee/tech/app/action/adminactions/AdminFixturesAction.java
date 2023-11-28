@@ -19,18 +19,9 @@ import java.io.IOException;
 @WebServlet("/adminfixtures")
 public class AdminFixturesAction extends BaseActionClass {
 
-        FixtureBeanI adminFixtureBean = new FixtureAdminBeanImpl();
+    @EJB(beanName = "adminFixtureBean")
+    FixtureBeanI adminFixtureBean;
 
-    @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        Database database = Database.getDbInstance();
-
-        Fixture getAdminFixture = new Fixture();
-
-        //database.getFixtures().add(new Fixture(req.getParameter("fixtureType"),req.getParameter("fixtureTime"),req.getParameter("fixtureLocation"),req.getParameter("homeTeam"),req.getParameter("awayTeam"),req.getParameter("fixtureDate")));
-
-        res.sendRedirect("./adminfixtures");
-    }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
