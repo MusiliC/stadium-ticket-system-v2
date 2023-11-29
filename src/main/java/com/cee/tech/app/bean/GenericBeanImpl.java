@@ -15,9 +15,9 @@ public class GenericBeanImpl<T> implements GenericBeanI<T> {
 
     @Override
     public List<T> list(Class<?> entity) {
+        genericDaoI.setDatabase(database);
         return genericDaoI.list(entity);
     }
-
 
     @Override
     public void addOrUpdate(T entity) {

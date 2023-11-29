@@ -15,7 +15,7 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
 
     @Override
     public List<T> list(Class<?> entity) {
-        return null;
+        return (List<T>) database.fetch(entity);
     }
 
     @Override

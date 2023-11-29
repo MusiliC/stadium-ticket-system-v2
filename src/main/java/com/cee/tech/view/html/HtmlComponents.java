@@ -52,7 +52,6 @@ public class HtmlComponents implements Serializable {
 
     public static String form(Class<?> model) {
 
-
         EticketHtmlForm eticketHtmlForm = null;
         if (model.isAnnotationPresent(EticketHtmlForm.class)) {
             eticketHtmlForm = model.getAnnotation(EticketHtmlForm.class);
