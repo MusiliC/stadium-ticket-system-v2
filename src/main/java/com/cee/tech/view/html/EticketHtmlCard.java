@@ -7,13 +7,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EticketRowCard {
-    String name() default "";
-    String className() default "";
-
-    String divTag() default "div";
-
-    String pTag() default "p";
-
+public @interface EticketHtmlCard {
+    String cssClass() default "";
+    String label() default "";
 
 }

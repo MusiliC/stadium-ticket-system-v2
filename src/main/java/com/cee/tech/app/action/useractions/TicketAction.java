@@ -3,6 +3,7 @@ package com.cee.tech.app.action.useractions;
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.userbean.BookTicketI;
 import com.cee.tech.app.model.entity.BookTicket;
+import com.cee.tech.view.html.HtmlComponents;
 import com.cee.tech.view.html.HtmlUserPages;
 
 import javax.ejb.EJB;
@@ -26,6 +27,10 @@ public class TicketAction extends BaseActionClass {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        renderPage(req, res , HtmlUserPages.myTicketsPage());
+        try {
+            renderPage(req, res , HtmlComponents.bookTicketCard(BookTicket.class, bookTicketBean.list(BookTicket.class)));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

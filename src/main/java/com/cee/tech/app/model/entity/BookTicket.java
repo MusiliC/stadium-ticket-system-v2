@@ -3,6 +3,7 @@ package com.cee.tech.app.model.entity;
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketFormField;
+import com.cee.tech.view.html.EticketHtmlCard;
 import com.cee.tech.view.html.EticketHtmlForm;
 
 @DbTable(name = "bookTicket")
@@ -13,15 +14,18 @@ public class BookTicket extends BaseEntity {
     private String name;
 
     @DbTableColumn(name = "ticketNumber", notNull = "not null")
+    @EticketHtmlCard(cssClass = "ticketNumber")
     private String ticketNumber;
     @EticketFormField(name = "email")
     @DbTableColumn(name = "email")
+
     private String email;
     @EticketFormField(label = "Phone Number", name = "phoneNumber")
     @DbTableColumn(name = "phoneNumber", notNull = "not null")
     private String phoneNumber;
     @EticketFormField(label="Ticket Type", name = "ticketType")
     @DbTableColumn(name = "ticketType", notNull = "not null")
+    @EticketHtmlCard(cssClass = "ticketFixtureType")
     private String ticketType;
     @EticketFormField(label= "Number of Tickets", fieldType = "number", name = "numberOfTickets")
     @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
