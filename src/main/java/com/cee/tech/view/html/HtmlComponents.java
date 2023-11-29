@@ -115,6 +115,53 @@ public class HtmlComponents implements Serializable {
         return htmlForm.toString();
     }
 
+    public static String bookTicketCard(Class<?> clazz, List<?> models) throws IllegalAccessException {
+
+        Field[] fields = clazz.getDeclaredFields();
+
+        StringBuilder cardBuilder = new StringBuilder();
+
+        cardBuilder.append("<div class=\"topTicketPart\">\n" +
+                "        <div class=\"topTicketPartTitle\">\n" +
+                "          <p>My Tickets</p>\n" +
+                "        </div>\n" +
+                "      </div>\n");
+
+        cardBuilder.append("<div class=\"mainTicketContainer\">\n");
+
+        cardBuilder.append("<div class=\"newTicketContainer\">");
+
+        if (models != null && !models.isEmpty()) {
+            for (Object model : models) {
+                cardBuilder.append("<div class=\"newTicketCard\">");
+
+                for (Field field : fields) {
+                    if (!field.isAnnotationPresent(EticketHtmlCard.class))
+                        continue;
+
+                    field.setAccessible(true);
+                    EticketHtmlCard annotation = field.getAnnotation(EticketHtmlCard.class);
+
+                    cardBuilder.append("<div class=\"").append(annotation.cssClass()).append("\">");
+                    cardBuilder.append("<p>").append(field.get(model)).append("</p>");
+                    cardBuilder.append("</div>");
+                }
+
+                cardBuilder.append("<div class=\"myTicketNormalButton\">");
+                cardBuilder.append("<a href=\"./ticketdetails").append("\">View</a>");
+                cardBuilder.append("</div>");
+
+                cardBuilder.append("</div>");
+            }
+        }
+
+        cardBuilder.append("</div>");
+        cardBuilder.append("</div>");
+
+
+        return cardBuilder.toString();
+    }
+
 
 
     public static String ticketForm(Class<?> model) {

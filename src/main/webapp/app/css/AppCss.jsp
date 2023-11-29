@@ -287,12 +287,12 @@
               .topTicketPart {
                   height: 150px;
                   background: rgb(28, 85, 172);
-                  margin-bottom: 30px;
+                  margin-bottom: 10px;
                   display: flex;
                   align-items: center;
                 }
                 .topTicketPartTitle{
-                    width: 73%;
+                    width: 83%;
                     margin: auto;
                 }
                 .topTicketPartTitle p{
@@ -687,5 +687,46 @@
                                                     margin: 20px 0px;
                                                   }
 
-                                <%-- ticket pricing --%>
+                                <%-- book ticket --%>
+                                   .ticketNumber,.newTicketInfoDetails,.ticketDate{
+                                        width: 150px;
+                                    }
+                                    .ticketFixtureType{
+                                        width: 200px;
+                                    }
+                                    .myTicketNormalButton{
+                                        width: 100px;
+                                    }
+
+                                    .newTicketContainer {
+                                        width: 100%;
+                                        margin: auto;
+                                        padding-top: 20px;
+                                        padding-bottom: 20px;
+                                    }
+
+                                    .newTicketCard {
+                                        box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+                                        padding: 17px;
+                                        margin-top: 20px;
+                                        margin-bottom: 20px;
+                                        display: flex;
+                                        gap: 25px;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                    }
+
+                                    .newTicketCard:hover {
+                                        background-color: #E0F4FF;
+                                        cursor: pointer;
+                                    }
+
+                                    .newTicketInfoDetails {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 10px;
+                                        text-align: start;
+                                        font-weight: 500;
+                                    }
+
                             </style>
