@@ -26,11 +26,9 @@ public class AdminTicketManageAction extends BaseActionClass {
 
         TicketManagement newTicket = new TicketManagement();
 
-
         serializeForm(newTicket, req.getParameterMap());
 
         adminTicketManagementBean.addOrUpdate(newTicket);
-
 
         res.sendRedirect("./adminticketpricing");
     }

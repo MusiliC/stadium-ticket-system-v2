@@ -19,11 +19,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -102,6 +100,7 @@ public class MySqlDatabase implements Serializable {
 
         }
     }
+
     public void saveOrUpdate(Object entity) {
 
         try {
@@ -165,81 +164,75 @@ public class MySqlDatabase implements Serializable {
 
             sqlStmt.executeUpdate();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//    public void saveOrUpdate(Object entity) {
-//
-//        try {
-//            Class<?> clazz = entity.getClass();
-//            if (!clazz.isAnnotationPresent(DbTable.class))
-//                return;
-//
-//            DbTable dbTable = clazz.getAnnotation(DbTable.class);
-//
-//            List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
-//            fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
-//
-//
-//            StringBuilder columnBuilder = new StringBuilder();
-//            StringBuilder paramPlaceHolderBuilder = new StringBuilder();
-//            List<Object> parameters = new ArrayList<>();
-//
-//            for (Field field : fields) {
-//                if (!field.isAnnotationPresent(DbTableColumn.class) || field.isAnnotationPresent(DBTableId.class))
-//                    continue;
-//
-//                field.setAccessible(true);
-//                if (field.get(entity) == null)
-//                    continue;
-//
-//                DbTableColumn dbTableColumn = field.getAnnotation(DbTableColumn.class);
-//
-//                columnBuilder.append(dbTableColumn.name()).append(",");
-//                paramPlaceHolderBuilder.append("?").append(",");
-//                parameters.add(field.get(entity));
-//
-//            }
-//
-//            String queryBuilder = "insert into " +
-//                    dbTable.name() +
-//                    "(" +
-//                    columnBuilder +
-//                    ")" +
-//                    " values(" +
-//                    paramPlaceHolderBuilder +
-//                    ")";
-//
-//            String query = queryBuilder.replace(",)", ")");
-//            System.out.println("Query: " + query);
-//
-//            PreparedStatement sqlStmt = connection.prepareStatement(query);
-//
-//            int paramIdx = 1;
-//            for (Object param : parameters) {
-//                if (param.getClass().isAssignableFrom(int.class))
-//                    sqlStmt.setInt(paramIdx++, (Integer) param);
-//                else if (param.getClass().isAssignableFrom(Long.class))
-//                    sqlStmt.setLong(paramIdx++, (long) param);
-//                else if (param.getClass().isAssignableFrom(Date.class))
-//                    sqlStmt.setDate(paramIdx++, new java.sql.Date(((Date) param).getTime()));
-//                else
-//                    sqlStmt.setString(paramIdx++, (String) param);
-//            }
-//
-//            sqlStmt.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
-    public static  <T> List<T> fetch(T filter){
+    public <T> List<T> fetch(T filter) {
+        System.out.println("starting select/................");
+        try {
+
+            Class<?> clazz = (Class<?>) filter;
+
+            if (!clazz.isAnnotationPresent(DbTable.class))
+                return new ArrayList<>();
+
+            DbTable dbTable = clazz.getAnnotation(DbTable.class);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            System.out.println(stringBuilder.toString());
+
+            stringBuilder.append("SELECT * FROM ")
+                    .append(dbTable.name()).append(";");
+
+            PreparedStatement preparedStatement=connection.prepareStatement(stringBuilder.toString());
+
+            System.out.println("executing query begins for table/................ " + dbTable.name());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<T> result = new ArrayList<>();
+
+
+            while (resultSet.next()) {
+                T object = (T) clazz.getDeclaredConstructor().newInstance();
+
+                for (Field field : clazz.getDeclaredFields()) {
+                    DbTableColumn dbColumn = field.getAnnotation(DbTableColumn.class);
+                    if (dbColumn != null) {
+                        String columnName = dbColumn.name();
+
+                        Object value = resultSet.getObject(columnName);
+
+                        if (value instanceof java.sql.Date && field.getType().equals(java.util.Date.class)) {
+                            value = new java.util.Date(((java.sql.Date) value).getTime());
+                        }
+
+                        // Convert String to enum if needed
+                        if (field.getType().isEnum() && value instanceof String) {
+                            value = Enum.valueOf((Class<Enum>) field.getType(), (String) value);
+                        }
+
+                        field.setAccessible(true);
+                        field.set(object, value);
+                    }
+                }
+
+                result.add(object);
+            }
+            return result;
+
+
+        } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException |
+                 NoSuchMethodException e) {
+            e.printStackTrace();
+        }
         return new ArrayList<>();
     }
 
-    public static  <T> T fetchSingle(T filter){
+    public <T> T fetchSingle(T filter) {
+
         return filter;
     }
 
@@ -249,7 +242,7 @@ public class MySqlDatabase implements Serializable {
     }
 
     @PreDestroy
-    public void closeConnection(){
+    public void closeConnection() {
         try {
             if (connection != null)
                 connection.close();
