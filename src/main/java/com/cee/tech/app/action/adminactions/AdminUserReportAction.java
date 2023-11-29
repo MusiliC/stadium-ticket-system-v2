@@ -22,5 +22,11 @@ public class AdminUserReportAction extends BaseActionClass {
         renderAdminPage(req, res, HtmlAdminPages.adminUserReport(HtmlComponents.table(User.class,userBean.list(User.class) ))
              );
 
+        //testing for single item
+//        StringBuilder test = new StringBuilder();
+//
+//        renderAdminPage(req, res,test.append("one data - for static id 1 - ").append ( userBean.selectSingle(User.class,1)
+//        ).toString());
+
     }
 }

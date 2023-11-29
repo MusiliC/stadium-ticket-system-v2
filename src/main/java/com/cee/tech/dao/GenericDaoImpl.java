@@ -19,6 +19,11 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
     }
 
     @Override
+    public T fetchSingle(Class<?> entity, int id) {
+        return (T) database.fetchSingle(entity, id);
+    }
+
+    @Override
     public void addOrUpdate(T entity) {
         database.saveOrUpdate(entity);
     }

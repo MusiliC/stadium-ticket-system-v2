@@ -2,13 +2,10 @@ package com.cee.tech.app.model.entity;
 
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
-import com.cee.tech.view.html.EticketFixtureCard;
 import com.cee.tech.view.html.EticketFormField;
 import com.cee.tech.view.html.EticketHtmlForm;
 import com.cee.tech.view.html.EticketTableColHeader;
 import org.apache.commons.lang3.StringUtils;
-
-import java.io.Serializable;
 
 @EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
 @DbTable(name = "fixtures")

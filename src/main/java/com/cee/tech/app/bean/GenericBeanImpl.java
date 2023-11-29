@@ -20,6 +20,12 @@ public class GenericBeanImpl<T> implements GenericBeanI<T> {
     }
 
     @Override
+    public T selectSingle(Class<?> entity, int id) {
+        genericDaoI.setDatabase(database);
+        return genericDaoI.fetchSingle(entity, id);
+    }
+
+    @Override
     public void addOrUpdate(T entity) {
         genericDaoI.setDatabase(database);
         genericDaoI.addOrUpdate(entity);
