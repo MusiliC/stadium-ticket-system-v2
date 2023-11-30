@@ -5,10 +5,13 @@ import com.cee.tech.app.bean.userbean.UserBeanI;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
 import com.cee.tech.database.MySqlDatabase;
+import com.cee.tech.utils.HashText;
 import com.cee.tech.view.html.HtmlComponents;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -18,6 +21,11 @@ import java.util.List;
 @Stateless
 public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
+    @Inject
+    private HashText hashText;
+
+
+
     @Override
     public boolean registerUser(User user) throws SQLException {
 
@@ -25,7 +33,18 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
             throw new RuntimeException("Password & confirm password do not match");
 
         //1. check if username already exist
+
+//        List<User> users = list(user.getClass());
+//        if (!users.isEmpty())
+//            throw new RuntimeException("User already exists!");
         //2. hash password
+
+        try {
+            user.setPassword(hashText.hash(user.getPassword()));
+        } catch (Exception ex){
+            throw new RuntimeException(ex.getMessage());
+        }
+
         //3. initiate event to send email ...Observer design pattern
 
         getDao().addOrUpdate(user);

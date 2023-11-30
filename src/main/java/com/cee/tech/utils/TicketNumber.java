@@ -1,10 +1,11 @@
 package com.cee.tech.utils;
 
+import javax.inject.Named;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
-@UniqueNumber
+@Named("Ticket")
 public class TicketNumber implements UniqueNoGenerator {
     public String generate(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");

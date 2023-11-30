@@ -16,6 +16,14 @@ public class BookTicket extends BaseEntity {
     @DbTableColumn(name = "ticketNumber", notNull = "not null")
     @EticketHtmlCard(cssClass = "ticketNumber")
     private String ticketNumber;
+
+    @EticketHtmlCard(cssClass = "ticketFixtureType")
+    private String fixtureType = "CAF Champions League";
+
+    @EticketHtmlCard(cssClass = "newTicketInfoDetails")
+    private String homeTeam = "Gor Mahia";
+    @EticketHtmlCard(cssClass = "newTicketInfoDetails")
+    private  String awayTeam = "AFC Leopards";
     @EticketFormField(name = "email")
     @DbTableColumn(name = "email")
 
@@ -25,11 +33,16 @@ public class BookTicket extends BaseEntity {
     private String phoneNumber;
     @EticketFormField(label="Ticket Type", name = "ticketType")
     @DbTableColumn(name = "ticketType", notNull = "not null")
-    @EticketHtmlCard(cssClass = "ticketFixtureType")
     private String ticketType;
+    @EticketHtmlCard(cssClass = "ticketDate")
+    private String date = "2023/11/11";
     @EticketFormField(label= "Number of Tickets", fieldType = "number", name = "numberOfTickets")
     @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
     private int numberOfTickets;
+
+
+
+
 
     public BookTicket() {
     }
