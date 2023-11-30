@@ -3,18 +3,17 @@ package com.cee.tech.app.bean.userbean;
 import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.model.entity.BookTicket;
 import com.cee.tech.utils.TicketNumber;
-import com.cee.tech.utils.UniqueNumber;
-import com.cee.tech.utils.UniqueNumberType;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 @Stateless
 @Remote
 public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookTicketI {
     @Inject
-    @UniqueNumber(type = UniqueNumberType.TICKET)
+    @Named("Ticket")
     private TicketNumber ticketNumberGenerator;
 
     @Override

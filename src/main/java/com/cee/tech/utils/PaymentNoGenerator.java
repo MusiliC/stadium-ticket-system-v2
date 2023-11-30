@@ -1,10 +1,11 @@
 package com.cee.tech.utils;
 
+import javax.inject.Named;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
-@UniqueNumber(type = UniqueNumberType.PAYMENT)
+@Named("Payment")
 public class PaymentNoGenerator implements UniqueNoGenerator{
     @Override
     public String generate() {
