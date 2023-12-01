@@ -20,9 +20,9 @@ public class BookTicket extends BaseEntity {
     @EticketHtmlCard(cssClass = "ticketFixtureType")
     private String fixtureType = "CAF Champions League";
 
-    @EticketHtmlCard(cssClass = "newTicketInfoDetails")
+    @EticketHtmlCard(cssClass = "newTicketInfoDetails", pTag = "bookTicketHomeTeam")
     private String homeTeam = "Gor Mahia";
-    @EticketHtmlCard(cssClass = "newTicketInfoDetails")
+    @EticketHtmlCard(cssClass = "newTicketInfoDetails", pTag = "bookTicketAwayTeam")
     private  String awayTeam = "AFC Leopards";
     @EticketFormField(name = "email")
     @DbTableColumn(name = "email")

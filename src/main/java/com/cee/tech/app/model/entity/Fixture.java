@@ -3,6 +3,7 @@ package com.cee.tech.app.model.entity;
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketFormField;
+import com.cee.tech.view.html.EticketHtmlCard;
 import com.cee.tech.view.html.EticketHtmlForm;
 import com.cee.tech.view.html.EticketTableColHeader;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ public class Fixture extends BaseEntity {
     @EticketFormField(label = "Fixture Type")
     @EticketTableColHeader(headerLabel = "Fixture Type")
     @DbTableColumn(name = "fixtureType", notNull = "not null")
+    //@EticketHtmlCard(cssClass = "ticketNumber")
     private String fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")

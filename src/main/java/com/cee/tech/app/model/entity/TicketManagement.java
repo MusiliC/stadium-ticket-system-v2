@@ -2,30 +2,39 @@ package com.cee.tech.app.model.entity;
 
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
+import com.cee.tech.view.html.EticketFormField;
+import com.cee.tech.view.html.EticketHtmlForm;
 import com.cee.tech.view.html.EticketTableColHeader;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
 @DbTable(name = "ticketManagement")
+@EticketHtmlForm(label = "TicketManagement", url = "./adminticketpricing", httpMethod = "POST")
 public class TicketManagement extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
     @DbTableColumn(name = "fixtureType", notNull = "not null")
+    @EticketFormField(label = "Fixture Type")
     private String fixtureType;
     @EticketTableColHeader(headerLabel = "Total Tickets")
     @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
+    @EticketFormField(label = "Total Tickets Allocated: ", fieldType = "number")
     private int totalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "VIP tickets")
     @DbTableColumn(name = "totalVip", notNull = "not null", definition = "int")
+    @EticketFormField(label = "Total VIP tickets: ", fieldType = "number")
     private int totalVipTicketsLocated;
     @EticketTableColHeader(headerLabel = "VIP Ticket Amount")
     @DbTableColumn(name = "vipAmount", notNull = "not null", definition = "int")
+    @EticketFormField(label = "VIP ticket amount: ", fieldType = "number")
     private int ticketAmountVIP;
     @EticketTableColHeader(headerLabel = "Normal Tickets")
     @DbTableColumn(name = "totalNormal", notNull = "not null", definition="int")
+    @EticketFormField(label = "Total Normal tickets: ", fieldType = "number")
     private int totalNormalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "Normal Ticket Amount")
     @DbTableColumn(name = "normalAmount", notNull = "not null", definition = "int")
+    @EticketFormField(label = "Normal ticket amount: ", fieldType = "number")
     private int ticketAmountNormal;
 
     @EticketTableColHeader(headerLabel = "Action")
