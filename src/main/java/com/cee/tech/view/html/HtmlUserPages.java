@@ -174,7 +174,7 @@ public class HtmlUserPages implements Serializable {
                 "          </div>\n" +
                 "        </div>\n" +
                 "      </div>\n" +
-                "      <div class=\"ticketButtons\">\n" +
+                "      <div class=\"oneTicketButtons\">\n" +
                 "        <a href=\"./tickets\" class=\"ticketNormalButton\">Back</a>\n" +
                 "        <a href=\"#\" class=\"ticketOutlineButton\">Download</a>\n" +
                 "      </div>\n" +
