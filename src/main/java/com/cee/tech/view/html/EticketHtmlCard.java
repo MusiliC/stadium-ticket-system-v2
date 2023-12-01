@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EticketHtmlCard {
     String cssClass() default "";
+    String pTag() default "";
     String label() default "";
 
 }

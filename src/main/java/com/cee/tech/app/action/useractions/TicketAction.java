@@ -3,6 +3,7 @@ package com.cee.tech.app.action.useractions;
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.userbean.BookTicketI;
 import com.cee.tech.app.model.entity.BookTicket;
+import com.cee.tech.utils.CookieUtils;
 import com.cee.tech.view.html.HtmlComponents;
 import com.cee.tech.view.html.HtmlUserPages;
 
@@ -27,6 +28,9 @@ public class TicketAction extends BaseActionClass {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        Cookie userCookie = CookieUtils.getCookieByName(req, "username");
+        assert userCookie != null;
+        System.out.println(userCookie.getValue());
         try {
             renderPage(req, res , HtmlComponents.bookTicketCard(BookTicket.class, bookTicketBean.list(BookTicket.class)));
         } catch (IllegalAccessException e) {
@@ -34,3 +38,4 @@ public class TicketAction extends BaseActionClass {
         }
     }
 }
+

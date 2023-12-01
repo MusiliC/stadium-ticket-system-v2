@@ -44,7 +44,6 @@ public class LoginAction extends BaseActionClass {
 
             User userDetails = authBean.authenticateUser(loginUser);
 
-
             if (userDetails != null && StringUtils.isNotBlank(userDetails.getUsername())) {
                 HttpSession httpSession = req.getSession(true);
                 httpSession.setAttribute("LoginId", new Date().getTime() + "");

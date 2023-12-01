@@ -12,6 +12,8 @@ import java.util.List;
 @Stateless(name = "userFixtureBean")
 @Remote
 public class FixtureBeanImp extends GenericBeanImpl<Fixture> implements FixtureBeanI, Serializable {
+
+
     public  String upcomingFixtures(){
         List<Fixture> fixtures = Database.getDbInstance().getFixtures();
 

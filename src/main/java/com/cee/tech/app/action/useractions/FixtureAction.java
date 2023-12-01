@@ -21,9 +21,6 @@ public class FixtureAction extends BaseActionClass {
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
-        Database database = Database.getDbInstance();
-
 
         renderPage(req, res, HtmlUserPages.titleHeader("Upcoming Fixtures") +
                 fixtureBean.upcomingFixtures() +
