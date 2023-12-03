@@ -9,7 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +25,9 @@ public class LoginAction extends BaseActionClass {
 
     @EJB
     AuthBeanI authBean;
+
+    @Inject
+    private double buildNumber;
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
@@ -47,6 +52,8 @@ public class LoginAction extends BaseActionClass {
             if (userDetails != null && StringUtils.isNotBlank(userDetails.getUsername())) {
                 HttpSession httpSession = req.getSession(true);
                 httpSession.setAttribute("LoginId", new Date().getTime() + "");
+                httpSession.setAttribute("buildNumber",  buildNumber);
+                System.out.println("The build number is " + buildNumber);
                 // implementing cookies
                 Cookie newCookie = new Cookie("username", username);
                 res.addCookie(newCookie);

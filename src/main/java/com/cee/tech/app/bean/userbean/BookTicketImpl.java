@@ -1,14 +1,18 @@
 package com.cee.tech.app.bean.userbean;
 
 import com.cee.tech.app.bean.GenericBeanImpl;
+import com.cee.tech.app.model.entity.Audit;
 import com.cee.tech.app.model.entity.BookTicket;
 import com.cee.tech.utils.TicketNumber;
 import com.cee.tech.utils.UserDetails;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.text.DateFormat;
+import java.util.Date;
 
 @Stateless
 @Remote
@@ -16,11 +20,9 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
     @Inject
     @Named("Ticket")
     private TicketNumber ticketNumberGenerator;
-  //  @Inject
-//    @Named("UserBean")
-//    private UserDetails userDetails;
 
-
+    @Inject
+    private Event<Audit> logger;
 
 
     @Override
@@ -28,6 +30,11 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         bookTicket.setTicketNumber(ticketNumberGenerator.generate());
         getDao().addOrUpdate(bookTicket);
+
+        Audit log = new Audit();
+        log.setLogdetails("Confirmed you booked ticket: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + bookTicket.getEmail());
+
+        logger.fire(log);
     }
 
 }

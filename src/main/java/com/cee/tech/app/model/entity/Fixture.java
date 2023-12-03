@@ -17,7 +17,8 @@ public class Fixture extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
     @DbTableColumn(name = "fixtureType", notNull = "not null")
     //@EticketHtmlCard(cssClass = "ticketNumber")
-    private FixtureType fixtureType;
+//    private FixtureType fixtureType;
+    private String fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")
     @DbTableColumn(name = "fixtureTime", notNull = "not null")
@@ -42,12 +43,12 @@ public class Fixture extends BaseEntity {
     private String action = "Edit";
 
 
-    public FixtureType getFixtureType() {
+    public String getFixtureType() {
         return fixtureType;
     }
 
 
-    public Fixture(int id,FixtureType fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
+    public Fixture(int id,String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
                    String awayTeam, String fixtureDate) {
         setId(id);
         this.fixtureType = fixtureType;
@@ -98,7 +99,7 @@ public class Fixture extends BaseEntity {
         this.fixtureLocation = fixtureLocation;
     }
 
-    public void setFixtureType(FixtureType fixtureType) {
+    public void setFixtureType(String fixtureType) {
         this.fixtureType = fixtureType;
     }
 
