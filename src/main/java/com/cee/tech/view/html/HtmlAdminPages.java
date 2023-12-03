@@ -16,6 +16,25 @@ public class HtmlAdminPages {
                 "    </div>";
     }
 
+    public  static String adminCreateTicketManagement(String adminTicketManage){
+        return " <div class=\"formMainContainer\">\n" +
+                "      <div class=\"createFixtureContainer\">\n" +
+                "        <p class=\"fixtureTitle\">Manage Tickets</p>\n" +
+                "\n" +
+                adminTicketManage +
+                "      </div>\n" +
+                "    </div>";
+    }
+    public static String admin(String adminFixtureForm){
+        return " <div class=\"formMainContainer\">\n" +
+                "      <div class=\"createFixtureContainer\">\n" +
+                "        <p class=\"fixtureTitle\">Create Fixture</p>\n" +
+                "\n" +
+                adminFixtureForm +
+                "      </div>\n" +
+                "    </div>";
+    }
+
     public static String adminFixturesPage(String adminUpcomingFixtures){
         return "<div class=\"mainFixtureContainer\">\n" +
                 "      <!-- top part -->\n" +
