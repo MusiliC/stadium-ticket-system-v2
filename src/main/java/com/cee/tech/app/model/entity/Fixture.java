@@ -17,6 +17,7 @@ public class Fixture extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
     @DbTableColumn(name = "fixtureType", notNull = "not null")
     //@EticketHtmlCard(cssClass = "ticketNumber")
+//    private FixtureType fixtureType;
     private String fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")

@@ -17,6 +17,8 @@ public class User extends BaseEntity {
     @DbTableColumn(name = "password", notNull = "not null")
     private String password;
     private String confirmPassword;
+
+
     @DbTableColumn(name = "normalTickets", definition = "int")
     @EticketTableColHeader(headerLabel = "Normal Ticket")
     private int normalTickets = 0;
