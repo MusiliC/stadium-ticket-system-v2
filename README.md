@@ -196,3 +196,9 @@ CDI QUALIFIERS @Qualifier - specify an implementation/bean to be injected
 @Specializes - injects the implementation of child class from parent class which specializes the parent class implementation
 
 INBUILT QUALIFIES @Named - set bean name @Default - any bean without a qualifier is by default annotated with @Default or if it is @Named without value @Any - added to all beans, allows dynamic access of bean through Instance @Alternative - allows enabling and disabling beans, use bean on priority @Initialized @Destroy
+
+CDI Producers @Produces
+
+Types of beans Class based beans*** method beans field beans
+
+CDI events (Event) @Observer

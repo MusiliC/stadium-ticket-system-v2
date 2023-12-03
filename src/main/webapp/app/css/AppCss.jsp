@@ -148,12 +148,10 @@
                 }
              .formMainContainer {
                   width: 83%;
-                  margin: auto;
-                  padding-top: 10px;
-                  padding-bottom: 10px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
+                      margin: auto;
+                      padding-top: 10px;
+                      padding-bottom: 10px;
+
                 }
                 .formContainer {
                   width: 600px;
@@ -346,7 +344,7 @@
                   height: 70vh;
                 }
 
-                .formTicketContainer {
+                .formTicketBookContainer {
                   width: 600px;
                   display: grid;
                   grid-template-columns: auto auto;
@@ -361,16 +359,15 @@
                 }
                 .bookTicketTitle{
                  font-size: 1.5rem;
-                                  text-align: start;
+                                  text-align: center;
                                   margin: 20px 0px;
                                   color: rgb(10, 79, 182);
                 }
-              .ticketButtons{
-                    display: flex;
-                    justify-content: start;
-                    gap: 20px;
-                    align-items: center;
-                    width:100%;
+              .bookTicketButtons{
+                     display: flex;
+                     justify-content: space-between;
+                     gap: 20px;
+                     align-items: center;
                 }
             <%--oneTicket styling --%>
 
@@ -459,6 +456,13 @@
                       color: rgb(10, 79, 182);
                       font-weight: 570;
                     }
+
+                     .oneTicketButtons {
+                          display: flex;
+                          margin-top: 30px;
+                          gap: 20px;
+                          align-items: center;
+                        }
             <%-- footer --%>
              .footerContainer{
                     width: 100%;

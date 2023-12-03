@@ -33,6 +33,7 @@ public class BookTicket extends BaseEntity {
     private String phoneNumber;
     @EticketFormField(label="Ticket Type", name = "ticketType")
     @DbTableColumn(name = "ticketType", notNull = "not null")
+//    private TicketType ticketType;
     private String ticketType;
     @EticketHtmlCard(cssClass = "ticketDate")
     private String date = "2023/11/11";

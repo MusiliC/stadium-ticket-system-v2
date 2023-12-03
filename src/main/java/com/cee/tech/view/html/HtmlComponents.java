@@ -62,9 +62,10 @@ public class HtmlComponents implements Serializable {
 
         StringBuilder htmlForm = new StringBuilder();
 
-         htmlForm.append("<form action=\"").append(eticketHtmlForm.url()).append("\" method=\"").append(eticketHtmlForm.httpMethod()).append("\">\n");
-        htmlForm.append( "<div class=\"formContainer\">\n");
+        htmlForm.append(" <div class=\"formMainContainer\">");
 
+        htmlForm.append("<form action=\"").append(eticketHtmlForm.url()).append("\" method=\"").append(eticketHtmlForm.httpMethod()).append("\">\n");
+        htmlForm.append( "<div class=\"formContainer\">\n");
 
         Field[] fields = model.getDeclaredFields();
 
@@ -110,6 +111,7 @@ public class HtmlComponents implements Serializable {
         htmlForm.append("</div>\n");
         htmlForm.append("<input class=\"normalFormButton\" type=\"submit\" value=\"Post Fixture\" />\n");
         htmlForm.append( "</form>");
+        htmlForm.append( " </div>");
 
 
         return htmlForm.toString();
@@ -173,9 +175,10 @@ public class HtmlComponents implements Serializable {
             return StringUtils.EMPTY;
         }
         StringBuilder htmlForm = new StringBuilder();
+        htmlForm.append("<div class=\"mainTicketBookContainer\"> ");
          htmlForm.append("<form action=\"").append(eticketHtmlForm.url()).append("\" method=\"").append(eticketHtmlForm.httpMethod()).append("\">\n");
         htmlForm.append( " <p class=\"bookTicketTitle\">Book a ticket</p>\n");
-        htmlForm.append( "<div class=\"formTicketContainer\">\n");
+        htmlForm.append( "<div class=\"formTicketBookContainer\">\n");
 
         Field[] fields = model.getDeclaredFields();
 
@@ -213,18 +216,21 @@ public class HtmlComponents implements Serializable {
             }else {
 
                 htmlForm.append(" <input type=\"").append(StringUtils.isBlank(formField.fieldType()) ? fieldName : formField.fieldType()).append("\" name=\"").append(StringUtils.isBlank(formField.name()) ? fieldName : formField.name()).append("\" id=\"").append(StringUtils.isBlank(formField.id()) ? fieldName : formField.id()).append("\" />\n");
-                htmlForm.append(" </div>");
+
             }
+            htmlForm.append(" </div>");
         }
         ;
 
         htmlForm.append( "</div>\n");
-        htmlForm.append( " <div class=\"ticketButtons\">\n" +
+        htmlForm.append( " <div class=\"bookTicketButtons\">\n" +
                 "<a href=\"./fixtures\" class=\"homeOutlineButton\" > Cancel</a>\n" +
                 "<input class=\"normalFormButton\" type=\"submit\" value=\"Book Ticket\" />\n" +
                 "</div>");
 
         htmlForm.append(" </form>\n");
+
+        htmlForm.append(" </div>");
 
         return htmlForm.toString();
 
