@@ -8,6 +8,9 @@ import com.cee.tech.view.html.EticketHtmlForm;
 import com.cee.tech.view.html.EticketTableColHeader;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 @EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
 @DbTable(name = "fixtures")
 public class Fixture extends BaseEntity {
