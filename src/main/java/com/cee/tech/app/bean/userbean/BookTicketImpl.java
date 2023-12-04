@@ -4,7 +4,6 @@ import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.model.entity.Audit;
 import com.cee.tech.app.model.entity.BookTicket;
 import com.cee.tech.utils.TicketNumber;
-import com.cee.tech.utils.UserDetails;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;

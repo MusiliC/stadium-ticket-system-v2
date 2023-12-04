@@ -148,9 +148,13 @@
                 }
              .formMainContainer {
                   width: 83%;
-                      margin: auto;
-                      padding-top: 10px;
-                      padding-bottom: 10px;
+                  margin: auto;
+                  padding-top: 10px;
+                  padding-bottom: 10px;
+                  display:flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
 
                 }
                 .formContainer {
@@ -159,6 +163,13 @@
                   grid-template-columns: auto auto;
                   gap: 15px;
                   margin: 20px 0px;
+                }
+
+                .formSubmitButton{
+                   display:flex;
+                   flex-direction: column;
+                   justify-content: center;
+                   align-items: center;
                 }
 
                 .normalFormButton {
@@ -704,7 +715,7 @@
 
                                     .newTicketContainer {
                                         width: 100%;
-                                        margin: auto;
+                                        margin: 0px  auto;
                                         padding-top: 20px;
                                         padding-bottom: 20px;
                                     }

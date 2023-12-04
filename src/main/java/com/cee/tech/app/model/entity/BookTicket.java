@@ -33,8 +33,8 @@ public class BookTicket extends BaseEntity {
     private String phoneNumber;
     @EticketFormField(label="Ticket Type", name = "ticketType")
     @DbTableColumn(name = "ticketType", notNull = "not null")
-//    private TicketType ticketType;
-    private String ticketType;
+   private TicketType ticketType;
+    //private String ticketType;
     @EticketHtmlCard(cssClass = "ticketDate")
     private String date = "2023/11/11";
     @EticketFormField(label= "Number of Tickets", fieldType = "number", name = "numberOfTickets")
@@ -51,7 +51,7 @@ public class BookTicket extends BaseEntity {
 
 
 
-    public BookTicket(int id,String ticketNumber, String name, String email, String phoneNumber, String ticketType, int numberOfTickets) {
+    public BookTicket(int id,String ticketNumber, String name, String email, String phoneNumber, TicketType ticketType, int numberOfTickets) {
         setId(id);
         this.ticketNumber = ticketNumber;
         this.name = name;
@@ -86,11 +86,11 @@ public class BookTicket extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getTicketType() {
+    public TicketType getTicketType() {
         return ticketType;
     }
 
-    public void setTicketType(String ticketType) {
+    public void setTicketType(TicketType ticketType) {
         this.ticketType = ticketType;
     }
 

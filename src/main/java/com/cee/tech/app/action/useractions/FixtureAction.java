@@ -5,6 +5,7 @@ import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
 import com.cee.tech.app.bean.userbean.FixtureBeanImp;
 import com.cee.tech.app.model.entity.Fixture;
 import com.cee.tech.database.Database;
+import com.cee.tech.view.html.HtmlComponents;
 import com.cee.tech.view.html.HtmlUserPages;
 
 import javax.ejb.EJB;
@@ -25,18 +26,21 @@ public class FixtureAction extends BaseActionClass {
     private List<String> developers;
 
 
-
-
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         System.out.println("Developers are:");
-        for (String developer: developers)
+        for (String developer : developers)
             System.out.println(developer);
-
-        renderPage(req, res, HtmlUserPages.titleHeader("Upcoming Fixtures") +
-                fixtureBean.upcomingFixtures() +
-                HtmlUserPages.titleClosingTags()
-        );
+        try {
+            renderPage(req, res, HtmlUserPages.titleHeader("Upcoming Fixtures") +
+                    HtmlComponents.fixtureCard(Fixture.class, fixtureBean.list(Fixture.class)) +
+                    HtmlUserPages.titleClosingTags()
+            );
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
