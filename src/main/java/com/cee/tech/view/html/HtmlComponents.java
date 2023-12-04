@@ -24,6 +24,7 @@ public class HtmlComponents implements Serializable {
         StringBuilder tbBuilder = new StringBuilder();
 
         tbBuilder.append("<table>");
+
         tbBuilder.append("<tr>");
 
         for (Field field : fields) {
@@ -34,17 +35,19 @@ public class HtmlComponents implements Serializable {
 
         tbBuilder.append("</tr>");
 
+
         if (models == null || models.isEmpty()) {
             return tbBuilder.toString();
         }
         for (Object model : models) {
+
             tbBuilder.append("<tr>");
             for (Field field : fields) {
                 if (!field.isAnnotationPresent(EticketTableColHeader.class))
                     continue;
                 field.setAccessible(true);
                 try {
-                    tbBuilder.append("<td>").append(field.get(model)).append("</td>");
+                    tbBuilder.append("<td><a href=\"example.html\">").append(field.get(model)).append("</a></td>");
 
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
@@ -52,6 +55,7 @@ public class HtmlComponents implements Serializable {
             }
 
             tbBuilder.append("</tr>");
+
         }
         tbBuilder.append("</table>");
         return tbBuilder.toString();

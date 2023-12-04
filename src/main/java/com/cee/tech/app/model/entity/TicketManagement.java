@@ -38,8 +38,8 @@ public class TicketManagement extends BaseEntity {
     @EticketFormField(label = "Normal ticket amount: ", fieldType = "number")
     private int ticketAmountNormal;
 
-    @EticketTableColHeader(headerLabel = "Action")
-    private String action = "Edit";
+    @EticketTableColHeader(headerLabel = "Edit")
+    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
 
     public TicketManagement() {
     }

@@ -715,7 +715,7 @@
 
                                     .newTicketContainer {
                                         width: 100%;
-                                        margin: auto;
+                                        margin: 0px  auto;
                                         padding-top: 20px;
                                         padding-bottom: 20px;
                                     }

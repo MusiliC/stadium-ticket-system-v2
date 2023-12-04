@@ -44,8 +44,8 @@ public class Fixture extends BaseEntity {
     @DbTableColumn(name = "fixtureDate", notNull = "not null")
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
-    @EticketTableColHeader(headerLabel = "Action")
-    private String action = "Edit";
+    @EticketTableColHeader(headerLabel = "Edit")
+    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
 
 
     public FixtureType getFixtureType() {
