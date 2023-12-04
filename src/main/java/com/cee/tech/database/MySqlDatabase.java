@@ -235,23 +235,23 @@ public class MySqlDatabase implements Serializable {
         return new ArrayList<>();
     }
 
-//    public void delete(Class<?> clazz, Object id) {
-//        if (!clazz.isAnnotationPresent(DbTable.class))
-//            return;
-//
-//        DbTable dbTable = clazz.getAnnotation(DbTable.class);
-//
-//
-//        String sqlStm = "DELETE FROM " + dbTable.name() + " WHERE id = ?";
-//        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlStm)) {
-//            if (id instanceof Long)
-//                preparedStatement.setLong(1, (Long) id);
-//
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public void delete(Class<?> clazz, Object id) {
+        if (!clazz.isAnnotationPresent(DbTable.class))
+            return;
+
+        DbTable dbTable = clazz.getAnnotation(DbTable.class);
+
+
+        String sqlStm = "DELETE FROM " + dbTable.name() + " WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlStm)) {
+            if (id instanceof Integer)
+                preparedStatement.setInt(1, (Integer) id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public <T> T fetchSingle(Class<T> clazz, int id) {

@@ -33,9 +33,11 @@ public class FixtureAction extends BaseActionClass {
         for (String developer: developers)
             System.out.println(developer);
 
+       // Fixture fixture = new Fixture();
+
         renderPage(req, res, HtmlUserPages.titleHeader("Upcoming Fixtures") +
                 fixtureBean.upcomingFixtures() +
-                HtmlUserPages.titleClosingTags()
+                HtmlUserPages.titleClosingTags() + fixtureBean.upcomingFixtures()
         );
 
     }

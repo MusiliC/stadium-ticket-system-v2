@@ -1,11 +1,18 @@
 package com.cee.tech.view.html;
 
+import com.cee.tech.app.model.entity.Fixture;
+import com.cee.tech.database.MySqlDatabase;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.ejb.EJB;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HtmlComponents implements Serializable {
@@ -190,7 +197,9 @@ public class HtmlComponents implements Serializable {
 
     }
 
-    public static String bookTicketCard(Class<?> clazz, List<?> models) throws IllegalAccessException {
+
+
+    public static String bookTicketCard(Class<?> clazz, List<?> models) throws IllegalAccessException, NoSuchFieldException {
 
         Field[] fields = clazz.getDeclaredFields();
 
@@ -217,9 +226,28 @@ public class HtmlComponents implements Serializable {
                     field.setAccessible(true);
                     EticketHtmlCard annotation = field.getAnnotation(EticketHtmlCard.class);
 
-                    cardBuilder.append("<div class=\"").append(annotation.cssClass()).append("\">");
-                    cardBuilder.append("<p>").append(field.get(model)).append("</p>");
-                    cardBuilder.append("</div>");
+
+                    if ("homeTeam".equals(field.getName()) ) {
+                        cardBuilder.append("<div class=\"").append(annotation.cssClass()).append("\">");
+                        // Append the homeTeam field to awayTeam
+                        cardBuilder.append("<p>").append(field.get(model)).append("</p>");
+
+                        Field awayTeamField = model.getClass().getDeclaredField("awayTeam");
+                        awayTeamField.setAccessible(true);
+                        cardBuilder.append("<p>").append(awayTeamField.get(model)).append("</p>");
+                        cardBuilder.append("</div>");
+                    } else {
+                        if ( "awayTeam".equals(field.getName()))
+                            continue;
+                        cardBuilder.append("<div class=\"").append(annotation.cssClass()).append("\">");
+
+                        // For other fields, append them normally
+                        cardBuilder.append("<p>").append(field.get(model)).append("</p>");
+                        cardBuilder.append("</div>");
+                    }
+
+
+
                 }
 
                 cardBuilder.append("<div class=\"myTicketNormalButton\">");
