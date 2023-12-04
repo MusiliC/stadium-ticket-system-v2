@@ -15,7 +15,8 @@ public class TicketManagement extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
     @DbTableColumn(name = "fixtureType", notNull = "not null")
     @EticketFormField(label = "Fixture Type")
-    private String fixtureType;
+    //private String fixtureType;
+    private FixtureType fixtureType;
     @EticketTableColHeader(headerLabel = "Total Tickets")
     @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
     @EticketFormField(label = "Total Tickets Allocated: ", fieldType = "number")
@@ -37,13 +38,13 @@ public class TicketManagement extends BaseEntity {
     @EticketFormField(label = "Normal ticket amount: ", fieldType = "number")
     private int ticketAmountNormal;
 
-    @EticketTableColHeader(headerLabel = "Action")
-    private String action = "Edit";
+    @EticketTableColHeader(headerLabel = "Edit")
+    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
 
     public TicketManagement() {
     }
 
-    public TicketManagement(int id,String fixtureType, int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
+    public TicketManagement(int id,FixtureType fixtureType, int totalTicketsAllocated, int totalVipTicketsLocated, int ticketAmountVIP, int totalNormalTicketsAllocated, int ticketAmountNormal) {
         setId(id);
         this.fixtureType = fixtureType;
         this.totalTicketsAllocated = totalTicketsAllocated;
@@ -53,11 +54,11 @@ public class TicketManagement extends BaseEntity {
         this.ticketAmountNormal = ticketAmountNormal;
     }
 
-    public String getFixtureType() {
+    public FixtureType getFixtureType() {
         return fixtureType;
     }
 
-    public void setFixtureType(String fixtureType) {
+    public void setFixtureType(FixtureType fixtureType) {
         this.fixtureType = fixtureType;
     }
 

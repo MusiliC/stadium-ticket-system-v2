@@ -114,6 +114,7 @@ public class MySqlDatabase implements Serializable {
 
             StringBuilder columnBuilder = new StringBuilder();
             StringBuilder paramPlaceHolderBuilder = new StringBuilder();
+            StringBuilder values = new StringBuilder();
             List<Object> parameters = new ArrayList<>();
 
             for (Field field : fields) {
@@ -129,6 +130,8 @@ public class MySqlDatabase implements Serializable {
                 columnBuilder.append(dbTableColumn.name()).append(",");
                 paramPlaceHolderBuilder.append("?").append(",");
                 parameters.add(field.get(entity));
+
+
 
             }
 
@@ -156,6 +159,8 @@ public class MySqlDatabase implements Serializable {
                     sqlStmt.setInt(paramIdx++, (int) param);
                 else if (param.getClass().isAssignableFrom(Date.class))
                     sqlStmt.setDate(paramIdx++, new java.sql.Date(((Date) param).getTime()));
+                else if (param.getClass().isEnum())
+                    sqlStmt.setString(paramIdx++, ((Enum<?>) param).name());
                 else
                     sqlStmt.setString(paramIdx++, (String) param);
             }
@@ -229,6 +234,25 @@ public class MySqlDatabase implements Serializable {
         }
         return new ArrayList<>();
     }
+
+    public void delete(Class<?> clazz, Object id) {
+        if (!clazz.isAnnotationPresent(DbTable.class))
+            return;
+
+        DbTable dbTable = clazz.getAnnotation(DbTable.class);
+
+
+        String sqlStm = "DELETE FROM " + dbTable.name() + " WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlStm)) {
+            if (id instanceof Integer)
+                preparedStatement.setInt(1, (Integer) id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public <T> T fetchSingle(Class<T> clazz, int id) {
         System.out.println("starting select for single item/................");

@@ -33,18 +33,5 @@ public class FixtureAdminBeanImpl extends GenericBeanImpl<Fixture> implements Fi
         logger.fire(log);
     }
 
-    @Override
-    public String upcomingFixtures() {
-        List<Fixture> fixtures = Database.getDbInstance().getFixtures();
-
-        StringBuilder tbBuilder = new StringBuilder();
-
-
-        for(Fixture fixture: fixtures)
-            tbBuilder.append(fixture.tableAdminRow());
-
-        return tbBuilder.toString();
-    }
-
 
 }

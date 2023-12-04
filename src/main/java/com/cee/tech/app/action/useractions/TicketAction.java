@@ -32,7 +32,11 @@ public class TicketAction extends BaseActionClass {
         assert userCookie != null;
         System.out.println(userCookie.getValue());
         try {
-            renderPage(req, res , HtmlComponents.bookTicketCard(BookTicket.class, bookTicketBean.list(BookTicket.class)));
+            try {
+                renderPage(req, res , HtmlComponents.bookTicketCard(BookTicket.class, bookTicketBean.list(BookTicket.class)));
+            } catch (NoSuchFieldException e) {
+                throw new RuntimeException(e);
+            }
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }

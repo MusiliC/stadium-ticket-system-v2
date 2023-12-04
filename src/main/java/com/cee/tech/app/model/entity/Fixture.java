@@ -2,11 +2,11 @@ package com.cee.tech.app.model.entity;
 
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
-import com.cee.tech.view.html.EticketFormField;
-import com.cee.tech.view.html.EticketHtmlCard;
-import com.cee.tech.view.html.EticketHtmlForm;
-import com.cee.tech.view.html.EticketTableColHeader;
+import com.cee.tech.view.html.*;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
 @DbTable(name = "fixtures")
@@ -16,39 +16,44 @@ public class Fixture extends BaseEntity {
     @EticketFormField(label = "Fixture Type")
     @EticketTableColHeader(headerLabel = "Fixture Type")
     @DbTableColumn(name = "fixtureType", notNull = "not null")
-    //@EticketHtmlCard(cssClass = "ticketNumber")
-//    private FixtureType fixtureType;
-    private String fixtureType;
+    @EticketFixtureCard(cssClass = "fixture")
+    private FixtureType fixtureType;
+    //private String fixtureType;
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")
     @DbTableColumn(name = "fixtureTime", notNull = "not null")
+    @EticketFixtureCard(cssClass = "timeLocation")
     private String fixtureTime;
     @EticketFormField(label = "Fixture Location")
     @EticketTableColHeader(headerLabel = "Location")
+    @EticketFixtureCard(cssClass = "timeLocation")
     @DbTableColumn(name = "fixtureLocation", notNull = "not null")
     private String fixtureLocation;
     @EticketFormField(label = "Home Team")
     @EticketTableColHeader(headerLabel = "Home Team")
     @DbTableColumn(name = "homeTeam", notNull = "not null")
+    @EticketFixtureCard(cssClass = "teams")
     private String homeTeam;
     @EticketFormField(label = "Away Team")
     @EticketTableColHeader(headerLabel = "Away Team")
     @DbTableColumn(name = "awayTeam", notNull = "not null")
+    @EticketFixtureCard(cssClass = "teams")
     private String awayTeam;
     @EticketFormField(label = "Fixture Date", fieldType = "date")
     @EticketTableColHeader(headerLabel = "Date")
     @DbTableColumn(name = "fixtureDate", notNull = "not null")
+    @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
-    @EticketTableColHeader(headerLabel = "Action")
-    private String action = "Edit";
+    @EticketTableColHeader(headerLabel = "Edit")
+    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
 
 
-    public String getFixtureType() {
+    public FixtureType getFixtureType() {
         return fixtureType;
     }
 
 
-    public Fixture(int id,String fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
+    public Fixture(int id, FixtureType fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
                    String awayTeam, String fixtureDate) {
         setId(id);
         this.fixtureType = fixtureType;
@@ -99,61 +104,38 @@ public class Fixture extends BaseEntity {
         this.fixtureLocation = fixtureLocation;
     }
 
-    public void setFixtureType(String fixtureType) {
+    public void setFixtureType(FixtureType fixtureType) {
         this.fixtureType = fixtureType;
     }
 
     public Fixture() {
     }
 
-    public String tableRow() {
-        StringBuilder tbBuilder = new StringBuilder();
-        tbBuilder.append("<div class=\"oneFixture\">");
-        tbBuilder.append("<div class=\"fixture\">");
-        // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
-        tbBuilder.append(" </div>");
-        tbBuilder.append("  <div class=\"timeLocation\">");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureLocation())).append("</p>");
-        tbBuilder.append(" </div>");
-        tbBuilder.append("<div class=\"teams\">");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getHomeTeam())).append("</p>");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getAwayTeam())).append("</p>");
-        tbBuilder.append(" </div>");
-        tbBuilder.append("<div class=\"date\">");
-        tbBuilder.append("<td>").append(StringUtils.trimToEmpty(getFixtureDate())).append("</td>");
-        tbBuilder.append(" </div>");
-        tbBuilder.append("<div class=\"ticket\">");
-        tbBuilder.append("  <div class=\"outlineTicketButton\"><a href=\"./book\">Buy Ticket</a> </div>");
-        tbBuilder.append("</div>");
-        tbBuilder.append("</div>");
-        return tbBuilder.toString();
 
-    }
-
-    public String tableAdminRow() {
-        StringBuilder tbBuilder = new StringBuilder();
-        tbBuilder.append("<div class=\"oneFixture\">");
-        tbBuilder.append("<div class=\"fixture\">");
-        // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
-        tbBuilder.append(" </div>");
-        tbBuilder.append("  <div class=\"timeLocation\">");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureDate())).append("</p>");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureLocation())).append("</p>");
-        tbBuilder.append(" </div>");
-        tbBuilder.append("<div class=\"teams\">");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getHomeTeam())).append("</p>");
-        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getAwayTeam())).append("</p>");
-        tbBuilder.append(" </div>");
-        tbBuilder.append("  <div class=\"homeButtons\">\n" +
-                "              <a href=\"./#\" class=\"homeOutlineButton\" >Edit</a>\n" +
-                "              <a href=\"./#\" class=\"homeNormalButton\">Delete</a>\n" +
-                "        </div>");
-        tbBuilder.append("</div>");
-        return tbBuilder.toString();
-
-    }
+//
+//    public String tableAdminRow() {
+//        StringBuilder tbBuilder = new StringBuilder();
+//        tbBuilder.append("<div class=\"oneFixture\">");
+//        tbBuilder.append("<div class=\"fixture\">");
+//        // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
+//        tbBuilder.append(" </div>");
+//        tbBuilder.append("  <div class=\"timeLocation\">");
+//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");
+//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureDate())).append("</p>");
+//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureLocation())).append("</p>");
+//        tbBuilder.append(" </div>");
+//        tbBuilder.append("<div class=\"teams\">");
+//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getHomeTeam())).append("</p>");
+//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getAwayTeam())).append("</p>");
+//        tbBuilder.append(" </div>");
+//        tbBuilder.append("  <div class=\"homeButtons\">\n" +
+//                "              <a href=\"./#\" class=\"homeOutlineButton\" >Edit</a>\n" +
+//                "              <a href=\"./#\" class=\"homeNormalButton\">Delete</a>\n" +
+//                "        </div>");
+//        tbBuilder.append("</div>");
+//        return tbBuilder.toString();
+//
+//    }
 
     public String getAction() {
         return action;
