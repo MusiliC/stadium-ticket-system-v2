@@ -83,12 +83,10 @@
 </c:when>
 <c:otherwise>
 
-        <h2>Login</h2>
-
         <form action="./login" method="post">
 
             <jsp:useBean id="loginFormBean" class="com.cee.tech.usebean.LoginForm"/>
-         <%--   Time to login:    <jsp:getProperty name="loginFormBean" property="timeToLogin" /> --%>
+
             <jsp:setProperty name="loginFormBean" property="usernamePlaceholder" value="Enter your username" />
 
             <br/>
