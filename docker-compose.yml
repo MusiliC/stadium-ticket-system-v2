@@ -1,27 +1,29 @@
-version: '3.3'
+version: "3"
+
 services:
-  app:
-    image: musilic/stadium-ticket-system:v2
-    expose:
-      - 8080
-    restart: always
-    depends_on:
-      - db
-
-  db:
+  mysqld:
     image: mysql:latest
+    container_name: eticket-system
     restart: always
-    expose:
-      - 3306
     environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_USERNAME: "${MYSQL_USER}"
+      MYSQL_ROOT_PASSWORD: makutano
+      MYSQL_DATABASE: eticket
+    volumes:
+      - mysql-data:/var/lib/mysql
 
+  eticket-system:
+    image: musilic/eticket-system:v1
+    ports:
+      - "8090:8090"
+    depends_on:
+      mysqld:
+        condition: service_started
+    environment:
+      MYSQL_HOST: mysqld
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: makutano
+      MYSQL_DATABASE: eticket
 
-
-
-
-
-
-
-
+volumes:
+  mysql-data:
