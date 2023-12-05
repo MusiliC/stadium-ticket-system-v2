@@ -526,8 +526,8 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="stadium.war" runtime-name="stadium.war">
-            <content sha1="c9bf6607641608d02bfb618092c19cfcaf5e3e8a"/>
-        </deployment>
+<!--        <deployment name="stadium.war" runtime-name="stadium.war">-->
+<!--            <content sha1="c9bf6607641608d02bfb618092c19cfcaf5e3e8a"/>-->
+<!--        </deployment>-->
     </deployments>
 </server>
