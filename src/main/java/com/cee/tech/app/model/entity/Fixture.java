@@ -5,43 +5,44 @@ import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.*;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
-@DbTable(name = "fixtures")
+@Entity
+@Table(name = "fixtures")
 public class Fixture extends BaseEntity {
 
 
     @EticketFormField(label = "Fixture Type")
     @EticketTableColHeader(headerLabel = "Fixture Type")
-    @DbTableColumn(name = "fixtureType", notNull = "not null")
+    @Column(name = "fixtureType")
     @EticketFixtureCard(cssClass = "fixture")
+    @Enumerated(EnumType.STRING)
     private FixtureType fixtureType;
-    //private String fixtureType;
+
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")
-    @DbTableColumn(name = "fixtureTime", notNull = "not null")
+    @Column(name = "fixtureTime")
     @EticketFixtureCard(cssClass = "timeLocation")
     private String fixtureTime;
     @EticketFormField(label = "Fixture Location")
     @EticketTableColHeader(headerLabel = "Location")
     @EticketFixtureCard(cssClass = "timeLocation")
-    @DbTableColumn(name = "fixtureLocation", notNull = "not null")
+    @Column(name = "fixtureLocation")
     private String fixtureLocation;
     @EticketFormField(label = "Home Team")
     @EticketTableColHeader(headerLabel = "Home Team")
-    @DbTableColumn(name = "homeTeam", notNull = "not null")
+    @Column(name = "homeTeam")
     @EticketFixtureCard(cssClass = "teams")
     private String homeTeam;
     @EticketFormField(label = "Away Team")
     @EticketTableColHeader(headerLabel = "Away Team")
-    @DbTableColumn(name = "awayTeam", notNull = "not null")
+    @Column(name = "awayTeam")
     @EticketFixtureCard(cssClass = "teams")
     private String awayTeam;
     @EticketFormField(label = "Fixture Date", fieldType = "date")
     @EticketTableColHeader(headerLabel = "Date")
-    @DbTableColumn(name = "fixtureDate", notNull = "not null")
+    @Column(name = "fixtureDate")
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
     @EticketTableColHeader(headerLabel = "Edit")

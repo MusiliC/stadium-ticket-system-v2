@@ -6,52 +6,56 @@ import com.cee.tech.view.html.EticketFormField;
 import com.cee.tech.view.html.EticketHtmlCard;
 import com.cee.tech.view.html.EticketHtmlForm;
 
-@DbTable(name = "bookTicket")
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "bookTicket")
 @EticketHtmlForm(label = "Ticket", url = "./book")
 public class BookTicket extends BaseEntity {
     @EticketFormField(name = "name")
-    @DbTableColumn(name = "name", notNull = "not null")
+    @Column(name = "name")
     private String name;
 
-    @DbTableColumn(name = "ticketNumber", notNull = "not null")
+    @Column(name = "ticketNumber")
     @EticketHtmlCard(cssClass = "ticketNumber")
     private String ticketNumber;
 
     @EticketHtmlCard(cssClass = "ticketFixtureType")
+    @Transient
     private String fixtureType = "CAF Champions League";
 
     @EticketHtmlCard(cssClass = "newTicketInfoDetails", pTag = "bookTicketHomeTeam")
+    @Transient
     private String homeTeam = "Gor Mahia";
     @EticketHtmlCard(cssClass = "newTicketInfoDetails", pTag = "bookTicketAwayTeam")
-    private  String awayTeam = "AFC Leopards";
+    @Transient
+    private String awayTeam = "AFC Leopards";
     @EticketFormField(name = "email")
-    @DbTableColumn(name = "email")
-
+    @Column(name = "email")
     private String email;
     @EticketFormField(label = "Phone Number", name = "phoneNumber")
-    @DbTableColumn(name = "phoneNumber", notNull = "not null")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
-    @EticketFormField(label="Ticket Type", name = "ticketType")
-    @DbTableColumn(name = "ticketType", notNull = "not null")
-   private TicketType ticketType;
-    //private String ticketType;
+    @EticketFormField(label = "Ticket Type", name = "ticketType")
+    @Column(name = "ticketType")
+    @Enumerated(EnumType.STRING)
+    private TicketType ticketType;
+
     @EticketHtmlCard(cssClass = "ticketDate")
+    @Transient
     private String date = "2023/11/11";
-    @EticketFormField(label= "Number of Tickets", fieldType = "number", name = "numberOfTickets")
-    @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
+    @EticketFormField(label = "Number of Tickets", fieldType = "number", name = "numberOfTickets")
+    //@DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
+    @Column(name = "totalTickets")
     private int numberOfTickets;
-
-
-
 
 
     public BookTicket() {
     }
 
 
-
-
-    public BookTicket(int id,String ticketNumber, String name, String email, String phoneNumber, TicketType ticketType, int numberOfTickets) {
+    public BookTicket(int id, String ticketNumber, String name, String email, String phoneNumber, TicketType ticketType, int numberOfTickets) {
         setId(id);
         this.ticketNumber = ticketNumber;
         this.name = name;

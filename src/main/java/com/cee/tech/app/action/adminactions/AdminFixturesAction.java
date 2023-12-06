@@ -25,7 +25,7 @@ public class AdminFixturesAction extends BaseActionClass {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        renderAdminPage(req, res, HtmlAdminPages.adminFixturesPage( HtmlComponents.table(Fixture.class,adminFixtureBean.list(Fixture.class) ))
+        renderAdminPage(req, res, HtmlAdminPages.adminFixturesPage( HtmlComponents.table(Fixture.class,adminFixtureBean.list(new Fixture()) ))
                 );
 
     }

@@ -7,36 +7,47 @@ import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
 import com.cee.tech.database.MySqlDatabase;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GenericDaoImpl<T> implements GenericDaoI<T> {
-    private MySqlDatabase database;
 
+    private EntityManager em;
+
+    @SuppressWarnings({"unchecked"})
     @Override
-    public List<T> list(Class<?> entity) {
-        return (List<T>) database.fetch(entity);
+    public List<T> list(Object entity) {
+        String jpql  = "FROM " + entity.getClass().getSimpleName() + " e";
+
+        List<T> results = (List<T>) em.createQuery(jpql, entity.getClass()).getResultList();
+
+        return results;
+
     }
 
     @Override
     public T fetchSingle(Class<?> entity, int id) {
-        return (T) database.fetchSingle(entity, id);
+        return null;
     }
 
     @Override
     public void addOrUpdate(T entity) {
-        database.saveOrUpdate(entity);
+        em.merge(entity);
     }
+
     @Override
     public void delete(T entity) {
 
     }
 
-    public MySqlDatabase getDatabase() {
-        return database;
+    public EntityManager getEm() {
+        return em;
     }
 
-    public void setDatabase(MySqlDatabase database) {
-        this.database = database;
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
+
+
 }

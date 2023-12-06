@@ -7,34 +7,37 @@ import com.cee.tech.view.html.EticketHtmlForm;
 import com.cee.tech.view.html.EticketTableColHeader;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-@DbTable(name = "ticketManagement")
+
+@Entity
+@Table(name = "ticketManagement")
 @EticketHtmlForm(label = "TicketManagement", url = "./adminticketpricing", httpMethod = "POST")
 public class TicketManagement extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Fixture Type")
-    @DbTableColumn(name = "fixtureType", notNull = "not null")
+    @Column(name = "fixtureType")
     @EticketFormField(label = "Fixture Type")
-    //private String fixtureType;
+    @Enumerated(EnumType.STRING)
     private FixtureType fixtureType;
     @EticketTableColHeader(headerLabel = "Total Tickets")
-    @DbTableColumn(name = "totalTickets", notNull = "not null", definition = "int")
+    @Column(name = "totalTickets")
     @EticketFormField(label = "Total Tickets Allocated: ", fieldType = "number")
     private int totalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "VIP tickets")
-    @DbTableColumn(name = "totalVip", notNull = "not null", definition = "int")
+    @Column(name = "totalVip")
     @EticketFormField(label = "Total VIP tickets: ", fieldType = "number")
     private int totalVipTicketsLocated;
     @EticketTableColHeader(headerLabel = "VIP Ticket Amount")
-    @DbTableColumn(name = "vipAmount", notNull = "not null", definition = "int")
+    @Column(name = "vipAmount")
     @EticketFormField(label = "VIP ticket amount: ", fieldType = "number")
     private int ticketAmountVIP;
     @EticketTableColHeader(headerLabel = "Normal Tickets")
-    @DbTableColumn(name = "totalNormal", notNull = "not null", definition="int")
+    @Column(name = "totalNormal")
     @EticketFormField(label = "Total Normal tickets: ", fieldType = "number")
     private int totalNormalTicketsAllocated;
     @EticketTableColHeader(headerLabel = "Normal Ticket Amount")
-    @DbTableColumn(name = "normalAmount", notNull = "not null", definition = "int")
+    @Column(name = "normalAmount")
     @EticketFormField(label = "Normal ticket amount: ", fieldType = "number")
     private int ticketAmountNormal;
 

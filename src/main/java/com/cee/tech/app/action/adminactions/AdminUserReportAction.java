@@ -19,7 +19,7 @@ public class AdminUserReportAction extends BaseActionClass {
     UserBeanI userBean;
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-        renderAdminPage(req, res, HtmlAdminPages.adminUserReport(HtmlComponents.table(User.class,userBean.list(User.class) ))
+        renderAdminPage(req, res, HtmlAdminPages.adminUserReport(HtmlComponents.table(User.class,userBean.list(new User()) ))
              );
 
         //testing for single item

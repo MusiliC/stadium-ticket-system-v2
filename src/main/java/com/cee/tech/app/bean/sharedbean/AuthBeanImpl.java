@@ -1,4 +1,5 @@
 package com.cee.tech.app.bean.sharedbean;
+import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.model.entity.Audit;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.MySqlDatabase;
@@ -15,10 +16,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Remote
 @Stateless
-public class AuthBeanImpl implements Serializable, AuthBeanI {
+public class AuthBeanImpl extends GenericBeanImpl<User> implements Serializable, AuthBeanI {
 
     @EJB
     MySqlDatabase mySqlDatabase;
@@ -37,29 +39,17 @@ public class AuthBeanImpl implements Serializable, AuthBeanI {
             throw new RuntimeException(ex.getMessage());
         }
 
+        List<User> users = list(loginUser);
 
-        String sqlQuery = "select id,username from users where username = ? and password = ? limit 1";
+        if (users.isEmpty() || users.get(0) == null)
+            throw new RuntimeException("Invalid user!!");
 
-
-        PreparedStatement sqlStmt =mySqlDatabase.getConnection().prepareStatement(sqlQuery);
-
-        sqlStmt.setString(1, loginUser.getUsername());
-        sqlStmt.setString(2, loginUser.getPassword());
-
-        User user = new User();
-
-        ResultSet result = sqlStmt.executeQuery();
-
-        while (result.next()){
-            user.setId(result.getInt("id"));
-            user.setUsername(result.getString("username"));
-        }
 
         Audit log = new Audit();
-        log.setLogdetails("User logged in at: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + user.getUsername());
+        log.setLogdetails("User logged in at: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + users.get(0).getUsername());
 
         logger.fire(log);
 
-        return user;
+        return users.get(0);
     }
 }
