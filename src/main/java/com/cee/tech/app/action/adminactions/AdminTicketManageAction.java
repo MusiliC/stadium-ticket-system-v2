@@ -35,7 +35,7 @@ public class AdminTicketManageAction extends BaseActionClass {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        renderAdminPage(req, res, HtmlAdminPages.adminTicketManageListPage(HtmlComponents.table(TicketManagement.class, adminTicketManagementBean.list(TicketManagement.class)))
+        renderAdminPage(req, res, HtmlAdminPages.adminTicketManageListPage(HtmlComponents.table(TicketManagement.class, adminTicketManagementBean.list(new TicketManagement())))
         );
 
     }

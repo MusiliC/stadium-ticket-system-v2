@@ -5,6 +5,7 @@ import com.cee.tech.app.model.entity.Audit;
 import com.cee.tech.app.model.entity.BookTicket;
 import com.cee.tech.utils.TicketNumber;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -22,6 +23,11 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
     @Inject
     private Event<Audit> logger;
+
+    @PostConstruct
+    public void init(){
+        System.out.println("Bean has bean created!!");
+    }
 
 
     @Override

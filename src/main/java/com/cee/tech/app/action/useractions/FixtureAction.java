@@ -33,7 +33,7 @@ public class FixtureAction extends BaseActionClass {
             System.out.println(developer);
         try {
             renderPage(req, res, HtmlUserPages.titleHeader("Upcoming Fixtures") +
-                    HtmlComponents.fixtureCard(Fixture.class, fixtureBean.list(Fixture.class)) +
+                    HtmlComponents.fixtureCard(Fixture.class, fixtureBean.list(new Fixture())) +
                     HtmlUserPages.titleClosingTags()
             );
         } catch (IllegalAccessException e) {

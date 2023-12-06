@@ -6,23 +6,32 @@ import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketTableColHeader;
 import com.cee.tech.view.html.TableActions;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-@DbTable(name = "users")
+//@DbTable(name = "users")
+@Entity
+@Table(name = "users")
 public class User extends BaseEntity {
 
-    @DbTableColumn(name = "username", notNull = "not null")
+
     @EticketTableColHeader(headerLabel = "Username")
+    @Column(name = "username")
     private String username;
-    @DbTableColumn(name = "password", notNull = "not null")
+
+    @Column(name = "password")
     private String password;
     private String confirmPassword;
 
 
-    @DbTableColumn(name = "normalTickets", definition = "int")
+
     @EticketTableColHeader(headerLabel = "Normal Ticket")
+    @Column(name = "normalTickets")
     private int normalTickets = 0;
-    @DbTableColumn(name = "vipTickets", definition = "int")
+
+   @Column(name = "vipTickets")
     @EticketTableColHeader(headerLabel = "VIP Ticket")
     private int vipTickets = 0;
 

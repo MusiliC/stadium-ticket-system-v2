@@ -33,7 +33,7 @@ public class TicketAction extends BaseActionClass {
         System.out.println(userCookie.getValue());
         try {
             try {
-                renderPage(req, res , HtmlComponents.bookTicketCard(BookTicket.class, bookTicketBean.list(BookTicket.class)));
+                renderPage(req, res , HtmlComponents.bookTicketCard(BookTicket.class, bookTicketBean.list(new BookTicket())));
             } catch (NoSuchFieldException e) {
                 throw new RuntimeException(e);
             }
