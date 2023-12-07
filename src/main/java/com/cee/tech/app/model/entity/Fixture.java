@@ -114,5 +114,15 @@ public class Fixture extends BaseEntity {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Fixture{" +
+                "fixtureType=" + fixtureType +
+                ", fixtureTime='" + fixtureTime + '\'' +
+                ", fixtureLocation='" + fixtureLocation + '\'' +
+                ", homeTeam='" + homeTeam + '\'' +
+                ", awayTeam='" + awayTeam + '\'' +
+                ", fixtureDate='" + fixtureDate + '\'' +
+                '}';
+    }
 }
