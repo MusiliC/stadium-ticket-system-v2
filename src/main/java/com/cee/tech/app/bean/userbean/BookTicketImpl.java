@@ -39,7 +39,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
 
     @Override
-    public void addOrUpdate(BookTicket bookTicket) {
+    public BookTicket addOrUpdate(BookTicket bookTicket) {
 
         if(bookTicket == null)
             throw  new RuntimeException("Invalid ticket details");
@@ -55,13 +55,15 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
         bookTicket.setUser(user);
 
         bookTicket.setTicketNumber(ticketNumberGenerator.generate());
-        getDao().addOrUpdate(bookTicket);
 
         //firing event to send an email
         Audit log = new Audit();
         log.setLogdetails("Confirmed you booked ticket: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + bookTicket.getEmail());
 
         logger.fire(log);
+
+        return getDao().addOrUpdate(bookTicket);
+
     }
 
     @Override

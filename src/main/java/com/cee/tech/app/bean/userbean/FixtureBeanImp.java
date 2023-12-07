@@ -18,7 +18,7 @@ import java.util.List;
 public class FixtureBeanImp extends GenericBeanImpl<Fixture> implements FixtureBeanI, Serializable {
 
     @Override
-    public void addOrUpdate(Fixture fixture) {
-        getDao().addOrUpdate(fixture);
+    public Fixture addOrUpdate(Fixture fixture) {
+       return getDao().addOrUpdate(fixture);
     }
 }
