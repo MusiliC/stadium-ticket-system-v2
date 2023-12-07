@@ -7,6 +7,7 @@ import com.cee.tech.view.html.EticketTableColHeader;
 import com.cee.tech.view.html.TableActions;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 //@DbTable(name = "users")
 @Entity
 @Table(name = "users")
+
 public class User extends BaseEntity {
 
 
@@ -26,18 +28,19 @@ public class User extends BaseEntity {
     private String confirmPassword;
 
 
-
     @EticketTableColHeader(headerLabel = "Normal Ticket")
     @Column(name = "normalTickets")
     private int normalTickets = 0;
 
-   @Column(name = "vipTickets")
+    @Column(name = "vipTickets")
     @EticketTableColHeader(headerLabel = "VIP Ticket")
     private int vipTickets = 0;
 
-    @EticketTableColHeader(headerLabel = "Actions")
-    @TableActions(actions = "Edit")
-    private String actions;
+//    @EticketTableColHeader(headerLabel = "Actions")
+//    @TableActions(actions = "Edit")
+//    private String actions;
+
+    private BookTicket bookTicket;
 
 
     public int getNormalTickets() {
@@ -99,15 +102,5 @@ public class User extends BaseEntity {
     }
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
-                ", normalTickets=" + normalTickets +
-                ", vipTickets=" + vipTickets +
-                ", actions='" + actions + '\'' +
-                '}';
-    }
+
 }
