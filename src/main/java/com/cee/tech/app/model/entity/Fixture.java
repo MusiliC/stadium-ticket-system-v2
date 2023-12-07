@@ -45,8 +45,9 @@ public class Fixture extends BaseEntity {
     @Column(name = "fixtureDate")
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
-    @EticketTableColHeader(headerLabel = "Edit")
-    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
+//    @EticketTableColHeader(headerLabel = "Edit")
+//    @Transient
+//    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
 
 
     public FixtureType getFixtureType() {
@@ -113,37 +114,15 @@ public class Fixture extends BaseEntity {
     }
 
 
-//
-//    public String tableAdminRow() {
-//        StringBuilder tbBuilder = new StringBuilder();
-//        tbBuilder.append("<div class=\"oneFixture\">");
-//        tbBuilder.append("<div class=\"fixture\">");
-//        // tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureType())).append("</p>");
-//        tbBuilder.append(" </div>");
-//        tbBuilder.append("  <div class=\"timeLocation\">");
-//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureTime())).append("</p>");
-//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureDate())).append("</p>");
-//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getFixtureLocation())).append("</p>");
-//        tbBuilder.append(" </div>");
-//        tbBuilder.append("<div class=\"teams\">");
-//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getHomeTeam())).append("</p>");
-//        tbBuilder.append("<p>").append(StringUtils.trimToEmpty(getAwayTeam())).append("</p>");
-//        tbBuilder.append(" </div>");
-//        tbBuilder.append("  <div class=\"homeButtons\">\n" +
-//                "              <a href=\"./#\" class=\"homeOutlineButton\" >Edit</a>\n" +
-//                "              <a href=\"./#\" class=\"homeNormalButton\">Delete</a>\n" +
-//                "        </div>");
-//        tbBuilder.append("</div>");
-//        return tbBuilder.toString();
-//
-//    }
-
-    public String getAction() {
-        return action;
+    @Override
+    public String toString() {
+        return "Fixture{" +
+                "fixtureType=" + fixtureType +
+                ", fixtureTime='" + fixtureTime + '\'' +
+                ", fixtureLocation='" + fixtureLocation + '\'' +
+                ", homeTeam='" + homeTeam + '\'' +
+                ", awayTeam='" + awayTeam + '\'' +
+                ", fixtureDate='" + fixtureDate + '\'' +
+                '}';
     }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
-
 }

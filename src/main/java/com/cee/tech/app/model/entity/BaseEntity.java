@@ -12,9 +12,7 @@ import java.io.Serializable;
 
 @MappedSuperclass
 public class BaseEntity implements Serializable {
-//    @EticketTableColHeader(headerLabel = "id")
-//    @DBTableId
-//    @DbTableColumn(name = "id", definition = "int", primaryKey = "primary key", notNull = "not null")
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
