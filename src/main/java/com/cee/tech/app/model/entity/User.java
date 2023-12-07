@@ -6,11 +6,10 @@ import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketTableColHeader;
 import com.cee.tech.view.html.TableActions;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 //@DbTable(name = "users")
 @Entity
@@ -35,6 +34,9 @@ public class User extends BaseEntity {
     @Column(name = "vipTickets")
     @EticketTableColHeader(headerLabel = "VIP Ticket")
     private int vipTickets = 0;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<BookTicket> myTickets = new ArrayList<>();
 
 //    @EticketTableColHeader(headerLabel = "Actions")
 //    @TableActions(actions = "Edit")

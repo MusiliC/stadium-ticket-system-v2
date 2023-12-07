@@ -6,6 +6,7 @@ import com.cee.tech.view.html.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
+import java.util.List;
 
 @EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
 @Entity
@@ -45,6 +46,8 @@ public class Fixture extends BaseEntity {
     @Column(name = "fixtureDate")
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
+
+
 //    @EticketTableColHeader(headerLabel = "Edit")
 //    @Transient
 //    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
