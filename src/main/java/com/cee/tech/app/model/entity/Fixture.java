@@ -47,10 +47,14 @@ public class Fixture extends BaseEntity {
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
 
+    @OneToOne
+    @JoinColumn(name="fixture_desc")
+    private TicketManagement ticketManagement;
 
-//    @EticketTableColHeader(headerLabel = "Edit")
-//    @Transient
-//    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
+
+    @EticketTableColHeader(headerLabel = "Edit")
+    @Transient
+    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
 
 
     public FixtureType getFixtureType() {

@@ -58,7 +58,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         //firing event to send an email
         Audit log = new Audit();
-        log.setLogdetails("Confirmed you booked ticket: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + bookTicket.getEmail());
+        log.setLogdetails("Confirmed you booked ticket: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + bookTicket.getTicketNumber());
 
         logger.fire(log);
 

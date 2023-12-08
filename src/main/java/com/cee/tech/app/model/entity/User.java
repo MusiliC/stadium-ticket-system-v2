@@ -39,11 +39,18 @@ public class User extends BaseEntity {
     private List<BookTicket> myTickets = new ArrayList<>();
 
 //    @EticketTableColHeader(headerLabel = "Actions")
+    // @Transient
 //    @TableActions(actions = "Edit")
 //    private String actions;
 
-    private BookTicket bookTicket;
 
+    public List<BookTicket> getMyTickets() {
+        return myTickets;
+    }
+
+    public void setMyTickets(List<BookTicket> myTickets) {
+        this.myTickets = myTickets;
+    }
 
     public int getNormalTickets() {
         return normalTickets;
