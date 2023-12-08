@@ -38,9 +38,10 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<BookTicket> myTickets = new ArrayList<>();
 
-//    @EticketTableColHeader(headerLabel = "Actions")
-//    @TableActions(actions = "Edit")
-//    private String actions;
+    @EticketTableColHeader(headerLabel = "Actions")
+    @TableActions(actions = "Edit")
+    @Transient
+    private String actions;
 
     private BookTicket bookTicket;
 

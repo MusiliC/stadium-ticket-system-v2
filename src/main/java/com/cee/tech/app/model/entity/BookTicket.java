@@ -21,9 +21,7 @@ public class BookTicket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticketId")
     private int ticketId;
-    @EticketFormField(name = "name")
-    @Column(name = "name")
-    private String name;
+
 
     @Column(name = "ticketNumber")
     @EticketHtmlCard(cssClass = "ticketNumber")
@@ -39,12 +37,8 @@ public class BookTicket implements Serializable {
     @EticketHtmlCard(cssClass = "newTicketInfoDetails", pTag = "bookTicketAwayTeam")
     @Transient
     private String awayTeam = "AFC Leopards";
-    @EticketFormField(name = "email")
-    @Column(name = "email")
-    private String email;
-    @EticketFormField(label = "Phone Number", name = "phoneNumber")
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
+
+
     @EticketFormField(label = "Ticket Type", name = "ticketType")
     @Column(name = "ticketType")
     @Enumerated(EnumType.STRING)
@@ -64,9 +58,9 @@ public class BookTicket implements Serializable {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ticket_desc", nullable=false)
-    private TicketManagement ticketManagement;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="ticket_desc", nullable=false)
+//    private TicketManagement ticketManagement;
 
     @Formula("ticketId")
     @EticketFormField(label = "User id", fieldType = "number", name = "userId")
@@ -80,12 +74,9 @@ public class BookTicket implements Serializable {
     public BookTicket() {
     }
 
-    public BookTicket(int ticketId, String name, String ticketNumber, String email, String phoneNumber, TicketType ticketType, int totalTickets) {
+    public BookTicket(int ticketId, String ticketNumber, TicketType ticketType, int totalTickets) {
         this.ticketId = ticketId;
-        this.name = name;
         this.ticketNumber = ticketNumber;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
         this.ticketType = ticketType;
         this.totalTickets = totalTickets;
     }
@@ -99,13 +90,6 @@ public class BookTicket implements Serializable {
         this.ticketId = ticketId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getTicketNumber() {
         return ticketNumber;
@@ -137,22 +121,6 @@ public class BookTicket implements Serializable {
 
     public void setAwayTeam(String awayTeam) {
         this.awayTeam = awayTeam;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public TicketType getTicketType() {
