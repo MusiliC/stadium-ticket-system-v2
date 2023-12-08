@@ -58,10 +58,6 @@ public class BookTicket implements Serializable {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ticket_desc", nullable=false)
-    private TicketManagement ticketManagement;
-
     @Formula("ticketId")
     @EticketFormField(label = "User id", fieldType = "number", name = "userId")
     private int userId;

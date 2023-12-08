@@ -27,7 +27,7 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
         String simpleName = entity.getClass().getSimpleName();
 
         String tAlias = (simpleName.charAt(0) + "_").toLowerCase();
-        String jpql = "FROM " + entity.getClass().getSimpleName() + " " + tAlias;
+        String jpql  = "FROM " + entity.getClass().getSimpleName() + " " + tAlias;
 
         StringBuilder whereClause = new StringBuilder();
         Map<String, Object> whereParams = new HashMap<>();
@@ -68,7 +68,7 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
         TypedQuery<T> query = (TypedQuery<T>) em.createQuery(jpql, entity.getClass());
 
         for (Map.Entry<String, Object> entry : whereParams.entrySet()) {
-            System.out.println("param Name: " + entry.getKey() + " = " + entry.getValue());
+            System.out.println("param Name: " + entry.getKey() + " = " + entry.getValue() );
             query = query.setParameter(entry.getKey(), entry.getValue());
         }
 
@@ -83,8 +83,8 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
     }
 
     @Override
-    public T addOrUpdate(T entity) {
-        return em.merge(entity);
+    public void addOrUpdate(T entity) {
+        em.merge(entity);
     }
 
     @Override

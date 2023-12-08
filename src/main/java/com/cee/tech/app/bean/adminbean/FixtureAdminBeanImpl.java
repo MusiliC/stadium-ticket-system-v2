@@ -23,16 +23,14 @@ public class FixtureAdminBeanImpl extends GenericBeanImpl<Fixture> implements Fi
     private Event<Audit> logger;
 
     @Override
-    public Fixture addOrUpdate(Fixture fixture) {
+    public void addOrUpdate(Fixture fixture) {
+
+        getDao().addOrUpdate(fixture);
 
         Audit log = new Audit();
         log.setLogdetails("Fixture created at: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + fixture.getFixtureLocation());
 
         logger.fire(log);
-
-       return getDao().addOrUpdate(fixture);
-
-
     }
 
 

@@ -11,7 +11,7 @@ public interface GenericDaoI <T> extends Serializable {
     List<T> list(Object entity);
 
     T fetchSingle(Class<?> entity, int id);
-     T addOrUpdate(T entity);
+    void addOrUpdate(T entity);
 
     void delete(T entity);
 

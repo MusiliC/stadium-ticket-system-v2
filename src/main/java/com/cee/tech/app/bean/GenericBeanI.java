@@ -9,7 +9,7 @@ public interface GenericBeanI<T> extends Serializable {
 
     T selectSingle(Class<?> entity, int id);
 
-     T addOrUpdate(T entity);
+     void addOrUpdate(T entity);
 
     T delete(Class<?> entity, int id);
 }

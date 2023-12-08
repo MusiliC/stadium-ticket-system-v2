@@ -15,8 +15,8 @@ public class AdminTicketManagementBeanImpl extends GenericBeanImpl<TicketManagem
     @PersistenceContext
     EntityManager em;
     @Override
-    public TicketManagement addOrUpdate(TicketManagement ticketManagement){
-       return getDao().addOrUpdate(ticketManagement);
+    public void addOrUpdate(TicketManagement ticketManagement){
+        getDao().addOrUpdate(ticketManagement);
     }
 
     @Override
