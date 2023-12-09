@@ -47,6 +47,10 @@ public class BookTicket implements Serializable {
     @EticketHtmlCard(cssClass = "ticketDate")
     @Transient
     private String date = "2023/11/11";
+
+    @EticketHtmlCard(cssClass = "ticketFixtureType")
+    @Formula("(select u.username from users u where u.id = user_id)")
+    private String ticketOwner;
     @EticketFormField(label = "Number of Tickets", fieldType = "number", name = "totalTickets")
     @Column(name = "totalTickets")
     private int totalTickets;
@@ -153,6 +157,14 @@ public class BookTicket implements Serializable {
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
+    }
+
+    public String getTicketOwner() {
+        return ticketOwner;
+    }
+
+    public void setTicketOwner(String ticketOwner) {
+        this.ticketOwner = ticketOwner;
     }
 
     public User getUser() {

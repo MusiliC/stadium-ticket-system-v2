@@ -2,6 +2,7 @@ package com.cee.tech.app.bean.sharedbean;
 
 import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.bean.userbean.UserBeanI;
+import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
 import com.cee.tech.database.Database;
 import com.cee.tech.database.MySqlDatabase;
@@ -12,6 +13,8 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,6 +27,8 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
     @Inject
     private HashText hashText;
 
+    @PersistenceContext
+    EntityManager em;
 
 
     @Override
@@ -52,6 +57,11 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
         return false;
 
     };
+
+    @Override
+    public List<User> list(Object entity) {
+        return em.createQuery("FROM User u",User.class).getResultList() ;
+    }
 
     @Override
     public boolean unregisterUser(User user) {

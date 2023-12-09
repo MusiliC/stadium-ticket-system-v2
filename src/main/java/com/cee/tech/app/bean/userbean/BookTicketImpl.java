@@ -43,8 +43,6 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
     @Override
     public BookTicket addOrUpdate(BookTicket bookTicket) {
 
-
-
         if (bookTicket == null)
             throw new RuntimeException("Invalid ticket details");
 
@@ -69,14 +67,16 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
         if(bookTicket.getTicketType().equals(TicketType.VIP)) {
             int newVipTicketCount = user.getVipTickets() + bookTicket.getTotalTickets();
             user.setVipTickets(newVipTicketCount);
-            userBeanI.addOrUpdate(user);
+            bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
 
         if(bookTicket.getTicketType().equals(TicketType.NORMAL)) {
             int newNormalTicketCount = user.getNormalTickets() + bookTicket.getTotalTickets();
             user.setNormalTickets(newNormalTicketCount);
-            userBeanI.addOrUpdate(user);
+            bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
+
+        getDao().getEm().flush();
 
         return getDao().addOrUpdate(bookTicket);
 

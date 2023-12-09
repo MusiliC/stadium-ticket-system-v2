@@ -24,6 +24,7 @@ public class User extends BaseEntity {
 
     @Column(name = "password")
     private String password;
+    @Transient
     private String confirmPassword;
 
 
@@ -36,14 +37,13 @@ public class User extends BaseEntity {
     private int vipTickets = 0;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Column(name = "myTickets")
     private List<BookTicket> myTickets = new ArrayList<>();
 
     @EticketTableColHeader(headerLabel = "Actions")
     @TableActions(actions = "Edit")
     @Transient
     private String actions;
-
-    private BookTicket bookTicket;
 
 
     public int getNormalTickets() {
@@ -105,5 +105,23 @@ public class User extends BaseEntity {
     }
 
 
+    public List<BookTicket> getMyTickets() {
+        return myTickets;
+    }
 
+    public void setMyTickets(List<BookTicket> myTickets) {
+        this.myTickets = myTickets;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", normalTickets=" + normalTickets +
+                ", vipTickets=" + vipTickets +
+//                ", myTickets=" + myTickets +
+                '}';
+    }
 }

@@ -47,7 +47,7 @@ public class HtmlComponents implements Serializable {
                     continue;
                 field.setAccessible(true);
                 try {
-                    tbBuilder.append("<td><a href=\"example.html\">").append(field.get(model)).append("</a></td>");
+                    tbBuilder.append("<td ><a href=\"example.html\">").append(field.get(model)).append("</a></td>");
 
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);

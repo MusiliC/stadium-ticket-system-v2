@@ -10,7 +10,10 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,8 +25,10 @@ import java.util.List;
 @Stateless
 public class AuthBeanImpl extends GenericBeanImpl<User> implements Serializable, AuthBeanI {
 
-    @EJB
-    MySqlDatabase mySqlDatabase;
+
+
+    @PersistenceContext
+    EntityManager em;
 
     @Inject
     private HashText hashText;
@@ -33,23 +38,36 @@ public class AuthBeanImpl extends GenericBeanImpl<User> implements Serializable,
     private Event<Audit> logger;
     public User authenticateUser(User loginUser) throws SQLException {
 
+//        try {
+//            loginUser.setPassword(hashText.hash(loginUser.getPassword()));
+//        } catch (Exception ex){
+//            throw new RuntimeException(ex.getMessage());
+//        }
+//
+//        System.out.println("***************Login User ***************" + loginUser);
+//
+//
+//        List<User> users = list(loginUser);
+
         try {
             loginUser.setPassword(hashText.hash(loginUser.getPassword()));
-        } catch (Exception ex){
-            throw new RuntimeException(ex.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
 
-        List<User> users = list(loginUser);
+        User userLoggedIn =  em.createQuery("FROM User u WHERE u.password=:password AND u.username=:username", User.class)
+                .setParameter("password", loginUser.getPassword())
+                .setParameter("username", loginUser.getUsername()).getSingleResult();
 
-        if (users.isEmpty() || users.get(0) == null)
+        if (userLoggedIn == null)
             throw new RuntimeException("Invalid user!!");
 
 
         Audit log = new Audit();
-        log.setLogdetails("User logged in at: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + users.get(0).getUsername());
+        log.setLogdetails("User logged in at: " + DateFormat.getDateTimeInstance().format(new Date()) + ", " + userLoggedIn.getUsername());
 
         logger.fire(log);
 
-        return users.get(0);
+        return userLoggedIn;
     }
 }

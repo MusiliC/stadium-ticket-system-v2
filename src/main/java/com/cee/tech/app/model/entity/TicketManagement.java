@@ -47,6 +47,9 @@ public class TicketManagement extends BaseEntity {
     @Formula("(coalesce(totalNormal,0) * coalesce(normalAmount,0))")
     private int normalRevenue;
 
+    @OneToOne(mappedBy="ticketManagement")
+    private Fixture fixture;
+
 //    @EticketTableColHeader(headerLabel = "Edit")
 //    @Transient
 //    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
