@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -111,6 +112,18 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
             bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
 
+        //testing native query
+        List<Object []> tickets = getDao().nativeQuery("select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
+                " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id");
+
+        for (Object [] ticket: tickets){
+            System.out.println();
+            System.out.println("*********************************");
+            System.out.println(Arrays.toString(ticket));
+            System.out.println();
+            System.out.println("*********************************");
+        }
+
         getDao().getEm().flush();
 
         return getDao().addOrUpdate(bookTicket);
@@ -133,5 +146,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
     //static id
         return em.createQuery("FROM BookTicket t WHERE t.user.id = 17", BookTicket.class).getResultList();
     }
+
+
 
 }

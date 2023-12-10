@@ -1,11 +1,5 @@
 package com.cee.tech.dao;
 
-import com.cee.tech.app.bean.GenericBeanI;
-import com.cee.tech.app.model.entity.Fixture;
-import com.cee.tech.app.model.entity.TicketManagement;
-import com.cee.tech.app.model.entity.User;
-import com.cee.tech.database.Database;
-import com.cee.tech.database.MySqlDatabase;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
@@ -73,8 +67,11 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
         }
 
         return query.getResultList();
+    }
 
-
+    @Override
+    public List<Object[]> nativeQuery(String sql) {
+        return getEm().createNativeQuery(sql).getResultList();
     }
 
     @Override
@@ -88,9 +85,12 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
     }
 
     @Override
-    public void delete(T entity) {
-
+    public void delete(Class<?> klass,int id) {
+            Object record = em.find(klass, id);
+            if(record != null)
+                em.remove(record);
     }
+
 
     public EntityManager getEm() {
         return em;

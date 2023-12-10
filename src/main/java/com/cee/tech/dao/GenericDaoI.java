@@ -10,10 +10,14 @@ public interface GenericDaoI <T> extends Serializable {
 
     List<T> list(Object entity);
 
+    List<Object[]> nativeQuery(String sql);
+
     T fetchSingle(Class<?> entity, int id);
      T addOrUpdate(T entity);
 
-    void delete(T entity);
+    void delete(Class<?> klass, int id);
+
+
 
     EntityManager getEm();
 
