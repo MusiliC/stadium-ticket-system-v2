@@ -11,11 +11,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 
+@NamedQueries({
+        @NamedQuery(name = BookTicket.bookTicketFindUserById,query = "FROM BookTicket t WHERE t.user.id = 17"),
+//        @NamedQuery(name = BookTicket.SelectTicketsWithFixture, query = "select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
+//                " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id"),
+//        @NamedQuery(name = BookTicket.selectTicketDescWithBookTicket, query= "select t.ticketNumber, f.fixtureType,d.totalTickets from bookTicket t left " +
+//                " join fixtures f  on t.ticket_fixture_desc = f.id  join ticketManagement d on f.fixture_desc_id = d.id")
+})
 @Entity
 @Table(name = "bookTicket")
 //@AttributeOverride(name = "id", column = @Column(name = "ticketId"))
 @EticketHtmlForm(label = "Ticket", url = "./book")
 public class BookTicket implements Serializable {
+
+    public static final String bookTicketFindUserById = "BookTicket.bookTicketFindUserById";
+    public static final String SelectTicketsWithFixture= "BookTicket.selectTicketsWithFixture";
+    public static final String selectTicketDescWithBookTicket = "BookTicket.selectTicketDescWithBookTicket";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

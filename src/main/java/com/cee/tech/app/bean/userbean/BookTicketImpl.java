@@ -139,12 +139,12 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 //                )
 //        })
 
-//        return em.createQuery("FROM BookTicket t WHERE t.user.id = :userId", BookTicket.class)
+//        return em.createNamedQuery("BookTicket.findByUserId", BookTicket.class)
 //                .setParameter("userId", user.getId())
 //                .getResultList();
 
     //static id
-        return em.createQuery("FROM BookTicket t WHERE t.user.id = 17", BookTicket.class).getResultList();
+        return em.createNamedQuery(BookTicket.bookTicketFindUserById, BookTicket.class).getResultList();
     }
 
     //query to join bookTicket with ticketDesc through fixture table
