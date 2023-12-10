@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
@@ -55,6 +56,9 @@ public class Fixture extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "fixture_desc_id")
     private TicketManagement ticketManagement;
+
+    @OneToMany(mappedBy = "fixture")
+    private List<BookTicket> fixtureTickets = new ArrayList<>();
 
 
 //    @EticketTableColHeader(headerLabel = "Edit")
@@ -141,9 +145,18 @@ public class Fixture extends BaseEntity {
         this.fixtureDescId = fixtureDescId;
     }
 
+    public List<BookTicket> getFixtureTickets() {
+        return fixtureTickets;
+    }
+
+    public void setFixtureTickets(List<BookTicket> fixtureTickets) {
+        this.fixtureTickets = fixtureTickets;
+    }
+
     @Override
     public String toString() {
         return "Fixture{" +
+                "fixture id = " + getId() +
                 "fixtureType=" + fixtureType +
                 ", fixtureTime='" + fixtureTime + '\'' +
                 ", fixtureLocation='" + fixtureLocation + '\'' +

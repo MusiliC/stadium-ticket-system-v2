@@ -62,13 +62,17 @@ public class BookTicket implements Serializable {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="ticket_desc", nullable=false)
-//    private TicketManagement ticketManagement;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ticket_fixture_desc", nullable=false)
+    private Fixture fixture;
 
     @Formula("ticketId")
     @EticketFormField(label = "User id", fieldType = "number", name = "userId")
     private int userId;
+
+    @EticketFormField(label = "Fixture id", fieldType = "number", name = "fixtureId")
+    @Transient
+    private int fixtureId;
 
 
 //    @Formula("(select u.name from users u where u.id=id)")
@@ -181,5 +185,21 @@ public class BookTicket implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public Fixture getFixture() {
+        return fixture;
+    }
+
+    public void setFixture(Fixture fixture) {
+        this.fixture = fixture;
+    }
+
+    public int getFixtureId() {
+        return fixtureId;
+    }
+
+    public void setFixtureId(int fixtureId) {
+        this.fixtureId = fixtureId;
     }
 }
