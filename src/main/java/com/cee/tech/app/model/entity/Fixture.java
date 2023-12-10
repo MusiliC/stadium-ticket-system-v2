@@ -4,6 +4,7 @@ import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.*;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.List;
@@ -46,6 +47,10 @@ public class Fixture extends BaseEntity {
     @Column(name = "fixtureDate")
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
+
+    @Transient
+    @EticketFormField(label = "Fixture desc id", fieldType = "number", name = "fixtureDescId")
+    private int fixtureDescId;
 
     @OneToOne
     @JoinColumn(name = "fixture_desc_id")
@@ -128,6 +133,13 @@ public class Fixture extends BaseEntity {
     public Fixture() {
     }
 
+    public int getFixtureDescId() {
+        return fixtureDescId;
+    }
+
+    public void setFixtureDescId(int fixtureDescId) {
+        this.fixtureDescId = fixtureDescId;
+    }
 
     @Override
     public String toString() {

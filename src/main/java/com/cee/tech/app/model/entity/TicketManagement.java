@@ -47,7 +47,7 @@ public class TicketManagement extends BaseEntity {
     @Formula("(coalesce(totalNormal,0) * coalesce(normalAmount,0))")
     private int normalRevenue;
 
-    @OneToOne(mappedBy="ticketManagement")
+    @OneToOne(mappedBy="ticketManagement", cascade = CascadeType.ALL)
     private Fixture fixture;
 
 //    @EticketTableColHeader(headerLabel = "Edit")
@@ -111,6 +111,30 @@ public class TicketManagement extends BaseEntity {
 
     public void setNormalAmount(int normalAmount) {
         this.normalAmount = normalAmount;
+    }
+
+    public int getVipRevenue() {
+        return vipRevenue;
+    }
+
+    public void setVipRevenue(int vipRevenue) {
+        this.vipRevenue = vipRevenue;
+    }
+
+    public int getNormalRevenue() {
+        return normalRevenue;
+    }
+
+    public void setNormalRevenue(int normalRevenue) {
+        this.normalRevenue = normalRevenue;
+    }
+
+    public Fixture getFixture() {
+        return fixture;
+    }
+
+    public void setFixture(Fixture fixture) {
+        this.fixture = fixture;
     }
 
     public TicketManagement() {
