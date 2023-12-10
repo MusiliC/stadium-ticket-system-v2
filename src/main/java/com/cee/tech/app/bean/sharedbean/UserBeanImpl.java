@@ -76,5 +76,4 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
     }
 
 
-
 }

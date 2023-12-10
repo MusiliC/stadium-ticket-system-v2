@@ -38,16 +38,6 @@ public class AuthBeanImpl extends GenericBeanImpl<User> implements Serializable,
     private Event<Audit> logger;
     public User authenticateUser(User loginUser) throws SQLException {
 
-//        try {
-//            loginUser.setPassword(hashText.hash(loginUser.getPassword()));
-//        } catch (Exception ex){
-//            throw new RuntimeException(ex.getMessage());
-//        }
-//
-//        System.out.println("***************Login User ***************" + loginUser);
-//
-//
-//        List<User> users = list(loginUser);
 
         try {
             loginUser.setPassword(hashText.hash(loginUser.getPassword()));

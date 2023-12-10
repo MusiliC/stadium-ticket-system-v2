@@ -84,7 +84,19 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
     @Override
     public List<BookTicket> list(Object entity) {
-        return em.createQuery("FROM BookTicket t", BookTicket.class).getResultList();
+//        @NamedQueries({
+//                @NamedQuery(
+//                        name = "BookTicket.findByUserId",
+//                        query = "SELECT t FROM BookTicket t WHERE t.user.id = :userId"
+//                )
+//        })
+
+//        return em.createQuery("FROM BookTicket t WHERE t.user.id = :userId", BookTicket.class)
+//                .setParameter("userId", user.getId())
+//                .getResultList();
+
+    //static id
+        return em.createQuery("FROM BookTicket t WHERE t.user.id = 17", BookTicket.class).getResultList();
     }
 
 }

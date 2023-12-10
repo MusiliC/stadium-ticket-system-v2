@@ -37,7 +37,6 @@ public class User extends BaseEntity {
     private int vipTickets = 0;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @Column(name = "myTickets")
     private List<BookTicket> myTickets = new ArrayList<>();
 
     @EticketTableColHeader(headerLabel = "Actions")
