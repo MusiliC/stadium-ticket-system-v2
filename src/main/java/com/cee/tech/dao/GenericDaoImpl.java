@@ -76,7 +76,7 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
 
     @Override
     public T fetchSingle(Class<?> entity, int id) {
-        return null;
+        return (T) em.find(entity, id);
     }
 
     @Override
@@ -85,10 +85,10 @@ public class GenericDaoImpl<T> implements GenericDaoI<T> {
     }
 
     @Override
-    public void delete(Class<?> klass,int id) {
-            Object record = em.find(klass, id);
-            if(record != null)
-                em.remove(record);
+    public void delete(Class<?> klass, int id) {
+        Object record = em.find(klass, id);
+        if (record != null)
+            em.remove(record);
     }
 
 

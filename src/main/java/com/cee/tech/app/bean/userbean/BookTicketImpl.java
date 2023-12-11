@@ -69,8 +69,10 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
         if (user == null)
             throw new RuntimeException("Invalid user details");
 
+
         if (fixture == null)
             throw new RuntimeException("Invalid fixture details");
+
 
         //calling ticket desc
 //        TicketManagement ticketManagementDesc = getDao().getEm().find(TicketManagement.class,fixture.getFixtureDescId());
@@ -143,7 +145,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 //                .setParameter("userId", user.getId())
 //                .getResultList();
 
-    //static id
+        //static id
         return em.createNamedQuery(BookTicket.bookTicketFindUserById, BookTicket.class).getResultList();
     }
 

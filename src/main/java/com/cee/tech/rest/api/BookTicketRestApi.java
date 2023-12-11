@@ -24,12 +24,28 @@ public class BookTicketRestApi extends BaseRestApi{
         return respond();
     }
 
-
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response list() {
         return respond(bookTicketI.list(new BookTicket()));
-
     }
+
+    @Path("/{ticketId}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fetchById(@PathParam("ticketId") int ticketId) {
+       BookTicket ticket = bookTicketI.selectSingle(BookTicket.class, ticketId);
+        return respond(ticket);
+    }
+
+    @Path("/delete/{ticketId}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("ticketId") int ticketId) {
+        bookTicketI.delete(BookTicket.class, ticketId);
+        return respond();
+    }
+
 }
