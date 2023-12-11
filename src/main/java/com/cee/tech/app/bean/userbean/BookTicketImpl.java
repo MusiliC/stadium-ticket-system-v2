@@ -64,7 +64,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         Fixture fixture = getDao().getEm().find(Fixture.class, bookTicket.getFixtureId());
 
-        System.out.println(fixture.toString());
+
 
         if (user == null)
             throw new RuntimeException("Invalid user details");
@@ -75,21 +75,21 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
 
         //calling ticket desc
-//        TicketManagement ticketManagementDesc = getDao().getEm().find(TicketManagement.class,fixture.getFixtureDescId());
-//        if (ticketManagementDesc == null)
-//            throw new RuntimeException("Invalid fixture desc details");
-//
-//        int totalTicketsForFixture = ticketManagementDesc.getTotalTickets();
-//        int totalVIPTickets = ticketManagementDesc.getTotalVip();
-//        int totalNormalTickets = ticketManagementDesc.getTotalNormal();
-//
-//        if(bookTicket.getTicketType().equals(TicketType.VIP)){
-//            totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
-//            totalVIPTickets = totalTicketsForFixture - bookTicket.getTotalTickets();
-//            ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
-//            ticketManagementDesc.setTotalVip(totalVIPTickets);
-//            //ticketManagementDesc.setFixture(adminTicketManagementI.addOrUpdate(ticketManagementDesc));
-//        }
+        TicketManagement ticketManagementDesc = getDao().getEm().find(TicketManagement.class,fixture.getFixtureDescId());
+        if (ticketManagementDesc == null)
+            throw new RuntimeException("Invalid fixture desc details");
+
+        int totalTicketsForFixture = ticketManagementDesc.getTotalTickets();
+        int totalVIPTickets = ticketManagementDesc.getTotalVip();
+        int totalNormalTickets = ticketManagementDesc.getTotalNormal();
+
+        if(bookTicket.getTicketType().equals(TicketType.VIP)){
+            totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalVIPTickets = totalTicketsForFixture - bookTicket.getTotalTickets();
+            ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
+            ticketManagementDesc.setTotalVip(totalVIPTickets);
+            //ticketManagementDesc.setFixture(adminTicketManagementI.addOrUpdate(ticketManagementDesc));
+        }
 
         bookTicket.setUser(user);
         bookTicket.setFixture(fixture);

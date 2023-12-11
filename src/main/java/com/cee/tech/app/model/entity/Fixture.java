@@ -50,7 +50,7 @@ public class Fixture extends BaseEntity {
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
 
-    @Transient
+    @Formula("(fixture_desc_id)")
     @EticketFormField(label = "Fixture desc id", fieldType = "number", name = "fixtureDescId")
     private int fixtureDescId;
 
@@ -159,13 +159,13 @@ public class Fixture extends BaseEntity {
     @Override
     public String toString() {
         return "Fixture{" +
-                "fixture id = " + getId() +
                 "fixtureType=" + fixtureType +
                 ", fixtureTime='" + fixtureTime + '\'' +
                 ", fixtureLocation='" + fixtureLocation + '\'' +
                 ", homeTeam='" + homeTeam + '\'' +
                 ", awayTeam='" + awayTeam + '\'' +
                 ", fixtureDate='" + fixtureDate + '\'' +
+                ", fixtureDescId=" + fixtureDescId +
                 '}';
     }
 }

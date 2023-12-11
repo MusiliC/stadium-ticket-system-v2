@@ -142,4 +142,16 @@ public class TicketManagement extends BaseEntity {
     public TicketManagement() {
     }
 
+    @Override
+    public String toString() {
+        return "TicketManagement{" +
+                "totalTickets=" + totalTickets +
+                ", totalVip=" + totalVip +
+                ", vipAmount=" + vipAmount +
+                ", totalNormal=" + totalNormal +
+                ", normalAmount=" + normalAmount +
+                ", vipRevenue=" + vipRevenue +
+                ", normalRevenue=" + normalRevenue +
+                '}';
+    }
 }
