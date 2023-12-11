@@ -4,6 +4,7 @@ package com.cee.tech.app.model.entity;
 import com.cee.tech.view.html.EticketFormField;
 import com.cee.tech.view.html.EticketHtmlForm;
 import com.cee.tech.view.html.EticketTableColHeader;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Formula;
 
@@ -47,6 +48,7 @@ public class TicketManagement extends BaseEntity {
     @Formula("(coalesce(totalNormal,0) * coalesce(normalAmount,0))")
     private int normalRevenue;
 
+    @JsonIgnore
     @OneToOne(mappedBy="ticketManagement", cascade = CascadeType.ALL)
     private Fixture fixture;
 

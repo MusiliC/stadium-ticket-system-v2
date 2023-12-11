@@ -2,21 +2,15 @@ package com.cee.tech.app.bean.sharedbean;
 
 import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.bean.userbean.UserBeanI;
-import com.cee.tech.app.model.entity.TicketManagement;
 import com.cee.tech.app.model.entity.User;
-import com.cee.tech.database.Database;
-import com.cee.tech.database.MySqlDatabase;
 import com.cee.tech.utils.HashText;
 import com.cee.tech.view.html.HtmlComponents;
 
-import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -68,12 +62,6 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
     return false;
     }
 
-    @Override
-    public String allRegisteredUsers() {
-        List<User> users = Database.getDbInstance().getUsers();
-
-        return HtmlComponents.table(User.class,users);
-    }
 
 
 }

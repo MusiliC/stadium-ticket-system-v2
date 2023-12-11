@@ -3,6 +3,7 @@ package com.cee.tech.app.model.entity;
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Formula;
 
@@ -53,10 +54,12 @@ public class Fixture extends BaseEntity {
     @EticketFormField(label = "Fixture desc id", fieldType = "number", name = "fixtureDescId")
     private int fixtureDescId;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "fixture_desc_id")
     private TicketManagement ticketManagement;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "fixture")
     private List<BookTicket> fixtureTickets = new ArrayList<>();
 

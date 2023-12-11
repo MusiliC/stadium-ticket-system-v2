@@ -5,6 +5,7 @@ import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketTableColHeader;
 import com.cee.tech.view.html.TableActions;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,6 +37,7 @@ public class User extends BaseEntity {
     @EticketTableColHeader(headerLabel = "VIP Ticket")
     private int vipTickets = 0;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<BookTicket> myTickets = new ArrayList<>();
 

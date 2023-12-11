@@ -10,5 +10,5 @@ public interface UserBeanI extends GenericBeanI<User> {
 
     boolean unregisterUser(User user);
 
-    public String allRegisteredUsers();
+
 }

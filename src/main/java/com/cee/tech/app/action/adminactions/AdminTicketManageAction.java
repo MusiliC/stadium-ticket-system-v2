@@ -2,9 +2,7 @@ package com.cee.tech.app.action.adminactions;
 
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.adminbean.AdminTicketManagementI;
-import com.cee.tech.app.bean.adminbean.AdminTicketManagementBeanImpl;
 import com.cee.tech.app.model.entity.TicketManagement;
-import com.cee.tech.database.Database;
 import com.cee.tech.view.html.HtmlAdminPages;
 import com.cee.tech.view.html.HtmlComponents;
 
