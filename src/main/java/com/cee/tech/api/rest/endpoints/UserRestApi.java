@@ -1,4 +1,4 @@
-package com.cee.tech.rest.api;
+package com.cee.tech.api.rest.endpoints;
 
 import com.cee.tech.app.bean.userbean.UserBeanI;
 import com.cee.tech.app.model.entity.User;
@@ -15,8 +15,6 @@ public class UserRestApi extends BaseRestApi{
 
     @EJB
     UserBeanI userBeanI;
-
-
 
     @Path("/list")
     @GET

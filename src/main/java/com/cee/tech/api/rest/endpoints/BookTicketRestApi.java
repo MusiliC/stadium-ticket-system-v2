@@ -1,8 +1,9 @@
-package com.cee.tech.rest.api;
+package com.cee.tech.api.rest.endpoints;
 
 import com.cee.tech.app.bean.userbean.BookTicketI;
 import com.cee.tech.app.model.entity.BookTicket;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -24,6 +25,7 @@ public class BookTicketRestApi extends BaseRestApi{
         return respond();
     }
 
+    @RolesAllowed("LOGGED_IN")
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

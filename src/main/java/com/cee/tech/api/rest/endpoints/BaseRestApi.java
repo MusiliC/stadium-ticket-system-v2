@@ -1,4 +1,4 @@
-package com.cee.tech.rest.api;
+package com.cee.tech.api.rest.endpoints;
 
 import javax.ws.rs.core.Response;
 

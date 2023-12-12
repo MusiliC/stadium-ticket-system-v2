@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 
 @NamedQueries({
-        @NamedQuery(name = BookTicket.bookTicketFindUserById,query = "FROM BookTicket t WHERE t.user.id = 17"),
+       // @NamedQuery(name = BookTicket.bookTicketFindUserById,query = "FROM BookTicket t WHERE t.user.id = :userId"),
 //        @NamedQuery(name = BookTicket.SelectTicketsWithFixture, query = "select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
 //                " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id"),
 //        @NamedQuery(name = BookTicket.selectTicketDescWithBookTicket, query= "select t.ticketNumber, f.fixtureType,d.totalTickets from bookTicket t left " +
@@ -70,11 +70,11 @@ public class BookTicket implements Serializable {
     private UserDetails userDetails;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name="user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ticket_fixture_desc", nullable=false)
+    @JoinColumn(name="ticket_fixture_desc")
     private Fixture fixture;
 
     @Formula("ticketId")

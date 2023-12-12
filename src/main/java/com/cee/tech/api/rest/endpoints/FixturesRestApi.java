@@ -1,28 +1,26 @@
-package com.cee.tech.rest.api;
+package com.cee.tech.api.rest.endpoints;
 
-import com.cee.tech.app.bean.adminbean.AdminTicketManagementI;
 import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
-import com.cee.tech.app.model.entity.BookTicket;
 import com.cee.tech.app.model.entity.Fixture;
-import com.cee.tech.app.model.entity.TicketManagement;
+
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/ticketmanagement")
-public class TicketManagementRestApi extends BaseRestApi {
+@Path("/fixture")
+public class FixturesRestApi extends BaseRestApi {
 
-    @EJB
-    AdminTicketManagementI ticketManagementI;
+    @EJB(beanName = "userFixtureBean")
+    FixtureBeanI fixtureBeanI;
 
     @Path("/add")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response add(TicketManagement ticketManagement) {
-        ticketManagement = ticketManagementI.addOrUpdate(ticketManagement);
+    public Response add(Fixture fixture) {
+        fixture = fixtureBeanI.addOrUpdate(fixture);
         return respond();
     }
 
@@ -30,15 +28,15 @@ public class TicketManagementRestApi extends BaseRestApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response list() {
-        return respond(ticketManagementI.list(new TicketManagement()));
+        return respond(fixtureBeanI.list(new Fixture()));
     }
 
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response fetchById(@PathParam("id") int id) {
-        TicketManagement ticketManagement = ticketManagementI.selectSingle(TicketManagement.class, id);
-        return respond(ticketManagement);
+        Fixture fixture = fixtureBeanI.selectSingle(Fixture.class, id);
+        return respond(fixture);
     }
 
     @Path("/delete/{id}")
@@ -46,7 +44,7 @@ public class TicketManagementRestApi extends BaseRestApi {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") int id) {
-        ticketManagementI.delete(TicketManagement.class, id);
+        fixtureBeanI.delete(Fixture.class, id);
         return respond();
     }
 }

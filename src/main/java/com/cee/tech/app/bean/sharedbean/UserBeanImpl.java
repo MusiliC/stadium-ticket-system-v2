@@ -54,6 +54,7 @@ public class UserBeanImpl extends GenericBeanImpl<User> implements UserBeanI {
 
     @Override
     public List<User> list(Object entity) {
+
         return em.createQuery("FROM User u",User.class).getResultList() ;
     }
 

@@ -86,7 +86,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         if (bookTicket.getTicketType().equals(TicketType.VIP)) {
             totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
-            totalVIPTickets = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalVIPTickets = totalVIPTickets - bookTicket.getTotalTickets();
             totalVIPTicketsSold = totalVIPTicketsSold + bookTicket.getTotalTickets();
             ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
             ticketManagementDesc.setTotalVip(totalVIPTickets);
@@ -95,7 +95,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         if (bookTicket.getTicketType().equals(TicketType.NORMAL)) {
             totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
-            totalNormalTickets  = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalNormalTickets  = totalNormalTickets - bookTicket.getTotalTickets();
             totalNormalTicketsSold  = totalNormalTicketsSold  + bookTicket.getTotalTickets();
             ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
             ticketManagementDesc.setTotalNormal(totalNormalTickets);
@@ -143,21 +143,10 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
     }
 
+
     @Override
     public List<BookTicket> list(Object entity) {
-//        @NamedQueries({
-//                @NamedQuery(
-//                        name = "BookTicket.findByUserId",
-//                        query = "SELECT t FROM BookTicket t WHERE t.user.id = :userId"
-//                )
-//        })
-
-//        return em.createNamedQuery("BookTicket.findByUserId", BookTicket.class)
-//                .setParameter("userId", user.getId())
-//                .getResultList();
-
-        //static id
-        return em.createNamedQuery(BookTicket.bookTicketFindUserById, BookTicket.class).getResultList();
+        return em.createQuery("FROM BookTicket t",BookTicket.class).getResultList() ;
     }
 
     //query to join bookTicket with ticketDesc through fixture table

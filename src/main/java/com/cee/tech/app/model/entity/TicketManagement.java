@@ -24,41 +24,44 @@ public class TicketManagement extends BaseEntity {
     @EticketTableColHeader(headerLabel = "Total Tickets")
     @Column(name = "totalTickets")
     @EticketFormField(label = "Total Tickets Allocated: ", fieldType = "number")
-    private int totalTickets;
+    private int totalTickets = 0;
     @EticketTableColHeader(headerLabel = "VIP tickets")
     @Column(name = "totalVip")
     @EticketFormField(label = "Total VIP tickets: ", fieldType = "number")
-    private int totalVip;
+    private int totalVip = 0;
     @EticketTableColHeader(headerLabel = "VIP Ticket Amount")
     @Column(name = "vipAmount")
     @EticketFormField(label = "VIP ticket amount: ", fieldType = "number")
-    private int vipAmount;
+    private int vipAmount = 0;
     @EticketTableColHeader(headerLabel = "Normal Tickets")
     @Column(name = "totalNormal")
     @EticketFormField(label = "Total Normal tickets: ", fieldType = "number")
-    private int totalNormal;
+    private int totalNormal = 0;
     @EticketTableColHeader(headerLabel = "Normal Ticket Amount")
     @Column(name = "normalAmount")
     @EticketFormField(label = "Normal ticket amount: ", fieldType = "number")
-    private int normalAmount;
-
+    private int normalAmount = 0;
 
     @Column(name = "totalVipTicketsSold")
-    private  int totalVipTicketsSold;
+    private  int totalVipTicketsSold = 0;
 
     @Column(name = "totalNormalTicketsSold")
-    private int totalNormalTicketsSold;
+    private int totalNormalTicketsSold = 0;
 
     @Formula("(coalesce(totalVipTicketsSold,0) + coalesce(totalNormalTicketsSold,0))")
+    @Transient
     private int totalTicketsSold;
 
     @Formula("(coalesce(totalVipTicketsSold,0) * coalesce(vipAmount,0))")
+    @Transient
     private int vipRevenue;
 
     @Formula("(coalesce(totalNormalTicketsSold,0) * coalesce(normalAmount,0))")
+    @Transient
     private int normalRevenue;
 
     @Formula("(coalesce(normalRevenue,0) + coalesce(vipRevenue,0))")
+    @Transient
     private int totalRevenueGenerated;
 
     @JsonIgnore
