@@ -65,7 +65,6 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
         Fixture fixture = getDao().getEm().find(Fixture.class, bookTicket.getFixtureId());
 
 
-
         if (user == null)
             throw new RuntimeException("Invalid user details");
 
@@ -75,20 +74,32 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
 
         //calling ticket desc
-        TicketManagement ticketManagementDesc = getDao().getEm().find(TicketManagement.class,fixture.getFixtureDescId());
+        TicketManagement ticketManagementDesc = getDao().getEm().find(TicketManagement.class, fixture.getFixtureDescId());
         if (ticketManagementDesc == null)
             throw new RuntimeException("Invalid fixture desc details");
 
         int totalTicketsForFixture = ticketManagementDesc.getTotalTickets();
         int totalVIPTickets = ticketManagementDesc.getTotalVip();
+        int totalVIPTicketsSold = ticketManagementDesc.getTotalVipTicketsSold();
         int totalNormalTickets = ticketManagementDesc.getTotalNormal();
+        int totalNormalTicketsSold = ticketManagementDesc.getTotalNormalTicketsSold();
 
-        if(bookTicket.getTicketType().equals(TicketType.VIP)){
+        if (bookTicket.getTicketType().equals(TicketType.VIP)) {
             totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
             totalVIPTickets = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalVIPTicketsSold = totalVIPTicketsSold + bookTicket.getTotalTickets();
             ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
             ticketManagementDesc.setTotalVip(totalVIPTickets);
-            //ticketManagementDesc.setFixture(adminTicketManagementI.addOrUpdate(ticketManagementDesc));
+            ticketManagementDesc.setTotalVipTicketsSold(totalVIPTicketsSold);
+        }
+
+        if (bookTicket.getTicketType().equals(TicketType.NORMAL)) {
+            totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalNormalTickets  = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalNormalTicketsSold  = totalNormalTicketsSold  + bookTicket.getTotalTickets();
+            ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
+            ticketManagementDesc.setTotalNormal(totalNormalTickets);
+            ticketManagementDesc.setTotalNormalTicketsSold(totalNormalTicketsSold);
         }
 
         bookTicket.setUser(user);
@@ -102,23 +113,23 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         logger.fire(log);
 
-        if(bookTicket.getTicketType().equals(TicketType.VIP)) {
+        if (bookTicket.getTicketType().equals(TicketType.VIP)) {
             int newVipTicketCount = user.getVipTickets() + bookTicket.getTotalTickets();
             user.setVipTickets(newVipTicketCount);
             bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
 
-        if(bookTicket.getTicketType().equals(TicketType.NORMAL)) {
+        if (bookTicket.getTicketType().equals(TicketType.NORMAL)) {
             int newNormalTicketCount = user.getNormalTickets() + bookTicket.getTotalTickets();
             user.setNormalTickets(newNormalTicketCount);
             bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
 
         //testing native query
-        List<Object []> tickets = getDao().nativeQuery("select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
+        List<Object[]> tickets = getDao().nativeQuery("select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
                 " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id");
 
-        for (Object [] ticket: tickets){
+        for (Object[] ticket : tickets) {
             System.out.println();
             System.out.println("*********************************");
             System.out.println(Arrays.toString(ticket));

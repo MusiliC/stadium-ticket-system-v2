@@ -42,11 +42,24 @@ public class TicketManagement extends BaseEntity {
     @EticketFormField(label = "Normal ticket amount: ", fieldType = "number")
     private int normalAmount;
 
-    @Formula("(coalesce(totalVip,0) * coalesce(vipAmount,0))")
+
+    @Column(name = "totalVipTicketsSold")
+    private  int totalVipTicketsSold;
+
+    @Column(name = "totalNormalTicketsSold")
+    private int totalNormalTicketsSold;
+
+    @Formula("(coalesce(totalVipTicketsSold,0) + coalesce(totalNormalTicketsSold,0))")
+    private int totalTicketsSold;
+
+    @Formula("(coalesce(totalVipTicketsSold,0) * coalesce(vipAmount,0))")
     private int vipRevenue;
 
-    @Formula("(coalesce(totalNormal,0) * coalesce(normalAmount,0))")
+    @Formula("(coalesce(totalNormalTicketsSold,0) * coalesce(normalAmount,0))")
     private int normalRevenue;
+
+    @Formula("(coalesce(normalRevenue,0) + coalesce(vipRevenue,0))")
+    private int totalRevenueGenerated;
 
     @JsonIgnore
     @OneToOne(mappedBy="ticketManagement", cascade = CascadeType.ALL)
@@ -57,7 +70,9 @@ public class TicketManagement extends BaseEntity {
 //    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
 
 
-    public TicketManagement(int id,FixtureType fixtureType, int totalTickets, int totalVip, int vipAmount, int totalNormal, int normalAmount) {
+
+
+    public TicketManagement(int id,FixtureType fixtureType, int totalTickets, int totalVip, int vipAmount, int totalNormal, int normalAmount, int totalVipTicketsSold, int totalNormalTicketsSold) {
         setId(id);
         this.fixtureType = fixtureType;
         this.totalTickets = totalTickets;
@@ -65,6 +80,8 @@ public class TicketManagement extends BaseEntity {
         this.vipAmount = vipAmount;
         this.totalNormal = totalNormal;
         this.normalAmount = normalAmount;
+        this.totalVipTicketsSold = totalVipTicketsSold;
+        this.totalNormalTicketsSold = totalNormalTicketsSold;
     }
 
     public FixtureType getFixtureType() {
@@ -139,6 +156,31 @@ public class TicketManagement extends BaseEntity {
         this.fixture = fixture;
     }
 
+
+    public int getTotalVipTicketsSold() {
+        return totalVipTicketsSold;
+    }
+
+    public void setTotalVipTicketsSold(int totalVipTicketsSold) {
+        this.totalVipTicketsSold = totalVipTicketsSold;
+    }
+
+    public int getTotalNormalTicketsSold() {
+        return totalNormalTicketsSold;
+    }
+
+    public void setTotalNormalTicketsSold(int totalNormalTicketsSold) {
+        this.totalNormalTicketsSold = totalNormalTicketsSold;
+    }
+
+    public int getTotalRevenueGenerated() {
+        return totalRevenueGenerated;
+    }
+
+    public void setTotalRevenueGenerated(int totalRevenueGenerated) {
+        this.totalRevenueGenerated = totalRevenueGenerated;
+    }
+
     public TicketManagement() {
     }
 
@@ -150,8 +192,12 @@ public class TicketManagement extends BaseEntity {
                 ", vipAmount=" + vipAmount +
                 ", totalNormal=" + totalNormal +
                 ", normalAmount=" + normalAmount +
+                ", totalTicketsSold=" + totalTicketsSold +
+                ", totalVipTicketsSold=" + totalVipTicketsSold +
+                ", totalNormalTicketsSold=" + totalNormalTicketsSold +
                 ", vipRevenue=" + vipRevenue +
                 ", normalRevenue=" + normalRevenue +
+                ", totalRevenueGenerated=" + totalRevenueGenerated +
                 '}';
     }
 }
