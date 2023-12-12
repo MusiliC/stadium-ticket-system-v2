@@ -11,16 +11,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 
-@NamedQueries({
-       // @NamedQuery(name = BookTicket.bookTicketFindUserById,query = "FROM BookTicket t WHERE t.user.id = :userId"),
-//        @NamedQuery(name = BookTicket.SelectTicketsWithFixture, query = "select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
-//                " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id"),
-//        @NamedQuery(name = BookTicket.selectTicketDescWithBookTicket, query= "select t.ticketNumber, f.fixtureType,d.totalTickets from bookTicket t left " +
-//                " join fixtures f  on t.ticket_fixture_desc = f.id  join ticketManagement d on f.fixture_desc_id = d.id")
-})
+//@NamedQueries({
+//        @NamedQuery(name = BookTicket.bookTicketFindUserById,query = "FROM BookTicket t WHERE t.user.id = :userId"),
+////        @NamedQuery(name = BookTicket.SelectTicketsWithFixture, query = "select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
+////                " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id"),
+////        @NamedQuery(name = BookTicket.selectTicketDescWithBookTicket, query= "select t.ticketNumber, f.fixtureType,d.totalTickets from bookTicket t left " +
+////                " join fixtures f  on t.ticket_fixture_desc = f.id  join ticketManagement d on f.fixture_desc_id = d.id")
+//})
 @Entity
 @Table(name = "bookTicket")
-//@AttributeOverride(name = "id", column = @Column(name = "ticketId"))
 @EticketHtmlForm(label = "Ticket", url = "./book")
 public class BookTicket implements Serializable {
 
@@ -69,15 +68,15 @@ public class BookTicket implements Serializable {
     @Embedded
     private UserDetails userDetails;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="ticket_fixture_desc")
     private Fixture fixture;
 
-    @Formula("ticketId")
+    @Formula("user_id")
     @EticketFormField(label = "User id", fieldType = "number", name = "userId")
     private int userId;
 

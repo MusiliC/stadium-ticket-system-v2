@@ -38,10 +38,6 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
     @Inject
     private Event<Audit> logger;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("Bean has bean created!!");
-    }
 
     @PersistenceContext
     EntityManager em;
@@ -95,8 +91,8 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         if (bookTicket.getTicketType().equals(TicketType.NORMAL)) {
             totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
-            totalNormalTickets  = totalNormalTickets - bookTicket.getTotalTickets();
-            totalNormalTicketsSold  = totalNormalTicketsSold  + bookTicket.getTotalTickets();
+            totalNormalTickets = totalNormalTickets - bookTicket.getTotalTickets();
+            totalNormalTicketsSold = totalNormalTicketsSold + bookTicket.getTotalTickets();
             ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
             ticketManagementDesc.setTotalNormal(totalNormalTickets);
             ticketManagementDesc.setTotalNormalTicketsSold(totalNormalTicketsSold);
@@ -147,6 +143,13 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
     @Override
     public List<BookTicket> list(Object entity) {
         return em.createQuery("FROM BookTicket t",BookTicket.class).getResultList() ;
+    }
+
+    @Override
+    public List<BookTicket> findAllTicketsByUser(int userId) {
+        String jpql = "FROM BookTicket t WHERE t.userId=:userId";
+        return em.createQuery(jpql, BookTicket.class).setParameter("userId", userId)
+                .getResultList();
     }
 
     //query to join bookTicket with ticketDesc through fixture table

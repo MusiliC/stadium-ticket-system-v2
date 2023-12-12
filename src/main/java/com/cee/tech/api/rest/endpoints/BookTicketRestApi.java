@@ -2,12 +2,14 @@ package com.cee.tech.api.rest.endpoints;
 
 import com.cee.tech.app.bean.userbean.BookTicketI;
 import com.cee.tech.app.model.entity.BookTicket;
+import com.cee.tech.app.model.entity.Fixture;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/bookticket")
 public class BookTicketRestApi extends BaseRestApi{
@@ -25,7 +27,7 @@ public class BookTicketRestApi extends BaseRestApi{
         return respond();
     }
 
-    @RolesAllowed("LOGGED_IN")
+
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -33,12 +35,14 @@ public class BookTicketRestApi extends BaseRestApi{
         return respond(bookTicketI.list(new BookTicket()));
     }
 
-    @Path("/{ticketId}")
+
+
+    @Path("/list/{userId}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response fetchById(@PathParam("ticketId") int ticketId) {
-       BookTicket ticket = bookTicketI.selectSingle(BookTicket.class, ticketId);
-        return respond(ticket);
+    public Response fetchById(@PathParam("userId") int userId) {
+      List<BookTicket> tickets =  bookTicketI.findAllTicketsByUser(userId);
+        return respond(tickets);
     }
 
     @Path("/delete/{ticketId}")

@@ -30,7 +30,7 @@ public class TicketManagementRestApi extends BaseRestApi {
         return respond(ticketManagementI.list(new TicketManagement()));
     }
 
-    @Path("/{id}")
+    @Path("/list/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response fetchById(@PathParam("id") int id) {

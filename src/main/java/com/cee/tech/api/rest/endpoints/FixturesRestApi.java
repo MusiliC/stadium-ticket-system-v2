@@ -31,7 +31,7 @@ public class FixturesRestApi extends BaseRestApi {
         return respond(fixtureBeanI.list(new Fixture()));
     }
 
-    @Path("/{id}")
+    @Path("/list/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response fetchById(@PathParam("id") int id) {
