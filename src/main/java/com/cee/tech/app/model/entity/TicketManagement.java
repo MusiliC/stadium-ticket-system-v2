@@ -10,6 +10,8 @@ import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -64,15 +66,10 @@ public class TicketManagement extends BaseEntity {
     @Transient
     private int totalRevenueGenerated;
 
+
     @JsonIgnore
-    @OneToOne(mappedBy="ticketManagement", cascade = CascadeType.ALL)
-    private Fixture fixture;
-
-//    @EticketTableColHeader(headerLabel = "Edit")
-//    @Transient
-//    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
-
-
+    @OneToMany(mappedBy = "ticketManagement", cascade = CascadeType.ALL)
+    private List<Fixture> fixturesInThisType = new ArrayList<>();
 
 
     public TicketManagement(int id,FixtureType fixtureType, int totalTickets, int totalVip, int vipAmount, int totalNormal, int normalAmount, int totalVipTicketsSold, int totalNormalTicketsSold) {
@@ -151,14 +148,13 @@ public class TicketManagement extends BaseEntity {
         this.normalRevenue = normalRevenue;
     }
 
-    public Fixture getFixture() {
-        return fixture;
+    public List<Fixture> getFixturesInThisType() {
+        return fixturesInThisType;
     }
 
-    public void setFixture(Fixture fixture) {
-        this.fixture = fixture;
+    public void setFixturesInThisType(List<Fixture> fixturesInThisType) {
+        this.fixturesInThisType = fixturesInThisType;
     }
-
 
     public int getTotalVipTicketsSold() {
         return totalVipTicketsSold;

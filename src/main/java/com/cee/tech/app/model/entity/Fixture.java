@@ -17,13 +17,6 @@ import java.util.List;
 public class Fixture extends BaseEntity {
 
 
-    @EticketFormField(label = "Fixture Type")
-    @EticketTableColHeader(headerLabel = "Fixture Type")
-    @Column(name = "fixtureType")
-    @EticketFixtureCard(cssClass = "fixture")
-    @Enumerated(EnumType.STRING)
-    private FixtureType fixtureType;
-
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")
     @Column(name = "fixtureTime")
@@ -50,34 +43,24 @@ public class Fixture extends BaseEntity {
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fixture_desc_id")
+    private TicketManagement ticketManagement;
+
     @Formula("(fixture_desc_id)")
     @EticketFormField(label = "Fixture desc id", fieldType = "number", name = "fixtureDescId")
     private int fixtureDescId;
-
-    @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "fixture_desc_id")
-    private TicketManagement ticketManagement;
 
     @JsonIgnore
     @OneToMany(mappedBy = "fixture")
     private List<BookTicket> fixtureTickets = new ArrayList<>();
 
 
-//    @EticketTableColHeader(headerLabel = "Edit")
-//    @Transient
-//    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
-
-
-    public FixtureType getFixtureType() {
-        return fixtureType;
-    }
-
-
-    public Fixture(int id, FixtureType fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
+    public Fixture(int id, String fixtureTime, String fixtureLocation, String homeTeam,
                    String awayTeam, String fixtureDate) {
         setId(id);
-        this.fixtureType = fixtureType;
+
         this.fixtureTime = fixtureTime;
         this.fixtureLocation = fixtureLocation;
         this.homeTeam = homeTeam;
@@ -125,9 +108,6 @@ public class Fixture extends BaseEntity {
         this.fixtureLocation = fixtureLocation;
     }
 
-    public void setFixtureType(FixtureType fixtureType) {
-        this.fixtureType = fixtureType;
-    }
 
     public TicketManagement getTicketManagement() {
         return ticketManagement;
@@ -159,7 +139,7 @@ public class Fixture extends BaseEntity {
     @Override
     public String toString() {
         return "Fixture{" +
-                "fixtureType=" + fixtureType +
+
                 ", fixtureTime='" + fixtureTime + '\'' +
                 ", fixtureLocation='" + fixtureLocation + '\'' +
                 ", homeTeam='" + homeTeam + '\'' +

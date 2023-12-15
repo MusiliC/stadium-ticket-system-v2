@@ -24,7 +24,7 @@ import java.io.Serializable;
 public class BookTicket implements Serializable {
 
     public static final String bookTicketFindUserById = "BookTicket.bookTicketFindUserById";
-    public static final String SelectTicketsWithFixture= "BookTicket.selectTicketsWithFixture";
+    public static final String SelectTicketsWithFixture = "BookTicket.selectTicketsWithFixture";
     public static final String selectTicketDescWithBookTicket = "BookTicket.selectTicketDescWithBookTicket";
 
     @Id
@@ -37,26 +37,12 @@ public class BookTicket implements Serializable {
     @EticketHtmlCard(cssClass = "ticketNumber")
     private String ticketNumber;
 
-    @EticketHtmlCard(cssClass = "ticketFixtureType")
-    @Transient
-    private String fixtureType = "CAF Champions League";
-
-    @EticketHtmlCard(cssClass = "newTicketInfoDetails", pTag = "bookTicketHomeTeam")
-    @Transient
-    private String homeTeam = "Gor Mahia";
-    @EticketHtmlCard(cssClass = "newTicketInfoDetails", pTag = "bookTicketAwayTeam")
-    @Transient
-    private String awayTeam = "AFC Leopards";
-
 
     @EticketFormField(label = "Ticket Type", name = "ticketType")
     @Column(name = "ticketType")
     @Enumerated(EnumType.STRING)
     private TicketType ticketType;
 
-    @EticketHtmlCard(cssClass = "ticketDate")
-    @Transient
-    private String date = "2023/11/11";
 
     @EticketHtmlCard(cssClass = "ticketFixtureType")
     @Formula("(select u.username from users u where u.id = user_id)")
@@ -69,16 +55,18 @@ public class BookTicket implements Serializable {
     private UserDetails userDetails;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="ticket_fixture_desc")
-    private Fixture fixture;
 
     @Formula("user_id")
     @EticketFormField(label = "User id", fieldType = "number", name = "userId")
     private int userId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ticket_fixture_desc")
+    private Fixture fixture;
+
+
 
     @EticketFormField(label = "Fixture id", fieldType = "number", name = "fixtureId")
     @Transient
@@ -117,29 +105,6 @@ public class BookTicket implements Serializable {
         this.ticketNumber = ticketNumber;
     }
 
-    public String getFixtureType() {
-        return fixtureType;
-    }
-
-    public void setFixtureType(String fixtureType) {
-        this.fixtureType = fixtureType;
-    }
-
-    public String getHomeTeam() {
-        return homeTeam;
-    }
-
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
-    }
-
-    public String getAwayTeam() {
-        return awayTeam;
-    }
-
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
-    }
 
     public TicketType getTicketType() {
         return ticketType;
@@ -147,14 +112,6 @@ public class BookTicket implements Serializable {
 
     public void setTicketType(TicketType ticketType) {
         this.ticketType = ticketType;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public int getTotalTickets() {
