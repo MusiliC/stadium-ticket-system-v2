@@ -43,7 +43,7 @@ public class Fixture extends BaseEntity {
     @EticketFixtureCard(cssClass = "date")
     private String fixtureDate;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fixture_desc_id")
     private TicketManagement ticketManagement;
@@ -58,14 +58,14 @@ public class Fixture extends BaseEntity {
 
 
     public Fixture(int id, String fixtureTime, String fixtureLocation, String homeTeam,
-                   String awayTeam, String fixtureDate) {
+                   String awayTeam, String fixtureDate, int fixtureDescId) {
         setId(id);
-
         this.fixtureTime = fixtureTime;
         this.fixtureLocation = fixtureLocation;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.fixtureDate = fixtureDate;
+        this.fixtureDescId = fixtureDescId;
     }
 
     public String getFixtureTime() {
@@ -139,7 +139,6 @@ public class Fixture extends BaseEntity {
     @Override
     public String toString() {
         return "Fixture{" +
-
                 ", fixtureTime='" + fixtureTime + '\'' +
                 ", fixtureLocation='" + fixtureLocation + '\'' +
                 ", homeTeam='" + homeTeam + '\'' +

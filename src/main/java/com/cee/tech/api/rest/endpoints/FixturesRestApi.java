@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 @Path("/fixture")
 public class FixturesRestApi extends BaseRestApi {
 
-    @EJB(beanName = "userFixtureBean")
+    @EJB(beanName = "adminFixtureBean")
     FixtureBeanI fixtureBeanI;
 
     @Path("/add")

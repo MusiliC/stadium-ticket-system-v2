@@ -11,5 +11,21 @@ public class UserDetails implements Serializable {
     private String userEmail;
 
     @Column(name = "user_number")
-    private String userNumber;
+    private String phoneNumber;
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

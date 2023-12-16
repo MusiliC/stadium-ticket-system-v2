@@ -67,7 +67,6 @@ public class BookTicket implements Serializable {
     private Fixture fixture;
 
 
-
     @EticketFormField(label = "Fixture id", fieldType = "number", name = "fixtureId")
     @Transient
     private int fixtureId;
@@ -80,11 +79,12 @@ public class BookTicket implements Serializable {
     public BookTicket() {
     }
 
-    public BookTicket(int ticketId, String ticketNumber, TicketType ticketType, int totalTickets) {
+    public BookTicket(int ticketId, String ticketNumber, TicketType ticketType, int totalTickets, UserDetails userDetails) {
         this.ticketId = ticketId;
         this.ticketNumber = ticketNumber;
         this.ticketType = ticketType;
         this.totalTickets = totalTickets;
+        this.userDetails = userDetails;
     }
 
 

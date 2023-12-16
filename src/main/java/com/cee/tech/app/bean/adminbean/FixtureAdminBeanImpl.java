@@ -23,6 +23,7 @@ public class FixtureAdminBeanImpl extends GenericBeanImpl<Fixture> implements Fi
     @Override
     public Fixture addOrUpdate(Fixture fixture) {
 
+        System.out.println(fixture.toString());
 
         if (fixture.getFixtureDescId() == 0)
             throw new RuntimeException("Fixture type id not found");

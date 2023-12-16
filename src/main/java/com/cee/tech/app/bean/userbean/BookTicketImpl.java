@@ -122,7 +122,7 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
         }
 
         //testing native query
-        List<Object[]> tickets = getDao().nativeQuery("select t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate " +
+        List<Object[]> tickets = getDao().nativeQuery("select t.ticketNumber, f.homeTeam, f.awayTeam, f.fixtureDate " +
                 " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id");
 
         for (Object[] ticket : tickets) {
