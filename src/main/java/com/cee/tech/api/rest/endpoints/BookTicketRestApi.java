@@ -22,7 +22,6 @@ public class BookTicketRestApi extends BaseRestApi{
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response add(BookTicket bookTicket) {
-
         bookTicket = bookTicketI.addOrUpdate(bookTicket);
         return respond();
     }
@@ -35,6 +34,13 @@ public class BookTicketRestApi extends BaseRestApi{
         return respond(bookTicketI.list(new BookTicket()));
     }
 
+    @Path("/list/ticket/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response fetchOneTicket(@PathParam("id") int id) {
+        BookTicket oneTicket =  bookTicketI.selectSingle(BookTicket.class,id);
+        return respond(oneTicket);
+    }
 
 
     @Path("/list/{userId}")
