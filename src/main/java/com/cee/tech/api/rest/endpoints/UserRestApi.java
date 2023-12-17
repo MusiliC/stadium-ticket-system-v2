@@ -36,4 +36,14 @@ public class UserRestApi extends BaseRestApi{
         }
         return respond();
     }
+
+
+    @Path("/delete/{id}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        userBeanI.delete(User.class, id);
+        return respond();
+    }
 }

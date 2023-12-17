@@ -24,6 +24,15 @@ public class FixturesRestApi extends BaseRestApi {
         return respond();
     }
 
+    @Path("/update/{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("id") int id, Fixture fixture) {
+        fixture = fixtureBeanI.addOrUpdate(fixture);
+        return respond();
+    }
+
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
