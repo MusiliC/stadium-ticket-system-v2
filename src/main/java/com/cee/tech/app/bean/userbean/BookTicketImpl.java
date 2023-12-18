@@ -3,6 +3,7 @@ package com.cee.tech.app.bean.userbean;
 import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.bean.adminbean.AdminTicketManagementI;
 import com.cee.tech.app.model.entity.*;
+import com.cee.tech.app.observer.EmailBeanImpl;
 import com.cee.tech.utils.TicketNumber;
 
 
@@ -35,6 +36,9 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
     @Inject
     private Event<Audit> logger;
+
+    @Inject
+    private Event<BookTicket> bookTicketConfirmEvent;
 
 
     @PersistenceContext
@@ -119,22 +123,15 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
             bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
 
-        //testing native query
-        List<Object[]> tickets = getDao().nativeQuery("select t.ticketNumber, f.homeTeam, f.awayTeam, f.fixtureDate " +
-                " from bookTicket t inner join fixtures f on t.ticket_fixture_desc = f.id");
-
-        for (Object[] ticket : tickets) {
-            System.out.println();
-            System.out.println("*********************************");
-            System.out.println(Arrays.toString(ticket));
-            System.out.println();
-            System.out.println("*********************************");
-        }
-
         getDao().getEm().flush();
 
-        return getDao().addOrUpdate(bookTicket);
 
+        bookTicket = getDao().addOrUpdate(bookTicket);
+
+//        EmailBeanImpl emailBean = new EmailBeanImpl();
+//        emailBean.afterBookTicket(bookTicket.getUser());
+
+        return bookTicket;
     }
 
 
