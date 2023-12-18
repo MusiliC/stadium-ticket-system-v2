@@ -1,11 +1,12 @@
 package com.cee.tech.app.bean.userbean;
 
 import com.cee.tech.app.bean.GenericBeanImpl;
-import com.cee.tech.app.bean.sharedbean.UserBeanImpl;
+import com.cee.tech.app.bean.adminbean.AdminTicketManagementI;
 import com.cee.tech.app.model.entity.*;
+import com.cee.tech.app.observer.EmailBeanImpl;
 import com.cee.tech.utils.TicketNumber;
 
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -15,6 +16,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +26,10 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
     @EJB
     UserBeanI userBeanI;
+
+    @EJB
+    AdminTicketManagementI adminTicketManagementI;
+
     @Inject
     @Named("Ticket")
     private TicketNumber ticketNumberGenerator;
@@ -31,10 +37,9 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
     @Inject
     private Event<Audit> logger;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("Bean has bean created!!");
-    }
+    @Inject
+    private Event<BookTicket> bookTicketConfirmEvent;
+
 
     @PersistenceContext
     EntityManager em;
@@ -43,20 +48,60 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
     @Override
     public BookTicket addOrUpdate(BookTicket bookTicket) {
 
-
-
         if (bookTicket == null)
             throw new RuntimeException("Invalid ticket details");
 
         if (bookTicket.getUserId() == 0)
             throw new RuntimeException("User id not found");
 
+
+        if (bookTicket.getFixtureId() == 0)
+            throw new RuntimeException("Fixture id not found");
+
         User user = getDao().getEm().find(User.class, bookTicket.getUserId());
+
+        Fixture fixture = getDao().getEm().find(Fixture.class, bookTicket.getFixtureId());
+
 
         if (user == null)
             throw new RuntimeException("Invalid user details");
 
+
+        if (fixture == null)
+            throw new RuntimeException("Invalid fixture details");
+
+
+        //calling ticket desc
+        TicketManagement ticketManagementDesc = getDao().getEm().find(TicketManagement.class, fixture.getFixtureDescId());
+        if (ticketManagementDesc == null)
+            throw new RuntimeException("Invalid fixture desc details");
+
+        int totalTicketsForFixture = ticketManagementDesc.getTotalTickets();
+        int totalVIPTickets = ticketManagementDesc.getTotalVip();
+        int totalVIPTicketsSold = ticketManagementDesc.getTotalVipTicketsSold();
+        int totalNormalTickets = ticketManagementDesc.getTotalNormal();
+        int totalNormalTicketsSold = ticketManagementDesc.getTotalNormalTicketsSold();
+
+        if (bookTicket.getTicketType().equals(TicketType.VIP)) {
+            totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalVIPTickets = totalVIPTickets - bookTicket.getTotalTickets();
+            totalVIPTicketsSold = totalVIPTicketsSold + bookTicket.getTotalTickets();
+            ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
+            ticketManagementDesc.setTotalVip(totalVIPTickets);
+            ticketManagementDesc.setTotalVipTicketsSold(totalVIPTicketsSold);
+        }
+
+        if (bookTicket.getTicketType().equals(TicketType.NORMAL)) {
+            totalTicketsForFixture = totalTicketsForFixture - bookTicket.getTotalTickets();
+            totalNormalTickets = totalNormalTickets - bookTicket.getTotalTickets();
+            totalNormalTicketsSold = totalNormalTicketsSold + bookTicket.getTotalTickets();
+            ticketManagementDesc.setTotalTickets(totalTicketsForFixture);
+            ticketManagementDesc.setTotalNormal(totalNormalTickets);
+            ticketManagementDesc.setTotalNormalTicketsSold(totalNormalTicketsSold);
+        }
+
         bookTicket.setUser(user);
+        bookTicket.setFixture(fixture);
 
         bookTicket.setTicketNumber(ticketNumberGenerator.generate());
 
@@ -66,25 +111,43 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         logger.fire(log);
 
-        if(bookTicket.getTicketType().equals(TicketType.VIP)) {
+        if (bookTicket.getTicketType().equals(TicketType.VIP)) {
             int newVipTicketCount = user.getVipTickets() + bookTicket.getTotalTickets();
             user.setVipTickets(newVipTicketCount);
-            userBeanI.addOrUpdate(user);
+            bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
 
-        if(bookTicket.getTicketType().equals(TicketType.NORMAL)) {
+        if (bookTicket.getTicketType().equals(TicketType.NORMAL)) {
             int newNormalTicketCount = user.getNormalTickets() + bookTicket.getTotalTickets();
             user.setNormalTickets(newNormalTicketCount);
-            userBeanI.addOrUpdate(user);
+            bookTicket.setUser(userBeanI.addOrUpdate(user));
         }
 
-        return getDao().addOrUpdate(bookTicket);
+        getDao().getEm().flush();
 
+
+        bookTicket = getDao().addOrUpdate(bookTicket);
+
+//        EmailBeanImpl emailBean = new EmailBeanImpl();
+//        emailBean.afterBookTicket(bookTicket.getUser());
+
+        return bookTicket;
     }
+
 
     @Override
     public List<BookTicket> list(Object entity) {
-        return em.createQuery("FROM BookTicket t", BookTicket.class).getResultList();
+        return em.createQuery("FROM BookTicket t",BookTicket.class).getResultList() ;
     }
+
+    @Override
+    public List<BookTicket> findAllTicketsByUser(int userId) {
+        String jpql = "FROM BookTicket t WHERE t.userId=:userId";
+        return em.createQuery(jpql, BookTicket.class).setParameter("userId", userId)
+                .getResultList();
+    }
+
+    //query to join bookTicket with ticketDesc through fixture table
+    //select t.ticket_fixture_desc, t.ticketNumber, f.fixtureType, f.homeTeam, f.awayTeam, f.fixtureDate, d.totalTickets from bookTicket t left  join fixtures f  on t.ticket_fixture_desc = f.id  join ticketManagement d on f.fixture_desc_id = d.id
 
 }

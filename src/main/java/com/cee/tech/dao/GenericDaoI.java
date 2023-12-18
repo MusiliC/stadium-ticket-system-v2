@@ -6,14 +6,17 @@ import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.List;
 
-public interface GenericDaoI <T> extends Serializable {
+public interface GenericDaoI<T> extends Serializable {
 
     List<T> list(Object entity);
 
-    T fetchSingle(Class<?> entity, int id);
-     T addOrUpdate(T entity);
+    List<Object[]> nativeQuery(String sql);
 
-    void delete(T entity);
+    T fetchSingle(Class<?> entity, int id);
+
+    T addOrUpdate(T entity);
+
+    void delete(Class<?> klass, int id);
 
     EntityManager getEm();
 

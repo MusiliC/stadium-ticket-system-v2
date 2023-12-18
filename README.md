@@ -202,3 +202,10 @@ CDI Producers @Produces
 Types of beans Class based beans*** method beans field beans
 
 CDI events (Event) @Observer
+
+Drop down select for fixture types  - want to load the fixture types as a list but models/objects with properties
+if you select a fixture - you get the id and its properties lie ticket pricing
+
+- at the I am passing the ticketdesc id - but it should be passed through select, and in the select it should load all fixture types
+now from booking a ticket of a certain fixture, you have to load the fixture with specific fixture desc to get its properties, and later update the amount of ticket
+- addes cascade to ticket desc such when you delete ffixture deccit also deletes associated fixtures

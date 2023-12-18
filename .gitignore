@@ -89,3 +89,6 @@ nb-configuration.xml
 modules/
 
 .env
+PrivateInfo.java
+OutlookMailSender.java
+EmailSessionBean.java

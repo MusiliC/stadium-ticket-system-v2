@@ -3,9 +3,12 @@ package com.cee.tech.app.model.entity;
 import com.cee.tech.database.helper.DbTable;
 import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @EticketHtmlForm(label = "Fixture", url = "./admin", httpMethod = "POST")
@@ -13,13 +16,6 @@ import java.util.List;
 @Table(name = "fixtures")
 public class Fixture extends BaseEntity {
 
-
-    @EticketFormField(label = "Fixture Type")
-    @EticketTableColHeader(headerLabel = "Fixture Type")
-    @Column(name = "fixtureType")
-    @EticketFixtureCard(cssClass = "fixture")
-    @Enumerated(EnumType.STRING)
-    private FixtureType fixtureType;
 
     @EticketFormField(label = "Fixture Time", fieldType = "time")
     @EticketTableColHeader(headerLabel = "Time")
@@ -48,25 +44,28 @@ public class Fixture extends BaseEntity {
     private String fixtureDate;
 
 
-//    @EticketTableColHeader(headerLabel = "Edit")
-//    @Transient
-//    private String action = "<img width=\"22\" height=\"22\" src=\"https://img.icons8.com/cotton/64/create-new--v2.png\" alt=\"create-new--v2\"/>";
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fixture_desc_id")
+    private TicketManagement ticketManagement;
+
+    @Formula("(fixture_desc_id)")
+    @EticketFormField(label = "Fixture desc id", fieldType = "number", name = "fixtureDescId")
+    private int fixtureDescId;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "fixture")
+    private List<BookTicket> fixtureTickets = new ArrayList<>();
 
 
-    public FixtureType getFixtureType() {
-        return fixtureType;
-    }
-
-
-    public Fixture(int id, FixtureType fixtureType, String fixtureTime, String fixtureLocation, String homeTeam,
-                   String awayTeam, String fixtureDate) {
+    public Fixture(int id, String fixtureTime, String fixtureLocation, String homeTeam,
+                   String awayTeam, String fixtureDate, int fixtureDescId) {
         setId(id);
-        this.fixtureType = fixtureType;
         this.fixtureTime = fixtureTime;
         this.fixtureLocation = fixtureLocation;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.fixtureDate = fixtureDate;
+        this.fixtureDescId = fixtureDescId;
     }
 
     public String getFixtureTime() {
@@ -109,23 +108,43 @@ public class Fixture extends BaseEntity {
         this.fixtureLocation = fixtureLocation;
     }
 
-    public void setFixtureType(FixtureType fixtureType) {
-        this.fixtureType = fixtureType;
+
+    public TicketManagement getTicketManagement() {
+        return ticketManagement;
+    }
+
+    public void setTicketManagement(TicketManagement ticketManagement) {
+        this.ticketManagement = ticketManagement;
     }
 
     public Fixture() {
     }
 
+    public int getFixtureDescId() {
+        return fixtureDescId;
+    }
+
+    public void setFixtureDescId(int fixtureDescId) {
+        this.fixtureDescId = fixtureDescId;
+    }
+
+    public List<BookTicket> getFixtureTickets() {
+        return fixtureTickets;
+    }
+
+    public void setFixtureTickets(List<BookTicket> fixtureTickets) {
+        this.fixtureTickets = fixtureTickets;
+    }
 
     @Override
     public String toString() {
         return "Fixture{" +
-                "fixtureType=" + fixtureType +
                 ", fixtureTime='" + fixtureTime + '\'' +
                 ", fixtureLocation='" + fixtureLocation + '\'' +
                 ", homeTeam='" + homeTeam + '\'' +
                 ", awayTeam='" + awayTeam + '\'' +
                 ", fixtureDate='" + fixtureDate + '\'' +
+                ", fixtureDescId=" + fixtureDescId +
                 '}';
     }
 }

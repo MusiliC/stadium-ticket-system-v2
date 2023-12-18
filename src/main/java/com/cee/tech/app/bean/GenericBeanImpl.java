@@ -34,16 +34,14 @@ public class GenericBeanImpl<T> implements GenericBeanI<T> {
        return genericDaoI.addOrUpdate(entity);
     }
 
-    @Override
-    public T delete(Class<?> entity, int id) {
-        return null;
-    }
 
-//    @Override
-//    public T delete(Class<?> entity, int id) {
-//        genericDaoI.setEm(em);
-//        return genericDaoI.delete(entity, id);
-//    }
+
+    @Override
+    public void delete(Class<?> entity, int id) {
+        genericDaoI.setEm(em);
+         genericDaoI.delete(entity, id);
+
+    }
 
     public GenericDaoImpl<T> getDao(){
         genericDaoI.setEm(em);

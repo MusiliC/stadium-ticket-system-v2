@@ -2,9 +2,7 @@ package com.cee.tech.app.action.useractions;
 
 import com.cee.tech.app.action.BaseActionClass;
 import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
-import com.cee.tech.app.bean.userbean.FixtureBeanImp;
 import com.cee.tech.app.model.entity.Fixture;
-import com.cee.tech.database.Database;
 import com.cee.tech.view.html.HtmlComponents;
 import com.cee.tech.view.html.HtmlUserPages;
 
