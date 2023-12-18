@@ -18,11 +18,11 @@ public class EmailSessionBean implements EmailSessionBeanI {
     private final int port = 587;
     private final String host = "smtp.office365.com";
 
-    private final String from = "email@gmail.com";
+    private final String from = System.getProperty("FROM");
     private final boolean auth = true;
     private Session session;
-    private final String password = "password";
-    private final String username = "username";
+    private final String password = System.getProperty("PASSWORD");
+    private final String username = "Eticket App";
     private final boolean debug = true;
 
     public void MailBean(){
@@ -36,7 +36,7 @@ public class EmailSessionBean implements EmailSessionBeanI {
 
         this.session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(from, password);
             }
         });
         session.setDebug(debug);
@@ -56,8 +56,10 @@ public class EmailSessionBean implements EmailSessionBeanI {
             message.setReplyTo(replyToEmail);
             message.setSubject(mail.getSubject());
             message.setSentDate(new Date());
-            message.setContent(mail.getMessage(),"text/html; charset=utf-8");
+            message.setText(mail.getMessage());
+//            message.setContent(mail.getMessage(),"text/html; charset=utf-8");
             Transport.send(message);
+            System.out.println("Email sent");
         } catch (MessagingException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex);
