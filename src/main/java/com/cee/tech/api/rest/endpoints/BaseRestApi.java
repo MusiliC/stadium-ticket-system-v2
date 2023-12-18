@@ -4,7 +4,7 @@ import javax.ws.rs.core.Response;
 
 public abstract class BaseRestApi {
     Response respond(){
-        return Response.status(Response.Status.OK).entity(new RestResponseWrapper()).build();
+        return  Response.status(Response.Status.OK).entity(new RestResponseWrapper()).build();
     }
 
     Response respond(Object object){
