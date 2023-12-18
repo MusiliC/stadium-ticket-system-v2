@@ -2,12 +2,10 @@ package com.cee.tech.app.bean.userbean;
 
 import com.cee.tech.app.bean.GenericBeanImpl;
 import com.cee.tech.app.bean.adminbean.AdminTicketManagementI;
-import com.cee.tech.app.bean.sharedbean.FixtureBeanI;
-import com.cee.tech.app.bean.sharedbean.UserBeanImpl;
 import com.cee.tech.app.model.entity.*;
 import com.cee.tech.utils.TicketNumber;
 
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;

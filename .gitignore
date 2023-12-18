@@ -90,3 +90,5 @@ modules/
 
 .env
 PrivateInfo.java
+OutlookMailSender.java
+EmailSessionBean.java
