@@ -18,13 +18,12 @@ public class EmailBeanImpl implements Serializable {
     @EJB
     EmailSessionBeanI emailSessionBean;
 
-    public void afterBookTicket(@Observes User user) {
-        System.out.println("*************Email event fired***********");
-        System.out.println("Useremail is " + user.getUsername());
+    public void afterBookTicket(@Observes BookTicket bookTicket) {
+
         Mail mail = new Mail();
-        mail.setRecipient(user.getUsername());
+        mail.setRecipient(bookTicket.getUser().getUsername());
         mail.setSubject("Eticket System");
-        mail.setMessage("Confirmed you have booked ticket,  This is your ticket number: " );
+        mail.setMessage("Confirmed you have booked ticket,  This is your ticket number: " + bookTicket.getTicketNumber() + "," + " see you then");
 
         emailSessionBean.sendMail(mail);
 
