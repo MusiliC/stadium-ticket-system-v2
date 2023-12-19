@@ -128,6 +128,8 @@ public class BookTicketImpl extends GenericBeanImpl<BookTicket> implements BookT
 
         bookTicket = getDao().addOrUpdate(bookTicket);
 
+        bookTicketConfirmEvent.fire(bookTicket);
+
 //        EmailBeanImpl emailBean = new EmailBeanImpl();
 //        emailBean.afterBookTicket(bookTicket.getUser());
 
