@@ -99,7 +99,7 @@
             <input type="password" id="password" name="password" placeholder = " ${loginFormBean.passwordPlaceholder}"  required>
 
             <div class="regLink">
-                <input type="submit"/>
+                <input id="submitButton" type="submit"/>
                 <div><a href="./register">No account? Create</a></div>
             </div>
 

@@ -24,21 +24,18 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Singleton
-@Startup()
+//@Singleton
+//@Startup()
 public class MySqlDatabase implements Serializable {
     private Connection connection;
 
-    @PostConstruct
-    private void init() throws SQLException, NamingException {
-        Context ctx = new InitialContext();
-        DataSource dataSource = (DataSource) ctx.lookup("java:jboss/datasources/eticket");
-        connection = dataSource.getConnection();
-
-        System.out.println("Executed. on start up!!");
-
-        this.updateSchema();
-    }
+//    @PostConstruct
+//    private void init() throws SQLException, NamingException {
+//
+//        System.out.println("Executed. on start up!!");
+//
+//        this.updateSchema();
+//    }
 
 
     private void updateSchema() {
@@ -254,60 +251,7 @@ public class MySqlDatabase implements Serializable {
     }
 
 
-    public <T> T fetchSingle(Class<T> clazz, int id) {
-        System.out.println("starting select for single item/................");
 
-        if (!clazz.isAnnotationPresent(DbTable.class))
-            return null;
-
-        DbTable dbTable = clazz.getAnnotation(DbTable.class);
-        StringBuilder stringBuilder = new StringBuilder();
-
-        System.out.println(stringBuilder.toString());
-
-        stringBuilder.append("SELECT * FROM ")
-                .append(dbTable.name())
-                .append(" WHERE id = ?;");
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(stringBuilder.toString())) {
-            preparedStatement.setInt(1, id);
-
-            System.out.println("executing query begins for table/................ " + dbTable.name());
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                T object = clazz.getDeclaredConstructor().newInstance();
-
-                for (Field field : clazz.getDeclaredFields()) {
-                    DbTableColumn dbColumn = field.getAnnotation(DbTableColumn.class);
-                    if (dbColumn != null) {
-                        String columnName = dbColumn.name();
-
-                        // //String id = resultSet.getInt("id");
-                        Object value = resultSet.getObject(columnName);
-
-                        if (value instanceof java.sql.Date && field.getType().equals(java.util.Date.class)) {
-                            value = new java.util.Date(((java.sql.Date) value).getTime());
-                        }
-
-                        // Convert String to enum if needed
-                        if (field.getType().isEnum() && value instanceof String) {
-                            value = Enum.valueOf((Class<Enum>) field.getType(), (String) value);
-                        }
-
-                        field.setAccessible(true);
-                        field.set(object, value);
-                    }
-                }
-                return object;
-            }
-
-        } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException |
-                 NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public Connection getConnection() {
         return connection;

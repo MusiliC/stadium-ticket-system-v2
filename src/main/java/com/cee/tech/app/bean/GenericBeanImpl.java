@@ -2,9 +2,7 @@ package com.cee.tech.app.bean;
 
 import com.cee.tech.dao.GenericDaoI;
 import com.cee.tech.dao.GenericDaoImpl;
-import com.cee.tech.database.MySqlDatabase;
 
-import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;

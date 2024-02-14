@@ -1,14 +1,11 @@
 package com.cee.tech.app.model.entity;
 
-
-import com.cee.tech.database.helper.DbTable;
-import com.cee.tech.database.helper.DbTableColumn;
 import com.cee.tech.view.html.EticketTableColHeader;
-import com.cee.tech.view.html.TableActions;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
