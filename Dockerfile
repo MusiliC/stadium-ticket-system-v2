@@ -16,7 +16,7 @@ FROM quay.io/wildfly/wildfly:26.1.3.Final-jdk11 AS deploy
 
 RUN rm /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
-COPY --from=build /app/target/assetmanager.war /opt/jboss/wildfly/standalone/deployments/
+COPY --from=build /app/target/stadium.war  /opt/jboss/wildfly/standalone/deployments/
 COPY --from=build /app/standalone.xml /opt/jboss/wildfly/standalone/configuration/
 
 
