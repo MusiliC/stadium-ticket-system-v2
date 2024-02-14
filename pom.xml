@@ -22,7 +22,7 @@
       <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.10.0</version>
-            <scope>test</scope>
+            <scope>compile</scope>
     </dependency>
       <dependency>
           <groupId>javax.servlet</groupId>
@@ -123,6 +123,13 @@
           <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
           <version>0.12.3</version>
           <scope>runtime</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+      <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-java</artifactId>
+          <version>4.17.0</version>
       </dependency>
 
       <dependency>

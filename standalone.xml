@@ -135,7 +135,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/eticket" pool-name="eticket" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:mysql://localhost:3306/eticket</connection-url>
+                    <connection-url>jdbc:mysql://mysqld:3306/eticket</connection-url>
                     <driver>mysql</driver>
                     <pool>
                         <min-pool-size>5</min-pool-size>

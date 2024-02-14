@@ -25,8 +25,6 @@ import java.util.List;
 @Stateless
 public class AuthBeanImpl extends GenericBeanImpl<User> implements Serializable, AuthBeanI {
 
-
-
     @PersistenceContext
     EntityManager em;
 

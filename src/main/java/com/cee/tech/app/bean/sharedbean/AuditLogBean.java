@@ -11,11 +11,7 @@ import java.io.Serializable;
 
 @Singleton
 public class AuditLogBean implements Serializable {
-    @EJB
-    MySqlDatabase mySqlDatabase;
+//    @EJB
+//    MySqlDatabase mySqlDatabase;
 
-    public void log(@Observes Audit auditLog) {
-        System.out.println("Adding audit log");
-        mySqlDatabase.saveOrUpdate(auditLog);
-    }
 }

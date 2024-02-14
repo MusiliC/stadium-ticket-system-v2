@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public enum TicketType implements Serializable {
     VIP("VIP"),
+    DAILY("daily"),
     NORMAL("Normal");
+
+
+
 
     private String name;
     TicketType(String name) {
