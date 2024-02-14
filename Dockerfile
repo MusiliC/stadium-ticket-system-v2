@@ -20,7 +20,7 @@ COPY --from=build /app/standalone.xml /opt/jboss/wildfly/standalone/configuratio
 
 RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
 COPY --from=build /app/module.xml /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
-COPY --from=build /app/mysql-connector-java-8.0.17 /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
+COPY --from=build /app/mysql-connector-java-8.0.17.jar /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
 
 # Copy the entrypoint script
 COPY sqldumps.sql /opt/jboss/wildfly/bin/
