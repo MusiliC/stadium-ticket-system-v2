@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eticket-system
+  labels:
+    app: eticket-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eticket-system
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: eticket-system
+    spec:
+      containers:
+        - name: eticket-system
+          image: musilic/eticket-system:0.0.15
+          env:
+            - name: MYSQL_CONNECTION
+              value: jdbc:mysql://mysql:3306/eticket
+            - name: MYSQL_DATABASE
+              value: jdbc:mysql://mysql:3306/eticket
+            - name: MYSQL_HOST
+              value: mysql
+
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: eticket-secret
+                  key: mysql-root-password
+
+          ports:
+            - name: web
+              containerPort: 8080
+          resources:
+            requests:
+              memory: "512Mi"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+      restartPolicy: Always
