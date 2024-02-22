@@ -25,5 +25,13 @@ services:
       MYSQL_PASSWORD: makutano
       MYSQL_DATABASE: eticket
 
+  frontend:
+    image: musilic/frontend:latest
+    ports:
+      - "5173:5173"
+    depends_on:
+      eticket-system:
+        condition: service_started
+
 volumes:
   mysql-data:

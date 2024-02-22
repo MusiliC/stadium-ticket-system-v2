@@ -67,7 +67,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: eticket-secret
-                key: mysql-root-password
+                key: mysql-password
           - name: MYSQL_DATABASE
             value: eticket
         ports:
